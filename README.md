@@ -1,8 +1,8 @@
-# Webpack template
+# Todo list app
 
-A generic webpack template for html, css and javascript.
+A basic todo list app. Build in progress.
 
-### Important notes
+## Webpack notes
 
 Make sure to modify the command line of `"deploy"` script to refer to correct github branch used for production. Default set is `gh-pages`.
 
