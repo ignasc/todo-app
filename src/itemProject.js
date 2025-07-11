@@ -1,4 +1,4 @@
-class todoList{
+class projectList{
     constructor(title, description){
         this.id = "P" + crypto.randomUUID();
         this.title = title;
@@ -6,4 +6,4 @@ class todoList{
     }
 };
 
-export default todoList;
+export default projectList;

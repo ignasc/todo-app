@@ -1,7 +1,7 @@
-class todoItem{
-    constructor(todoListId, title, description, dueDate, priority, completed){
+class itemTodo{
+    constructor(projectId, title, description, dueDate, priority, completed){
         this.id = "I" + crypto.randomUUID();
-        this.todoListId = todoListId;
+        this.projectId = projectId;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -14,4 +14,4 @@ class todoItem{
     }
 };
 
-export default todoItem;
+export default itemTodo;
