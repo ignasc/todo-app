@@ -12,7 +12,6 @@ import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProjec
 /*-------- DEBUG AREA --------*/
 const testId = todoDB[1].id;
 
-projectCreateNew("New Project", "New project description")
-console.log(projectDB)
+console.log(projectRetrieve(projectDB[1].id))
 
 showTestMessage();

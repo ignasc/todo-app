@@ -64,7 +64,10 @@ function todoGetAllForProject(projectId){
 function projectCreateNew(title, description){
     projectDB.push(new projectList(title, description));
 };
-function projectRetrieve(){};
+function projectRetrieve(id){
+    const filteredItem = projectDB.filter((element)=>{return element.id == id});
+    return filteredItem[0];
+};
 function projectUpdate(){};
 function projectDelete(){};
 
