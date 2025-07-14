@@ -1,6 +1,14 @@
+import todoDB from "./dbTodoItems";
+import itemTodo from "./itemTodo";
+
 //CRUD operations for todo item db
-function todoCreateNew(){};
-function todoRetrieve(){};
+function todoCreateNew(newItem){
+    todoDB.push(newItem);
+};
+function todoRetrieve(id){
+    const filteredItem = todoDB.filter((element)=>{return element.id == id});
+    return filteredItem[0];
+};
 function todoUpdate(){};
 function todoDelete(){};
 
@@ -10,4 +18,4 @@ function projectRetrieve(){};
 function projectUpdate(){};
 function projectDelete(){};
 
-export default {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, projectCreateNew, projectRetrieve, projectUpdate, projectDelete}
+export {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, projectCreateNew, projectRetrieve, projectUpdate, projectDelete}
