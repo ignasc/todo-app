@@ -11,14 +11,16 @@ import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, projectCreateNew, p
 
 
 /*-------- DEBUG AREA --------*/
-todoCreateNew(new itemTodo("defaultListId","Todo No.99","To do item No.99",new Date(), 6, false))
+const testId = todoDB[1].id;
 
-console.log("Returned item:")
-console.log(todoRetrieve(todoDB[1].id))
+console.log("Item before changes:")
+console.log(todoRetrieve(testId))
 
-let debugCheckResult = todoDB[todoDB.length-1];
+todoUpdate(testId)
 
-console.log("Sample todo:")
+let debugCheckResult = todoDB[1];
+
+console.log("Item after update:")
 console.log(debugCheckResult)
 
 showTestMessage();

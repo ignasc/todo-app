@@ -9,6 +9,21 @@ class itemTodo{
         this.completed = completed;
     }
 
+    setProjectId(projectId){
+        this.projectId = projectId;
+    }
+    setTitle(title){
+        this.title = title;
+    }
+    setDescription(desc){
+        this.description = desc;
+    }
+    setDueDate(dueDate){
+        this.dueDate = dueDate;
+    }
+    setPriority(prio){
+        this.priority = prio;
+    }
     setCompleted(){
         this.completed = !this.completed;
     }
