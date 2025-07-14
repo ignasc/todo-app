@@ -99,8 +99,14 @@ function projectDelete(id){
     };
 };
 
+//custom CRUD operations for projects db.
+function projectGetAll(){
+    /*self note: this is reference to original array, spread operator does not work either as keypair values inside array elements are still references to original array values*/
+    return projectDB; 
+};
+
 export {
     todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject,
 
-    projectCreateNew, projectRetrieve, projectUpdate, projectDelete
+    projectCreateNew, projectRetrieve, projectUpdate, projectDelete, projectGetAll
 }
