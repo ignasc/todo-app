@@ -1,4 +1,6 @@
 import todoDB from "./dbTodoItems";
+import projectDB from "./dbProjects"
+import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
 
 //main CRUD operations for todo item db
@@ -59,7 +61,9 @@ function todoGetAllForProject(projectId){
 };
 
 //CRUD operations for projects db
-function projectCreateNew(){};
+function projectCreateNew(title, description){
+    projectDB.push(new projectList(title, description));
+};
 function projectRetrieve(){};
 function projectUpdate(){};
 function projectDelete(){};
