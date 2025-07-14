@@ -10,8 +10,10 @@ import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProjec
 
 
 /*-------- DEBUG AREA --------*/
-const testId = todoDB[1].id;
+const testId = projectDB[1].id;
 
-console.log(projectRetrieve(projectDB[1].id))
+projectDelete(testId)
+console.log("Project deleted: " + testId)
+console.log(projectDB)
 
 showTestMessage();

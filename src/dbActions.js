@@ -68,8 +68,36 @@ function projectRetrieve(id){
     const filteredItem = projectDB.filter((element)=>{return element.id == id});
     return filteredItem[0];
 };
-function projectUpdate(){};
-function projectDelete(){};
+function projectUpdate(id, updateKey = "N/A", updateValue = "N/A"){
+    for (let index = 0; index < projectDB.length; index++) {
+        const elementId = projectDB[index].id;
+
+        if(elementId == id){
+            switch (updateKey) {
+                case "title":
+                    projectDB[index].setTitle(updateValue);
+                    break;
+                case "description":
+                    projectDB[index].setDescription(updateValue);
+                    break;
+                default:
+                    console.log("Invalid key to update: " + updateKey)
+                    break;
+            };
+            break;
+        };
+    };
+};
+function projectDelete(id){
+    for (let index = 0; index < projectDB.length; index++) {
+        const elementId = projectDB[index].id;
+
+        if(elementId == id){
+            projectDB.splice(index, 1);
+            break;
+        };
+    };
+};
 
 export {
     todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject,
