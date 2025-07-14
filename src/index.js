@@ -14,13 +14,13 @@ import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, projectCreateNew, p
 const testId = todoDB[1].id;
 
 console.log("Item before changes:")
-console.log(todoRetrieve(testId))
+//console.log(todoRetrieve(testId))
+console.log(todoDB)
 
-todoUpdate(testId)
-
-let debugCheckResult = todoDB[1];
+todoDelete(testId)
 
 console.log("Item after update:")
-console.log(debugCheckResult)
+//console.log(debugCheckResult)
+console.log(todoDB)
 
 showTestMessage();

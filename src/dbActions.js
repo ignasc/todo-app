@@ -41,7 +41,16 @@ function todoUpdate(id, updateKey = "N/A", updateValue = "N/A"){
         };
     };
 };
-function todoDelete(){};
+function todoDelete(id){
+    for (let index = 0; index < todoDB.length; index++) {
+        const elementId = todoDB[index].id;
+
+        if(elementId == id){
+            todoDB.splice(index, 1);
+            break;
+        };
+    };
+};
 
 //CRUD operations for projects db
 function projectCreateNew(){};
