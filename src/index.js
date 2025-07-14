@@ -1,7 +1,7 @@
 import "./resetcss.css";
 import "./styles.css";
 
-import showTestMessage from "./testModule";
+import {showProjectList, showMainContent} from "./UI";
 import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects";
 
@@ -10,8 +10,6 @@ import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProjec
 
 
 /*-------- DEBUG AREA --------*/
-const testId = projectDB[1].id;
 
-
-
-showTestMessage();
+showProjectList();
+showMainContent();

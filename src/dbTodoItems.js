@@ -1,7 +1,11 @@
+//DEBUG
+import projectDB from "./dbProjects";
+//DEBUG END
+
 import itemTodo from "./itemTodo";
 
 const todoDB = [];
-const debugProjectIds = ["Default List", "customID_01", "customID_02"] // debug
+const debugProjectIds = [projectDB[0].id, projectDB[1].id, projectDB[2].id] // debug
 function randomIntFromInterval(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
