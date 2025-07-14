@@ -1,4 +1,3 @@
-import { defaultListId } from "./dbProjects";
 import itemTodo from "./itemTodo";
 
 const todoDB = [];

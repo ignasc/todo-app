@@ -1,26 +1,11 @@
 import projectList from "./itemProject";
 
-const listDB = [];
-
-class projectDB{
-
-    constructor(){
-        this.db = [];
-
-        this.db.push(new projectList("Default List","Default list for all todo's"));
-    }
-
-    get getFullDB(){
-        return this.db;
-    }
-
-};
+const projectDB = [];
 
 // Add few items to db for testing purposes
-listDB.push(new projectList("Default List","Default list for all todo's"));
-listDB.push(new projectList("customID_01","Project 01"));
-listDB.push(new projectList("customID_02","Project 02"));
+projectDB.push(new projectList("Default List","Default list for all todo's"));
+projectDB.push(new projectList("customID_01","Project 01"));
+projectDB.push(new projectList("customID_02","Project 02"));
 
-export const defaultListId = listDB[0].id;
-export const newProjectDB = new projectDB();
-export default listDB;
+export const defaultListId = projectDB[0].id;
+export default projectDB;

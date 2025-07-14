@@ -3,8 +3,6 @@ import "./styles.css";
 
 import showTestMessage from "./testModule";
 import todoDB from "./dbTodoItems";
-import {newProjectDB as projectDB} from "./dbProjects"
-import itemTodo from "./itemTodo";
 
 //DB actions
 import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject, projectCreateNew, projectRetrieve, projectUpdate, projectDelete} from "./dbActions";
