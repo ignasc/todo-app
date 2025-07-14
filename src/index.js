@@ -7,20 +7,12 @@ import {newProjectDB as projectDB} from "./dbProjects"
 import itemTodo from "./itemTodo";
 
 //DB actions
-import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, projectCreateNew, projectRetrieve, projectUpdate, projectDelete} from "./dbActions";
+import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject, projectCreateNew, projectRetrieve, projectUpdate, projectDelete} from "./dbActions";
 
 
 /*-------- DEBUG AREA --------*/
 const testId = todoDB[1].id;
 
-console.log("Item before changes:")
-//console.log(todoRetrieve(testId))
-console.log(todoDB)
-
-todoDelete(testId)
-
-console.log("Item after update:")
-//console.log(debugCheckResult)
-console.log(todoDB)
+console.log(todoGetAllForProject("Default List"))
 
 showTestMessage();

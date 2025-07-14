@@ -2,10 +2,14 @@ import { defaultListId } from "./dbProjects";
 import itemTodo from "./itemTodo";
 
 const todoDB = [];
+const debugProjectIds = ["Default List", "customID_01", "customID_02"] // debug
+function randomIntFromInterval(min,max){
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 // Add temporary items for development purposes.
-todoDB.push(new itemTodo(defaultListId,"Todo No.1","To do item No.1",new Date(), 6, false));
-todoDB.push(new itemTodo(defaultListId,"Todo No.2","To do item No.2",new Date(), 6, false));
-todoDB.push(new itemTodo(defaultListId,"Todo No.3","To do item No.3",new Date(), 6, false));
+for (let i = 0; i < 10; i++) {
+    todoDB.push(new itemTodo(debugProjectIds[randomIntFromInterval(0, debugProjectIds.length-1)],"Todo No."+i,"To do item No.1"+i,new Date(), 6, false));
+}
 
 export default todoDB;

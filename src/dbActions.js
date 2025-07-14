@@ -1,7 +1,7 @@
 import todoDB from "./dbTodoItems";
 import itemTodo from "./itemTodo";
 
-//CRUD operations for todo item db
+//main CRUD operations for todo item db
 function todoCreateNew(newItem){
     todoDB.push(newItem);
 };
@@ -52,10 +52,20 @@ function todoDelete(id){
     };
 };
 
+//custom CRUD operations for todo item db.
+function todoGetAllForProject(projectId){
+    const allTodosForProject = todoDB.filter((element)=>{return element.projectId == projectId;});
+    return allTodosForProject;
+};
+
 //CRUD operations for projects db
 function projectCreateNew(){};
 function projectRetrieve(){};
 function projectUpdate(){};
 function projectDelete(){};
 
-export {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, projectCreateNew, projectRetrieve, projectUpdate, projectDelete}
+export {
+    todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject,
+
+    projectCreateNew, projectRetrieve, projectUpdate, projectDelete
+}
