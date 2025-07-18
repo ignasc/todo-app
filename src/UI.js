@@ -1,5 +1,4 @@
 import { projectGetAll, todoGetAllForProject } from "./dbActions";
-import { defaultListId } from "./dbProjects";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -9,7 +8,7 @@ function showMainContent(){
 
     const todoList = document.createElement("ul");
     const todoItem = document.createElement("li")
-    const items = todoGetAllForProject(defaultListId);
+    const items = todoGetAllForProject(projectGetAll()[0].id);
 
     for (let i = 0; i < items.length; i++) {
         const element = items[i];
