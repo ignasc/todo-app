@@ -46,10 +46,11 @@ body{
 
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 20px;
-    
+    width: 100%;
+}
+
+#content-main > ul {
+    width: 100%;
 }
 
 .project-card {
@@ -59,11 +60,34 @@ body{
     box-shadow: 1px 1px 5px #444554;
     border-radius: 20px;
     height: max-content;
+    width: 100%;
 
-    display: grid;
-    gap: 5px;
-    grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1fr;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-item-card {
+    background-color: rgb(255, 252, 248);
+    padding: 10px;
+    border: 1px solid #172121;
+    box-shadow: 1px 1px 5px #444554;
+    border-radius: 20px;
+
+    font-size: 0.5rem;
+
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.project-nav {
+    border: 1px solid green;
+    display: flex;
+    justify-content: flex-end;
+}
+.todo-nav {
+    border: 1px solid blue;
+    display: flex;
 }
 
 .book-info-container {
