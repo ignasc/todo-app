@@ -1,4 +1,4 @@
-import { projectGetAll, todoGetAllForProject } from "./dbActions";
+import { projectGetAll, projectRetrieve, todoGetAllForProject } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -10,7 +10,7 @@ function showProjectDetails(id = projectGetAll()[0].id){
     const todoList = document.createElement("ul");
     const todoItem = document.createElement("li")
     const items = todoGetAllForProject(id);
-
+    console.log(items)
     for (let i = 0; i < items.length; i++) {
         const element = items[i];
         const newItem = todoItem.cloneNode();
@@ -18,6 +18,38 @@ function showProjectDetails(id = projectGetAll()[0].id){
 
         todoList.appendChild(newItem);
     };
+
+    /*DEBUG AREA*/
+    /*a test template to add at that shows project todos expanded with all details*/
+    const testProject = document.createElement("li");
+    const projectTitle = document.createElement("h1");
+    const projectDescription = document.createElement("p");
+    const todoListTest = document.createElement("ul");
+    const todoItemTest = document.createElement("li");
+
+    projectTitle.textContent = projectRetrieve(id).title;
+    projectDescription.textContent = projectRetrieve(id).description;
+    for (let index = 0; index < items.length; index++) {
+        const element = items[index];
+        const newItem = todoItemTest.cloneNode();
+        const todoTitle = document.createElement("h2");
+        const todoDescription = document.createElement("p");
+
+        todoTitle.textContent = element.title;
+        todoDescription.textContent = element.description;
+
+        newItem.appendChild(todoTitle);
+        newItem.appendChild(todoDescription);
+
+        todoListTest.appendChild(newItem);
+    };
+
+    testProject.appendChild(projectTitle);
+    testProject.appendChild(projectDescription);
+    testProject.appendChild(todoListTest);
+    divMain.appendChild(testProject);
+
+    /*DEBUG AREA END*/
 
     divMain.appendChild(todoList);
 };
