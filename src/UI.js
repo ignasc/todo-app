@@ -21,18 +21,23 @@ function showProjectDetails(id = projectGetAll()[0].id){
 
     /*DEBUG AREA*/
     /*a test template to add at that shows project todos expanded with all details*/
-    const testProject = document.createElement("li");
-    const projectTitle = document.createElement("h1");
+    const testProjectCard = document.createElement("li");
+    const projectTitle = document.createElement("p");
     const projectDescription = document.createElement("p");
     const todoListTest = document.createElement("ul");
     const todoItemTest = document.createElement("li");
+
+    testProjectCard.setAttribute("class", "project-card");
+    projectTitle.setAttribute("class", "project-title-p");
+    projectDescription.setAttribute("class", "project-description-p");
+
 
     projectTitle.textContent = projectRetrieve(id).title;
     projectDescription.textContent = projectRetrieve(id).description;
     for (let index = 0; index < items.length; index++) {
         const element = items[index];
         const newItem = todoItemTest.cloneNode();
-        const todoTitle = document.createElement("h2");
+        const todoTitle = document.createElement("p");
         const todoDescription = document.createElement("p");
 
         todoTitle.textContent = element.title;
@@ -44,10 +49,10 @@ function showProjectDetails(id = projectGetAll()[0].id){
         todoListTest.appendChild(newItem);
     };
 
-    testProject.appendChild(projectTitle);
-    testProject.appendChild(projectDescription);
-    testProject.appendChild(todoListTest);
-    divMain.appendChild(testProject);
+    testProjectCard.appendChild(projectTitle);
+    testProjectCard.appendChild(projectDescription);
+    testProjectCard.appendChild(todoListTest);
+    todoList.appendChild(testProjectCard);
 
     /*DEBUG AREA END*/
 
@@ -75,8 +80,4 @@ function showAllProjects(){
 
 };
 
-function getProjectDetails(id){
-    
-};
-
-export {showAllProjects, showProjectDetails, getProjectDetails};
+export {showAllProjects, showProjectDetails};
