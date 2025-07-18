@@ -1,7 +1,7 @@
 import "./resetcss.css";
 import "./styles.css";
 
-import {showProjectList, showMainContent} from "./UI";
+import {showAllProjects, showProjectDetails} from "./UI";
 import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects";
 
@@ -11,5 +11,5 @@ import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProjec
 
 /*-------- DEBUG AREA --------*/
 
-showProjectList();
-showMainContent();
+showAllProjects();
+showProjectDetails();

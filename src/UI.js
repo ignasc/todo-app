@@ -3,12 +3,13 @@ import { projectGetAll, todoGetAllForProject } from "./dbActions";
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
 
-function showMainContent(){
+function showProjectDetails(id = projectGetAll()[0].id){
+    /*Generate a list of all available todos for a project*/
     divMain.textContent = "";
 
     const todoList = document.createElement("ul");
     const todoItem = document.createElement("li")
-    const items = todoGetAllForProject(projectGetAll()[0].id);
+    const items = todoGetAllForProject(id);
 
     for (let i = 0; i < items.length; i++) {
         const element = items[i];
@@ -19,14 +20,10 @@ function showMainContent(){
     };
 
     divMain.appendChild(todoList);
-
-    //const topTitle = document.createElement("h1");
-    //topTitle.textContent = "Webpack template loaded";
-
-    //divMain.appendChild(topTitle);
 };
 
-function showProjectList(){
+function showAllProjects(){
+    /*Generate a list of all available projects*/
     divSidebar.textContent = "";
 
     const projectList = document.createElement("ul");
@@ -46,4 +43,8 @@ function showProjectList(){
 
 };
 
-export {showProjectList, showMainContent};
+function getProjectDetails(id){
+    
+};
+
+export {showAllProjects, showProjectDetails, getProjectDetails};
