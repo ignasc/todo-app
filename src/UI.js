@@ -4,7 +4,6 @@ const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
 
 function toggleProjectDetails(projectId = "N/A", status = false){
-    console.log("Expand project to be implemented")
     const allProjectArray = projectGetAll();
 
     for (let index = 0; index < allProjectArray.length; index++) {
