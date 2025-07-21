@@ -1,12 +1,22 @@
 import { todoGetAllForProject } from "./dbActions";
+import { toggleProjectDetails } from "./UI";
 
 class projectList{
     constructor(title, description){
         this.id = "P" + crypto.randomUUID();
         this.title = title;
         this.description = description;
+        this.cardExpanded = false;
     }
 
+    setExpanded(){
+        //debug: temporary function to force flag switch while testing
+        this.cardExpanded = true;
+    }
+    setCollapsed(){
+        //debug: temporary function to force flag switch while testing
+        this.cardExpanded = false;
+    }
     setTitle(title){
         this.title = title;
     }
@@ -33,6 +43,10 @@ class projectList{
 
         const btnExpand = btnGeneric.cloneNode();
         btnExpand.textContent = "Expand";
+        btnExpand.addEventListener("click", (e)=>{
+            toggleProjectDetails(this.id, true);
+        });
+
         const btnComplete = btnGeneric.cloneNode();
         btnComplete.textContent = "Mark Completed";
         const btnEdit = btnGeneric.cloneNode();
@@ -76,6 +90,10 @@ class projectList{
 
         const btnExpand = btnGeneric.cloneNode();
         btnExpand.textContent = "Collapse";
+        btnExpand.addEventListener("click", (e)=>{
+            toggleProjectDetails(this.id, false);
+        });
+
         const btnComplete = btnGeneric.cloneNode();
         btnComplete.textContent = "Mark Completed";
         const btnEdit = btnGeneric.cloneNode();

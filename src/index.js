@@ -1,7 +1,8 @@
 import "./resetcss.css";
 import "./styles.css";
 
-import {showProjectsSideBar, showProjectsMainContent} from "./UI";
+import {showProjectsSideBar, showProjectsMainContent, toggleProjectDetails} from "./UI";
 
+toggleProjectDetails();
 showProjectsSideBar();
 showProjectsMainContent();
