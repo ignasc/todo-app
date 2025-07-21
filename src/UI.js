@@ -1,55 +1,29 @@
-import { projectGetAll, projectRetrieve, todoGetAllForProject } from "./dbActions";
+import { projectGetAll } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
 
-function showProjectDetails(id = projectGetAll()[0].id){
-    /*Generate a list of all available todos for a project*/
+function showProjectsMainContent(id = projectGetAll()[0].id){
+    /*Generate a list of all available projects for the main content element*/
     divMain.textContent = "";
 
-    const todoList = document.createElement("ul");
-    const todoItem = document.createElement("li")
-    const items = todoGetAllForProject(id);
-    console.log(items)
+    const projectList = document.createElement("ul");
 
-    const collapsedCards = projectGetAll();
-    for (let index = 1; index < collapsedCards.length; index++) {
-        const element = collapsedCards[index];
-        todoList.appendChild(element.getHtmlCollapsed())
-    }
+    const allProjectsArray = projectGetAll();
 
-    /*DEBUG AREA*/
-    /*a test template to add that shows project todos expanded with all details*/
-    const testProjectCard = document.createElement("li");
-    const projectTitle = document.createElement("p");
-    const projectDescription = document.createElement("p");
-    const todoListTest = document.createElement("ul");
-    const todoItemTest = document.createElement("li");
+    //add expanded project to the list
+    projectList.appendChild(allProjectsArray[0].getHtmlExpanded())
 
-    testProjectCard.setAttribute("class", "project-card");
-    projectTitle.setAttribute("class", "project-title-p");
-    projectDescription.setAttribute("class", "project-description-p");
-
-
-    projectTitle.textContent = projectRetrieve(id).title;
-    projectDescription.textContent = projectRetrieve(id).description;
-
-    for (let index = 0; index < items.length; index++) {
-        const element = items[index];
-        todoListTest.appendChild(element.getItemCardHtml());
+    //add the rest as collapsed projects to the list
+    for (let index = 1; index < allProjectsArray.length; index++) {
+        const element = allProjectsArray[index];
+        projectList.appendChild(element.getHtmlCollapsed())
     };
 
-    testProjectCard.appendChild(projectTitle);
-    testProjectCard.appendChild(projectDescription);
-    testProjectCard.appendChild(todoListTest);
-    todoList.appendChild(testProjectCard);
-
-    /*DEBUG AREA END*/
-
-    divMain.appendChild(todoList);
+    divMain.appendChild(projectList);
 };
 
-function showAllProjects(){
+function showProjectsSideBar(){
     /*Generate a list of all available projects*/
     divSidebar.textContent = "";
 
@@ -70,4 +44,4 @@ function showAllProjects(){
 
 };
 
-export {showAllProjects, showProjectDetails};
+export {showProjectsSideBar, showProjectsMainContent};
