@@ -11,6 +11,7 @@ function showProjectDetails(id = projectGetAll()[0].id){
     const todoItem = document.createElement("li")
     const items = todoGetAllForProject(id);
     console.log(items)
+
     for (let i = 0; i < items.length; i++) {
         const element = items[i];
         const newItem = todoItem.cloneNode();
@@ -20,7 +21,7 @@ function showProjectDetails(id = projectGetAll()[0].id){
     };
 
     /*DEBUG AREA*/
-    /*a test template to add at that shows project todos expanded with all details*/
+    /*a test template to add that shows project todos expanded with all details*/
     const testProjectCard = document.createElement("li");
     const projectTitle = document.createElement("p");
     const projectDescription = document.createElement("p");
@@ -34,19 +35,10 @@ function showProjectDetails(id = projectGetAll()[0].id){
 
     projectTitle.textContent = projectRetrieve(id).title;
     projectDescription.textContent = projectRetrieve(id).description;
+
     for (let index = 0; index < items.length; index++) {
         const element = items[index];
-        const newItem = todoItemTest.cloneNode();
-        const todoTitle = document.createElement("p");
-        const todoDescription = document.createElement("p");
-
-        todoTitle.textContent = element.title;
-        todoDescription.textContent = element.description;
-
-        newItem.appendChild(todoTitle);
-        newItem.appendChild(todoDescription);
-
-        todoListTest.appendChild(newItem);
+        todoListTest.appendChild(element.getItemCardHtml());
     };
 
     testProjectCard.appendChild(projectTitle);

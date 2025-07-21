@@ -12,4 +12,4 @@ import {todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProjec
 /*-------- DEBUG AREA --------*/
 
 showAllProjects();
-//showProjectDetails();
+showProjectDetails();
