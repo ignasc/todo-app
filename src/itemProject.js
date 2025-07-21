@@ -99,6 +99,7 @@ class projectList{
 
         const projectDescription = document.createElement("p");
         projectDescription.setAttribute("class", "project-description-p");
+        projectDescription.textContent = this.description;
 
         const todoList = document.createElement("ul");
         todoList.setAttribute("class", "todo-list-card");
