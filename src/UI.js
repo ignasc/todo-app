@@ -12,13 +12,11 @@ function showProjectDetails(id = projectGetAll()[0].id){
     const items = todoGetAllForProject(id);
     console.log(items)
 
-    for (let i = 0; i < items.length; i++) {
-        const element = items[i];
-        const newItem = todoItem.cloneNode();
-        newItem.textContent = element.title;
-
-        todoList.appendChild(newItem);
-    };
+    const collapsedCards = projectGetAll();
+    for (let index = 1; index < collapsedCards.length; index++) {
+        const element = collapsedCards[index];
+        todoList.appendChild(element.getHtmlCollapsed())
+    }
 
     /*DEBUG AREA*/
     /*a test template to add that shows project todos expanded with all details*/
