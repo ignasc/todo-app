@@ -1,3 +1,5 @@
+import { todoGetAllForProject } from "./dbActions";
+
 class projectList{
     constructor(title, description){
         this.id = "P" + crypto.randomUUID();
@@ -50,7 +52,9 @@ class projectList{
 
         projectHeading.appendChild(projectNav);
 
-        return projectHeading;
+        projectCard.appendChild(projectHeading);
+
+        return projectCard;
     }
     getHtmlExpanded(){
 
