@@ -1,4 +1,4 @@
-import { todoMarkCompleted } from "./dbActions";
+import { todoDelete } from "./dbActions";
 import { showProjectsMainContent } from "./UI";
 
 class itemTodo{
@@ -60,8 +60,13 @@ class itemTodo{
 
         const btn_edit = document.createElement("button");
         btn_edit.textContent = "Edit";
+
         const btn_remove = document.createElement("button");
         btn_remove.textContent = "Remove";
+        btn_remove.addEventListener("click", ()=>{
+            todoDelete(this.id);
+            showProjectsMainContent();
+        });
 
         //assemble the item element
 
