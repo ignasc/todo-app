@@ -1,3 +1,6 @@
+import { todoMarkCompleted } from "./dbActions";
+import { showProjectsMainContent } from "./UI";
+
 class itemTodo{
     constructor(projectId, title, description, dueDate, priority, completed){
         this.id = "I" + crypto.randomUUID();
@@ -45,7 +48,16 @@ class itemTodo{
         cardNav.setAttribute("class", "todo-nav");
 
         const btn_complete = document.createElement("button");
-        btn_complete.textContent = "Mark Completed";
+        if(this.completed){
+            btn_complete.textContent = "Mark Incomplete";
+        }else{
+            btn_complete.textContent = "Mark Completed";
+        };
+        btn_complete.addEventListener("click", ()=>{
+            this.setCompleted();
+            showProjectsMainContent();
+        });
+
         const btn_edit = document.createElement("button");
         btn_edit.textContent = "Edit";
         const btn_remove = document.createElement("button");

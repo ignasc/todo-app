@@ -60,6 +60,16 @@ function todoGetAllForProject(projectId){
     return allTodosForProject;
 };
 
+function todoMarkCompleted(id){
+    for (let index = 0; index < todoDB.length; index++) {
+        const element = todoDB[index];
+        if(element.id == id){
+            element.setCompleted();
+            break;
+        };
+    }
+};
+
 //CRUD operations for projects db
 function projectCreateNew(title, description){
     projectDB.push(new projectList(title, description));
@@ -106,7 +116,7 @@ function projectGetAll(){
 };
 
 export {
-    todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject,
+    todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject, todoMarkCompleted,
 
     projectCreateNew, projectRetrieve, projectUpdate, projectDelete, projectGetAll
 }
