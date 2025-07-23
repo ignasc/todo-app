@@ -1,4 +1,4 @@
-import { todoGetAllForProject, projectDelete } from "./dbActions";
+import { todoGetAllForProject, projectUpdate, projectDelete } from "./dbActions";
 import { updateUI } from "./UI";
 
 class projectList{
@@ -8,6 +8,27 @@ class projectList{
         this.description = description;
         this.completed = false;
         this.cardExpanded = false;
+        this.editActive = false;
+    }
+
+    getProjectObject(){
+        return {
+            "id":this.id,
+            "title":this.title,
+            "description":this.description,
+            "completed":this.completed,
+            "cardExpanded":this.cardExpanded,
+            "editActive":this.editActive,
+        };
+    }
+
+    updateProjectObject(newDataObject){
+        if(newDataObject.title != ""){
+            this.setTitle(newDataObject.title);
+        };
+        if(newDataObject.description != ""){
+            this.setDescription(newDataObject.description);
+        };
     }
 
     toggleDetails(){
@@ -22,6 +43,61 @@ class projectList{
     setCompleted(){
         this.completed = !this.completed;
     }
+    setEditMode(){
+        this.editActive = !this.editActive;
+    }
+
+    addFormForEditing(){
+        const formCard = document.createElement("form")
+        formCard.setAttribute("class", "project-form");
+        formCard.setAttribute("id", this.id);
+
+        const genericInput = document.createElement("input");
+        genericInput.setAttribute("type", "text");
+        const genericLabel = document.createElement("label");
+
+        //title, description, date inputs
+        const inputTitle = genericInput.cloneNode()
+        inputTitle.setAttribute("id", "pname");
+        inputTitle.setAttribute("name", "title");
+        const labelTitle = genericLabel.cloneNode();
+        labelTitle.setAttribute("for", "pname");
+        labelTitle.textContent = "Task Name";
+
+        const inputDescription = genericInput.cloneNode();
+        inputDescription.setAttribute("id", "pdescription");
+        inputDescription.setAttribute("name", "description");
+        const labelDescription = genericLabel.cloneNode();
+        labelDescription.setAttribute("for", "pdescription");
+        labelDescription.textContent = "Description";
+
+        const btn_submit = genericInput.cloneNode();
+        btn_submit.setAttribute("type", "submit");
+        btn_submit.setAttribute("value", "Save");
+        btn_submit.setAttribute("id", "form-project-submit-btn");
+
+        btn_submit.addEventListener("click", (e)=>{
+            e.preventDefault()
+            const newFormData = new FormData(formCard);
+            const newProjectItem = {};
+            for(const [key, value] of newFormData){
+                newProjectItem[key] = value;
+            };
+            projectUpdate(this.id, newProjectItem);
+            this.setEditMode();
+            updateUI();
+        });
+
+        //add all elements to form
+        formCard.appendChild(labelTitle);
+        formCard.appendChild(inputTitle);
+        formCard.appendChild(labelDescription);
+        formCard.appendChild(inputDescription);
+        formCard.appendChild(btn_submit);
+
+        return formCard;
+    };
+
     getHtmlElement(){
         const btnGeneric = document.createElement("button");
 
@@ -64,6 +140,15 @@ class projectList{
 
         const btnEdit = btnGeneric.cloneNode();
         btnEdit.textContent = "Edit";
+        if(this.editActive){
+            btnEdit.textContent = "Cancel Edit";
+        }else{
+            btnEdit.textContent = "Edit";
+        };
+        btnEdit.addEventListener("click", ()=>{
+            this.setEditMode();
+            updateUI();
+        });
 
         const btnRemove = btnGeneric.cloneNode();
         btnRemove.textContent = "Remove";
@@ -85,6 +170,10 @@ class projectList{
         projectHeading.appendChild(projectNav);
 
         projectCard.appendChild(projectHeading);
+
+        if(this.editActive){
+            projectCard.appendChild(this.addFormForEditing());
+        };
 
         if(this.cardExpanded){
             projectCard.appendChild(this.getHtmlExpanded());

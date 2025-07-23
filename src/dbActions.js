@@ -57,22 +57,14 @@ function projectRetrieve(id){
     const filteredItem = projectDB.filter((element)=>{return element.id == id});
     return filteredItem[0];
 };
-function projectUpdate(id, updateKey = "N/A", updateValue = "N/A"){
+function projectUpdate(id, updateObject = {}){
     for (let index = 0; index < projectDB.length; index++) {
-        const elementId = projectDB[index].id;
+        const element = projectDB[index];
 
-        if(elementId == id){
-            switch (updateKey) {
-                case "title":
-                    projectDB[index].setTitle(updateValue);
-                    break;
-                case "description":
-                    projectDB[index].setDescription(updateValue);
-                    break;
-                default:
-                    console.log("Invalid key to update: " + updateKey)
-                    break;
-            };
+        if(element.id == id){
+
+            projectDB[index].updateProjectObject(updateObject);
+
             break;
         };
     };
