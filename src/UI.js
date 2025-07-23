@@ -3,7 +3,7 @@ import { projectGetAll } from "./dbActions";
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
 
-function toggleProjectDetails(projectId = "N/A", status = false){
+function toggleProjectDetails(projectId = "N/A"){
     const allProjectArray = projectGetAll();
 
     for (let index = 0; index < allProjectArray.length; index++) {
@@ -60,4 +60,4 @@ function updateUI(){
     showProjectsMainContent();
 };
 
-export {showProjectsSideBar, showProjectsMainContent, toggleProjectDetails, updateUI};
+export {updateUI};

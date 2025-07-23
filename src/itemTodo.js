@@ -1,5 +1,5 @@
 import { todoDelete, todoUpdate } from "./dbActions";
-import { showProjectsMainContent } from "./UI";
+import { updateUI } from "./UI";
 
 class itemTodo{
     constructor(projectId, title, description, dueDate, priority, completed){
@@ -106,7 +106,7 @@ class itemTodo{
             };
             todoUpdate(this.id, newTodoItem);
             this.setEditMode();
-            showProjectsMainContent();
+            updateUI();
         });
 
         //add all elements to form
@@ -145,7 +145,7 @@ class itemTodo{
         };
         btn_complete.addEventListener("click", ()=>{
             this.setCompleted();
-            showProjectsMainContent();
+            updateUI();
         });
 
         const btn_edit = document.createElement("button");
@@ -154,16 +154,16 @@ class itemTodo{
         }else{
             btn_edit.textContent = "Edit";
         };
-        btn_edit.addEventListener("click", (e)=>{
+        btn_edit.addEventListener("click", ()=>{
             this.setEditMode();
-            showProjectsMainContent();
+            updateUI();
         });
 
         const btn_remove = document.createElement("button");
         btn_remove.textContent = "Remove";
         btn_remove.addEventListener("click", ()=>{
             todoDelete(this.id);
-            showProjectsMainContent();
+            updateUI();
         });
 
         //assemble the item element
