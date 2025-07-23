@@ -13,6 +13,31 @@ class itemTodo{
         this.editActive = false;
     }
 
+    getTodoObject(){
+        return {
+            "id":this.id,
+            "projectId":this.projectId,
+            "title":this.title,
+            "description":this.description,
+            "dueDate":this.dueDate,
+            "priority":this.priority,
+            "completed":this.completed,
+            "editActive":this.editActive,
+        };
+    }
+
+    updateTodoObject(newDataObject){
+        if(newDataObject.title != ""){
+            this.setTitle(newDataObject.title);
+        };
+        if(newDataObject.description != ""){
+            this.setDescription(newDataObject.description);
+        };
+        if(newDataObject.dueDate != ""){
+            this.setDueDate(newDataObject.dueDate);
+        };
+    }
+
     setProjectId(projectId){
         this.projectId = projectId;
     }
@@ -61,7 +86,7 @@ class itemTodo{
 
         const inputDueDate = genericInput.cloneNode();
         inputDueDate.setAttribute("id", "iduedate");
-        inputDueDate.setAttribute("name", "duedate");
+        inputDueDate.setAttribute("name", "dueDate");
         inputDueDate.setAttribute("type", "date")
         const labelDueDate = genericLabel.cloneNode();
         labelDueDate.setAttribute("for", "idescription");
@@ -79,7 +104,8 @@ class itemTodo{
             for(const [key, value] of newFormData){
                 newTodoItem[key] = value;
             };
-            console.log(newTodoItem)
+            todoUpdate(this.id, newTodoItem);
+            showProjectsMainContent();
         });
 
         //add all elements to form

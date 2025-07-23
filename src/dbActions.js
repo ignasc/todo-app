@@ -11,34 +11,14 @@ function todoRetrieve(id){
     const filteredItem = todoDB.filter((element)=>{return element.id == id});
     return filteredItem[0];
 };
-function todoUpdate(id, updateKey = "N/A", updateValue = "N/A"){
+function todoUpdate(id, updateObject = {}){
     for (let index = 0; index < todoDB.length; index++) {
-        const elementId = todoDB[index].id;
+        const element = todoDB[index];
 
-        if(elementId == id){
-            switch (updateKey) {
-                case "projectid":
-                    todoDB[index].setProjectId(updateValue);
-                    break;
-                case "title":
-                    todoDB[index].setTitle(updateValue);
-                    break;
-                case "description":
-                    todoDB[index].setDescription(updateValue);
-                    break;
-                case "dueDate":
-                    todoDB[index].setDueDate(updateValue);
-                    break;
-                case "priority":
-                    todoDB[index].setPriority(updateValue);
-                    break;
-                case "completed":
-                    todoDB[index].setCompleted();
-                    break;
-                default:
-                    console.log("Invalid key to update: " + updateKey)
-                    break;
-            };
+        if(element.id == id){
+
+            todoDB[index].updateTodoObject(updateObject);
+
             break;
         };
     };
