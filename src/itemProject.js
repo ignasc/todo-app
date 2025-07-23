@@ -9,14 +9,6 @@ class projectList{
         this.cardExpanded = false;
     }
 
-    setExpanded(){
-        //debug: temporary function to force flag switch while testing
-        this.cardExpanded = true;
-    }
-    setCollapsed(){
-        //debug: temporary function to force flag switch while testing
-        this.cardExpanded = false;
-    }
     toggleDetails(){
         this.cardExpanded = !this.cardExpanded;
     }

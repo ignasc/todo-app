@@ -25,7 +25,6 @@ function showProjectsMainContent(id = projectGetAll()[0].id){
 
     const allProjectsArray = projectGetAll();
 
-    //add the rest as collapsed projects to the list
     for (let index = 0; index < allProjectsArray.length; index++) {
         const element = allProjectsArray[index];
         projectList.appendChild(element.getHtmlElement());
