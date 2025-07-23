@@ -6,6 +6,7 @@ class projectList{
         this.id = "P" + crypto.randomUUID();
         this.title = title;
         this.description = description;
+        this.completed = false;
         this.cardExpanded = false;
     }
 
@@ -17,6 +18,9 @@ class projectList{
     }
     setDescription(desc){
         this.description = desc;
+    }
+    setCompleted(){
+        this.completed = !this.completed;
     }
     getHtmlElement(){
         const btnGeneric = document.createElement("button");
@@ -48,9 +52,19 @@ class projectList{
         });
 
         const btnComplete = btnGeneric.cloneNode();
-        btnComplete.textContent = "Mark Completed";
+        btnComplete.addEventListener("click", ()=>{
+            this.setCompleted();
+            updateUI();
+        });
+        if(this.completed){
+            btnComplete.textContent = "Mark Incomplete";
+        }else{
+            btnComplete.textContent = "Mark Completed";
+        };
+
         const btnEdit = btnGeneric.cloneNode();
         btnEdit.textContent = "Edit";
+
         const btnRemove = btnGeneric.cloneNode();
         btnRemove.textContent = "Remove";
         btnRemove.addEventListener("click", ()=>{
