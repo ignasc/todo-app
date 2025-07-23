@@ -17,7 +17,7 @@ function toggleProjectDetails(projectId = "N/A", status = false){
     showProjectsMainContent();
 };
 
-function showProjectsMainContent(id = projectGetAll()[0].id){
+function showProjectsMainContent(){
     /*Generate a list of all available projects for the main content element*/
     divMain.textContent = "";
 
@@ -54,4 +54,10 @@ function showProjectsSideBar(){
 
 };
 
-export {showProjectsSideBar, showProjectsMainContent, toggleProjectDetails};
+function updateUI(){
+    toggleProjectDetails();
+    showProjectsSideBar();
+    showProjectsMainContent();
+};
+
+export {showProjectsSideBar, showProjectsMainContent, toggleProjectDetails, updateUI};

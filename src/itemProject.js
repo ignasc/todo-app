@@ -1,5 +1,5 @@
-import { todoGetAllForProject } from "./dbActions";
-import { toggleProjectDetails } from "./UI";
+import { todoGetAllForProject, projectDelete } from "./dbActions";
+import { showProjectsMainContent, toggleProjectDetails } from "./UI";
 
 class projectList{
     constructor(title, description){
@@ -52,6 +52,10 @@ class projectList{
         btnEdit.textContent = "Edit";
         const btnRemove = btnGeneric.cloneNode();
         btnRemove.textContent = "Remove";
+        btnRemove.addEventListener("click", ()=>{
+            projectDelete(this.id);
+            showProjectsMainContent();
+        });
 
         //assemble the html element
         projectTitleDiv.appendChild(btnExpand);
