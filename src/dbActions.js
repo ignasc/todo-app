@@ -1,7 +1,6 @@
 import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects"
 import projectList from "./itemProject";
-import itemTodo from "./itemTodo";
 
 //main CRUD operations for todo item db
 function todoCreateNew(newItem){

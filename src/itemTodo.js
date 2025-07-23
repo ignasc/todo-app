@@ -105,6 +105,7 @@ class itemTodo{
                 newTodoItem[key] = value;
             };
             todoUpdate(this.id, newTodoItem);
+            this.setEditMode();
             showProjectsMainContent();
         });
 
@@ -148,7 +149,15 @@ class itemTodo{
         });
 
         const btn_edit = document.createElement("button");
-        btn_edit.textContent = "Edit";
+        if(this.editActive){
+            btn_edit.textContent = "Cancel Edit";
+        }else{
+            btn_edit.textContent = "Edit";
+        };
+        btn_edit.addEventListener("click", (e)=>{
+            this.setEditMode();
+            showProjectsMainContent();
+        });
 
         const btn_remove = document.createElement("button");
         btn_remove.textContent = "Remove";
@@ -172,7 +181,9 @@ class itemTodo{
         cardItem.appendChild(cardHeader);
         cardItem.appendChild(cardNav);
 
-        cardItem.appendChild(this.addFormForEditing());
+        if(this.editActive){
+            cardItem.appendChild(this.addFormForEditing());
+        };
 
         return cardItem;
     }
