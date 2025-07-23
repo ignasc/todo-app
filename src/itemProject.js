@@ -17,13 +17,16 @@ class projectList{
         //debug: temporary function to force flag switch while testing
         this.cardExpanded = false;
     }
+    toggleDetails(){
+        this.cardExpanded = !this.cardExpanded;
+    }
     setTitle(title){
         this.title = title;
     }
     setDescription(desc){
         this.description = desc;
     }
-    getHtmlCollapsed(){
+    getHtmlElement(){
         const btnGeneric = document.createElement("button");
 
         const projectCard = document.createElement("li");
@@ -42,7 +45,11 @@ class projectList{
         projectNav.setAttribute("class", "project-nav");
 
         const btnExpand = btnGeneric.cloneNode();
-        btnExpand.textContent = "Expand";
+        if(this.cardExpanded){
+            btnExpand.textContent = "Collapse";
+        }else{
+            btnExpand.textContent = "Expand";
+        };
         btnExpand.addEventListener("click", (e)=>{
             toggleProjectDetails(this.id, true);
         });
@@ -68,52 +75,15 @@ class projectList{
 
         projectCard.appendChild(projectHeading);
 
+        if(this.cardExpanded){
+            projectCard.appendChild(this.getHtmlExpanded());
+        };
+
         return projectCard;
     }
     getHtmlExpanded(){
-        const btnGeneric = document.createElement("button");
-
-        const projectCard = document.createElement("li");
-        projectCard.setAttribute("class", "project-card");
-
-        const projectHeading = document.createElement("div");
-        projectHeading.setAttribute("class", "project-card-heading");
-
-        const projectTitleDiv = document.createElement("div");
-        projectTitleDiv.setAttribute("class", "project-card-title");
-
-        const projectTitleName = document.createElement("h1");
-        projectTitleName.textContent = this.title;
-
-        const projectNav = document.createElement("div");
-        projectNav.setAttribute("class", "project-nav");
-
-        const btnExpand = btnGeneric.cloneNode();
-        btnExpand.textContent = "Collapse";
-        btnExpand.addEventListener("click", (e)=>{
-            toggleProjectDetails(this.id, false);
-        });
-
-        const btnComplete = btnGeneric.cloneNode();
-        btnComplete.textContent = "Mark Completed";
-        const btnEdit = btnGeneric.cloneNode();
-        btnEdit.textContent = "Edit";
-        const btnRemove = btnGeneric.cloneNode();
-        btnRemove.textContent = "Remove";
-
-        //assemble the html element
-        projectTitleDiv.appendChild(btnExpand);
-        projectTitleDiv.appendChild(projectTitleName);
-
-        projectHeading.appendChild(projectTitleDiv);
-
-        projectNav.appendChild(btnComplete);
-        projectNav.appendChild(btnEdit);
-        projectNav.appendChild(btnRemove);
-
-        projectHeading.appendChild(projectNav);
-
-        //Above is for collapsed html element
+        const projectCardDetails = document.createElement("div");
+        projectCardDetails.setAttribute("class", "project-details");
 
         const projectDescription = document.createElement("p");
         projectDescription.setAttribute("class", "project-description-p");
@@ -129,11 +99,10 @@ class projectList{
             todoList.appendChild(element.getItemCardHtml())
         }
 
-        projectCard.appendChild(projectHeading);
-        projectCard.appendChild(projectDescription);
-        projectCard.appendChild(todoList);
+        projectCardDetails.appendChild(projectDescription);
+        projectCardDetails.appendChild(todoList);
 
-        return projectCard;
+        return projectCardDetails;
     }
 };
 
