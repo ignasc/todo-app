@@ -90,12 +90,6 @@ body{
     padding: 5px;
 }
 
-.todo-nav {
-    border: 1px solid blue;
-    display: flex;
-    gap: 5px;
-}
-
 .todo-list-card {
     display: flex;
     flex-direction: column;
@@ -113,6 +107,7 @@ body{
     font-size: 0.5rem;
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
 }
@@ -121,6 +116,20 @@ body{
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.todo-nav {
+    border: 1px solid blue;
+    display: flex;
+    gap: 5px;
+}
+
+.todo-form {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .book-info-container {
