@@ -10,30 +10,15 @@ body{
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 50px 1fr;
-    gap: 20px;
+    gap: 5px;
 
     margin: 10px;
     padding: 10px;
 }
 
-#book-add-new {
-    grid-column: 1 / 2;
+#main-navbar {
+    grid-column: 1 / -1;
     grid-row: 1 / 2;
-    justify-self: center;
-    align-self: center;
-}
-
-#book-new-form {
-    grid-column: 1 / 2;
-    grid-row: 2 / -1;
-    border: 1px solid #172121;
-    box-shadow: 1px 1px 5px #444554;
-    border-radius: 1rem;
-    background-color: rgb(255, 252, 248);
-    
-    display: none; /*controlled through js*/
-    flex-direction: column;
-    height: max-content;
 }
 
 #book-new-form > * {
@@ -42,11 +27,16 @@ body{
 
 #content-main {
     grid-column: 2 / -1;
-    grid-row: 1 / -1;
+    grid-row: 2 / -1;
 
     display: flex;
     flex-direction: row;
     width: 100%;
+}
+
+#content-sidebar {
+    grid-column: 1 / 2;
+    grid-row: 2 / -1;
 }
 
 #content-main > ul {

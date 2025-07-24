@@ -54,6 +54,10 @@ function projectCreateNew(title, description){
     projectDB.push(new projectList(title, description));
 };
 function projectRetrieve(id){
+    if(id == "getAll"){
+    /*self note: this is reference to original array, spread operator does not work either as keypair values inside array elements are still references to original array values*/
+    return projectDB;
+    };
     const filteredItem = projectDB.filter((element)=>{return element.id == id});
     return filteredItem[0];
 };
@@ -83,7 +87,7 @@ function projectDelete(id){
 //custom CRUD operations for projects db.
 function projectGetAll(){
     /*self note: this is reference to original array, spread operator does not work either as keypair values inside array elements are still references to original array values*/
-    return projectDB; 
+    return projectDB;
 };
 
 export {
