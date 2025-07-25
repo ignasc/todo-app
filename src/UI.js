@@ -1,4 +1,4 @@
-import { projectGetAll, projectRetrieve, todoGetAllForProject, todoRetrieve } from "./dbActions";
+import { projectGetAll, projectRetrieve, todoDelete, todoGetAllForProject, todoRetrieve } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -215,6 +215,10 @@ function returnTodoItem(object){
 
     const btnTodoRemove = btnGeneric.cloneNode();
     btnTodoRemove.textContent = "Remove";
+    btnTodoRemove.addEventListener("click", ()=>{
+        todoDelete(object.id);
+        updateUI();
+    });
 
     todoItem.appendChild(todoTitle);
     todoItem.appendChild(todoDescription);
