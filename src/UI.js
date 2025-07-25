@@ -1,81 +1,16 @@
 import { projectDelete, projectRetrieve, projectUpdate, todoRetrieve, todoDelete, todoUpdate } from "./dbActions";
 
-const divSidebar = document.querySelector("#content-sidebar");
-const divMain = document.querySelector("#content-main");
-
 const btnGeneric = document.createElement("button");
-const divGeneric = document.createElement("div");
-
-function toggleProjectDetails(projectId = "N/A"){
-    const allProjectArray = projectRetrieve("getAll");
-
-    for (let index = 0; index < allProjectArray.length; index++) {
-        const element = allProjectArray[index];
-        if(projectId == element.id){
-            element.toggleDetails();
-            break;
-        };
-    }
-
-    showProjectsMainContent();
-};
-
-function showProjectsMainContent(){
-    /*Generate a list of all available projects for the main content element*/
-    divMain.textContent = "";
-
-    const projectList = document.createElement("ul");
-
-    const allProjectsArray = projectRetrieve("getAll");
-
-    for (let index = 0; index < allProjectsArray.length; index++) {
-        const element = allProjectsArray[index];
-        projectList.appendChild(element.getHtmlElement());
-    };
-
-    divMain.appendChild(projectList);
-};
-
-function showProjectsSideBar(){
-    /*Generate a list of all available projects*/
-    divSidebar.textContent = "";
-
-    const projectList = document.createElement("ul");
-    const projectItem = document.createElement("li")
-    const btnProject = document.createElement("button");
-    const projects = projectRetrieve("getAll");
-
-    for (let i = 0; i < projects.length; i++) {
-        const element = projects[i];
-        const newItem = projectItem.cloneNode();
-        const newButton = btnProject.cloneNode();
-        newButton.addEventListener("click", (e)=>{
-            projectRetrieve(e.target.id).toggleDetails();
-            updateUI();
-        });
-        newButton.textContent = element.title;
-        newButton.setAttribute("id", element.id)
-        newItem.setAttribute("data-id", element.id)
-
-        newItem.appendChild(newButton);
-        projectList.appendChild(newItem);
-    };
-
-    divSidebar.appendChild(projectList);
-
-};
-
-/*Below code is in the process of refactoring the above code. The purpose is to remove all UI related functions from classes and move them to separate UI module (here)*/
 
 function showNavBar(){
     /*Generate a list of projects for sidebar*/
     const divNavbar = document.querySelector("#main-navbar");
     divNavbar.textContent = "";
 
-    const btn_NewProject = btnGeneric.cloneNode();
+    const btn_NewProject = document.createElement("button");
     btn_NewProject.textContent = "Create new todo list";
 
-    const btn_NewTodo = btnGeneric.cloneNode();
+    const btn_NewTodo = document.createElement("button");
     btn_NewTodo.textContent = "Create new todo item";
 
     divNavbar.appendChild(btn_NewProject);
@@ -84,6 +19,7 @@ function showNavBar(){
 
 function showSideBar(){
     /*Generate a list of all available projects*/
+    const divSidebar = document.querySelector("#content-sidebar");
     divSidebar.textContent = "";
 
     const projectList = document.createElement("ul");
@@ -113,6 +49,7 @@ function showSideBar(){
 function showMainContent(){
     /*Generate a list of projects/todo items for main page content*/
     const mainContentDiv = document.querySelector("#content-main");
+    const divMain = document.querySelector("#content-main");
     divMain.textContent = "";
 
     const fullListOfProjects = returnProjectsListHtml();
@@ -143,7 +80,7 @@ function returnProjectItemHtml(object){
     const projectCardHeader = document.createElement("div");
     projectCardHeader.setAttribute("class", "project-card-heading");
 
-    const btnExpand = btnGeneric.cloneNode();
+    const btnExpand = document.createElement("button");
     if(object.cardExpanded){
         btnExpand.textContent = "Collapse";
     }else{
@@ -166,7 +103,7 @@ function returnProjectItemHtml(object){
     const projectNav = document.createElement("div");
     projectNav.setAttribute("class", "project-nav");
 
-    const btnEdit = btnGeneric.cloneNode();
+    const btnEdit = document.createElement("button");
     if(object.editActive){
         btnEdit.textContent = "Cancel Edit";
     }else{
@@ -178,7 +115,7 @@ function returnProjectItemHtml(object){
         updateUI();
     });
 
-    const btnRemove = btnGeneric.cloneNode();
+    const btnRemove = document.createElement("button");
     btnRemove.textContent = "Remove";
     btnRemove.addEventListener("click", (e)=>{
         e.preventDefault();
@@ -237,7 +174,7 @@ function returnTodoItem(object){
     const todoNav = document.createElement("div");
     todoNav.setAttribute("class", "todo-nav");
 
-    const btnTodoComplete = btnGeneric.cloneNode();
+    const btnTodoComplete = document.createElement("button");
     if(object.completed){
         btnTodoComplete.textContent = "Mark Incomplete";
     }else{
@@ -250,7 +187,7 @@ function returnTodoItem(object){
         updateUI();
     });
 
-    const btnTodoEdit = btnGeneric.cloneNode();
+    const btnTodoEdit = document.createElement("button");
     if(object.editActive){
         btnTodoEdit.textContent = "Cancel Edit";
     }else{
@@ -262,7 +199,7 @@ function returnTodoItem(object){
         updateUI();
     });
 
-    const btnTodoRemove = btnGeneric.cloneNode();
+    const btnTodoRemove = document.createElement("button");
     btnTodoRemove.textContent = "Remove";
     btnTodoRemove.addEventListener("click", (e)=>{
         e.preventDefault();
