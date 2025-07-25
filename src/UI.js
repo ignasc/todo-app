@@ -96,6 +96,7 @@ function showSideBar(){
         const newItem = projectItem.cloneNode();
         const newButton = btnProject.cloneNode();
         newButton.addEventListener("click", (e)=>{
+            e.preventDefault();
             projectRetrieve(e.target.id).toggleDetails();
             updateUI();
         });
@@ -162,14 +163,16 @@ function returnProjectItemHtml(object){
     }else{
         btnEdit.textContent = "Edit";
     };
-    btnEdit.addEventListener("click", ()=>{
+    btnEdit.addEventListener("click", (e)=>{
+        e.preventDefault();
         object.setEditMode();
         updateUI();
     });
 
     const btnRemove = btnGeneric.cloneNode();
     btnRemove.textContent = "Remove";
-    btnRemove.addEventListener("click", ()=>{
+    btnRemove.addEventListener("click", (e)=>{
+        e.preventDefault();
         projectDelete(object.id);
         updateUI();
     });
@@ -231,6 +234,7 @@ function returnTodoItem(object){
     };
     btnTodoComplete.setAttribute("data-id", object.id);
     btnTodoComplete.addEventListener("click", (e)=>{
+        e.preventDefault();
         object.setCompleted();
         updateUI();
     });
@@ -241,14 +245,16 @@ function returnTodoItem(object){
     }else{
         btnTodoEdit.textContent = "Edit";
     };
-    btnTodoEdit.addEventListener("click", ()=>{
+    btnTodoEdit.addEventListener("click", (e)=>{
+        e.preventDefault();
         object.setEditMode();
         updateUI();
     });
 
     const btnTodoRemove = btnGeneric.cloneNode();
     btnTodoRemove.textContent = "Remove";
-    btnTodoRemove.addEventListener("click", ()=>{
+    btnTodoRemove.addEventListener("click", (e)=>{
+        e.preventDefault();
         todoDelete(object.id);
         updateUI();
     });
