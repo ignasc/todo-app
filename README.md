@@ -4,7 +4,11 @@ A basic todo list app. Build in progress.
 
 ## Personal thoughts
 
-As I am building the app, I am starting to realise that putting all buttons and their functions in projects or todo items class is not a great idea as that functionality is part of the UI. Now I am making that functionality embeded in the class item, which is stored in a database. Therefore I might refactor the code at later stage to make sure class only has methods that modify its own properties, rather than providing an html element to the UI.
+Initially I had classes of todo items and project lists include methods that generate an html element, which can be used in front-end UI. But quickly realised that it was not a great idea since classes for mostly related to backend. I separated UI methods from backend code and it had quite a few benefits:
+* Cleaner, more organised code: I split larger methods into smaller ones that are responsible for a specific task.
+* Object classes are not cluttered with large code.
+* Much easier to implement new features.
+* Object classes do not break UI display if missing.
 
 ## Webpack notes
 
