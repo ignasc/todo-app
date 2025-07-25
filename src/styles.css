@@ -63,16 +63,37 @@ body{
 
 .project-card-heading {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
-.project-card-title {
+.project-card-heading > button{
+    flex-grow: 0;
+    flex-basis: content;
+}
+
+.project-title {
+    flex-grow: 1;
+    flex-basis: 130px;
+
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 5px;
 }
 
+.project-description-p {
+    flex-grow: 3;
+    flex-basis: 300px;
+
+    font-style: italic;
+}
+
 .project-nav {
+    flex-grow: 1;
+    flex-basis: content;
+
     border: 1px solid green;
     display: flex;
     justify-content: center;
@@ -83,11 +104,11 @@ body{
 .todo-list-card {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 2px;
-    padding: 2px 0px 2px 0px;
 }
 
-.todo-item-card {
+.todo-card {
     background-color: rgb(255, 252, 248);
     padding: 10px;
     border: 1px solid #172121;
@@ -98,19 +119,27 @@ body{
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
+    align-items: center;
+    gap: 16px;
 }
 
-.todo-heading {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.todo-title {
+    flex-grow: 1;
+    flex-basis: content;
+}
+
+.todo-description {
+    flex-grow: 3;
+    flex-basis: 160px;
 }
 
 .todo-nav {
+    flex-grow: 1;
+    flex-basis: content;
+
     border: 1px solid blue;
     display: flex;
+    justify-content: flex-end;
     gap: 5px;
 }
 
@@ -133,11 +162,6 @@ body{
 .project-title-p {
     font-size: 1.2rem;
     margin-bottom: 5px;
-}
-
-.project-description-p {
-    font-style: italic;
-    margin-bottom: 10px;
 }
 
 #book-pages-p {

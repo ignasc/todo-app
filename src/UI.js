@@ -1,4 +1,4 @@
-import { projectGetAll, projectRetrieve } from "./dbActions";
+import { projectGetAll, projectRetrieve, todoGetAllForProject } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -110,60 +110,114 @@ function showSideBar(){
 };
 function showMainContent(){
     const mainContentDiv = document.querySelector("#content-main");
-    /*Structure:
-    project card
-        heading
-            button + title
-            nav buttons
-            description
-        body
-            ul todo
-                li todo
-                li todo
-    */
     divMain.textContent = "";
+
+    const fullListOfProjects = returnProjectsListHtml();
+
+    mainContentDiv.appendChild(fullListOfProjects);
+};
+
+function returnProjectsListHtml(){
     const projectList = document.createElement("ul");
-    const listItem = document.createElement("li");
 
     const projectArray = projectRetrieve("getAll");
     for (let index = 0; index < projectArray.length; index++) {
         const element = projectArray[index];
-        const newLiItem = listItem.cloneNode();
-        newLiItem.setAttribute("class", "project-card");
+        const newLiItem = returnProjectItemHtml(element);
 
-        //HEADING
-        const projectCardHeader = document.createElement("div");
-        projectCardHeader.setAttribute("class", "project-card-heading");
-
-        const btnExpand = btnGeneric.cloneNode();
-        btnExpand.textContent = "Expand";
-
-        const projectTitle = document.createElement("h1");
-        projectTitle.textContent = element.title;
-
-        const projectDescription = document.createElement("p");
-        projectDescription.setAttribute("class", "project-description-p");
-        projectDescription.textContent = element.description;
-
-
-        projectCardHeader.appendChild(btnExpand);
-        projectCardHeader.appendChild(projectTitle);
-        projectCardHeader.appendChild(projectDescription);
-
-        newLiItem.appendChild(projectCardHeader);
-
-        //BODY
-
-        const todoList = document.createElement("ul");
-        todoList.setAttribute("class", "todo-list-card");
-
-        newLiItem.appendChild(todoList);
-
-        //Append full list to main content element
         projectList.appendChild(newLiItem);
     };
 
-    mainContentDiv.appendChild(projectList);
+    return projectList;
+};
+
+function returnProjectItemHtml(object){
+    const newLiItem = document.createElement("li");
+    newLiItem.setAttribute("class", "project-card");
+
+    const projectCardHeader = document.createElement("div");
+    projectCardHeader.setAttribute("class", "project-card-heading");
+
+    const btnExpand = btnGeneric.cloneNode();
+    btnExpand.textContent = "Expand";
+
+    const projectTitle = document.createElement("h1");
+    projectTitle.setAttribute("class", "project-title");
+    projectTitle.textContent = object.title;
+
+    const projectDescription = document.createElement("p");
+    projectDescription.setAttribute("class", "project-description-p");
+    projectDescription.textContent = object.description;
+
+    const projectNav = document.createElement("div");
+    projectNav.setAttribute("class", "project-nav");
+    const btnEdit = btnGeneric.cloneNode();
+    btnEdit.textContent = "Edit";
+    const btnRemove = btnGeneric.cloneNode();
+    btnRemove.textContent = "Remove";
+
+    projectNav.appendChild(btnEdit);
+    projectNav.appendChild(btnRemove);
+
+    projectCardHeader.appendChild(btnExpand);
+    projectCardHeader.appendChild(projectTitle);
+    projectCardHeader.appendChild(projectDescription);
+    projectCardHeader.appendChild(projectNav);
+
+    newLiItem.appendChild(projectCardHeader);
+    newLiItem.appendChild(returnTodoList(object.id));
+
+    return newLiItem;
+};
+
+function returnTodoList(projectId){
+    const allTodoItems = todoGetAllForProject(projectId);
+    const todoList = document.createElement("ul");
+    todoList.setAttribute("class", "todo-list-card");
+
+    for (let index = 0; index < allTodoItems.length; index++) {
+        const element = allTodoItems[index];
+        console.log(element)
+        todoList.appendChild(returnTodoItem(element));
+    }
+
+    return todoList;
+};
+
+function returnTodoItem(object){
+    const todoItem = document.createElement("li");
+    todoItem.setAttribute("class", "todo-card");
+
+    const todoTitle = document.createElement("p");
+    todoTitle.setAttribute("class", "todo-title");
+    todoTitle.textContent = object.title;
+
+    const todoDescription = document.createElement("p");
+    todoDescription.setAttribute("class", "todo-description");
+    todoDescription.textContent = object.description;
+
+    const todoNav = document.createElement("div");
+    todoNav.setAttribute("class", "todo-nav");
+
+    const btnTodoComplete = btnGeneric.cloneNode();
+    btnTodoComplete.textContent = "Mark Completed";
+
+    const btnTodoEdit = btnGeneric.cloneNode();
+    btnTodoEdit.textContent = "Edit";
+
+    const btnTodoRemove = btnGeneric.cloneNode();
+    btnTodoRemove.textContent = "Remove";
+
+    todoItem.appendChild(todoTitle);
+    todoItem.appendChild(todoDescription);
+
+    todoNav.appendChild(btnTodoComplete);
+    todoNav.appendChild(btnTodoEdit);
+    todoNav.appendChild(btnTodoRemove);
+
+    todoItem.appendChild(todoNav);
+
+    return todoItem;
 };
 
 function updateUI(){
