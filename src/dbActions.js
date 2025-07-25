@@ -6,10 +6,16 @@ import projectList from "./itemProject";
 function todoCreateNew(newItem){
     todoDB.push(newItem);
 };
-function todoRetrieve(id){
+
+function todoRetrieve(id, getAll = false){
+    if(getAll){
+        const allTodosForProject = todoDB.filter((element)=>{return element.projectId == id;});
+        return allTodosForProject;
+    };
     const filteredItem = todoDB.filter((element)=>{return element.id == id});
     return filteredItem[0];
 };
+
 function todoUpdate(id, updateObject = {}){
     for (let index = 0; index < todoDB.length; index++) {
         const element = todoDB[index];
@@ -22,6 +28,7 @@ function todoUpdate(id, updateObject = {}){
         };
     };
 };
+
 function todoDelete(id){
     for (let index = 0; index < todoDB.length; index++) {
         const elementId = todoDB[index].id;
@@ -33,26 +40,11 @@ function todoDelete(id){
     };
 };
 
-//custom CRUD operations for todo item db.
-function todoGetAllForProject(projectId){
-    const allTodosForProject = todoDB.filter((element)=>{return element.projectId == projectId;});
-    return allTodosForProject;
-};
-
-function todoMarkCompleted(id){
-    for (let index = 0; index < todoDB.length; index++) {
-        const element = todoDB[index];
-        if(element.id == id){
-            element.setCompleted();
-            break;
-        };
-    }
-};
-
 //CRUD operations for projects db
 function projectCreateNew(title, description){
     projectDB.push(new projectList(title, description));
 };
+
 function projectRetrieve(id){
     if(id == "getAll"){
     /*self note: this is reference to original array, spread operator does not work either as keypair values inside array elements are still references to original array values*/
@@ -61,6 +53,7 @@ function projectRetrieve(id){
     const filteredItem = projectDB.filter((element)=>{return element.id == id});
     return filteredItem[0];
 };
+
 function projectUpdate(id, updateObject = {}){
     for (let index = 0; index < projectDB.length; index++) {
         const element = projectDB[index];
@@ -73,6 +66,7 @@ function projectUpdate(id, updateObject = {}){
         };
     };
 };
+
 function projectDelete(id){
     for (let index = 0; index < projectDB.length; index++) {
         const elementId = projectDB[index].id;
@@ -84,14 +78,7 @@ function projectDelete(id){
     };
 };
 
-//custom CRUD operations for projects db.
-function projectGetAll(){
-    /*self note: this is reference to original array, spread operator does not work either as keypair values inside array elements are still references to original array values*/
-    return projectDB;
-};
-
 export {
-    todoCreateNew, todoRetrieve, todoUpdate, todoDelete, todoGetAllForProject, todoMarkCompleted,
+    todoCreateNew, todoRetrieve, todoUpdate, todoDelete,
 
-    projectCreateNew, projectRetrieve, projectUpdate, projectDelete, projectGetAll
-}
+    projectCreateNew, projectRetrieve, projectUpdate, projectDelete, }

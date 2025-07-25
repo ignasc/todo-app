@@ -1,4 +1,4 @@
-import { projectDelete, projectGetAll, projectRetrieve, projectUpdate, todoDelete, todoGetAllForProject, todoRetrieve, todoUpdate } from "./dbActions";
+import { projectDelete, projectRetrieve, projectUpdate, todoRetrieve, todoDelete, todoUpdate } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -7,7 +7,7 @@ const btnGeneric = document.createElement("button");
 const divGeneric = document.createElement("div");
 
 function toggleProjectDetails(projectId = "N/A"){
-    const allProjectArray = projectGetAll();
+    const allProjectArray = projectRetrieve("getAll");
 
     for (let index = 0; index < allProjectArray.length; index++) {
         const element = allProjectArray[index];
@@ -26,7 +26,7 @@ function showProjectsMainContent(){
 
     const projectList = document.createElement("ul");
 
-    const allProjectsArray = projectGetAll();
+    const allProjectsArray = projectRetrieve("getAll");
 
     for (let index = 0; index < allProjectsArray.length; index++) {
         const element = allProjectsArray[index];
@@ -43,7 +43,7 @@ function showProjectsSideBar(){
     const projectList = document.createElement("ul");
     const projectItem = document.createElement("li")
     const btnProject = document.createElement("button");
-    const projects = projectGetAll();
+    const projects = projectRetrieve("getAll");
 
     for (let i = 0; i < projects.length; i++) {
         const element = projects[i];
@@ -89,7 +89,7 @@ function showSideBar(){
     const projectList = document.createElement("ul");
     const projectItem = document.createElement("li")
     const btnProject = document.createElement("button");
-    const projects = projectGetAll();
+    const projects = projectRetrieve("getAll");
 
     for (let i = 0; i < projects.length; i++) {
         const element = projects[i];
@@ -209,7 +209,7 @@ function returnProjectItemHtml(object){
 
 function returnTodoList(projectId){
     /*Generate todo item list as "ul" element*/
-    const allTodoItems = todoGetAllForProject(projectId);
+    const allTodoItems = todoRetrieve(projectId, true);
     const todoList = document.createElement("ul");
     todoList.setAttribute("class", "todo-list-card");
 
