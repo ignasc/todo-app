@@ -1,4 +1,4 @@
-import { projectDelete, projectGetAll, projectRetrieve, todoDelete, todoGetAllForProject, todoRetrieve } from "./dbActions";
+import { projectDelete, projectGetAll, projectRetrieve, projectUpdate, todoDelete, todoGetAllForProject, todoRetrieve } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -155,8 +155,18 @@ function returnProjectItemHtml(object){
 
     const projectNav = document.createElement("div");
     projectNav.setAttribute("class", "project-nav");
+
     const btnEdit = btnGeneric.cloneNode();
-    btnEdit.textContent = "Edit";
+    if(object.editActive){
+        btnEdit.textContent = "Cancel Edit";
+    }else{
+        btnEdit.textContent = "Edit";
+    };
+    btnEdit.addEventListener("click", ()=>{
+        object.setEditMode();
+        updateUI();
+    });
+
     const btnRemove = btnGeneric.cloneNode();
     btnRemove.textContent = "Remove";
     btnRemove.addEventListener("click", ()=>{
@@ -173,6 +183,11 @@ function returnProjectItemHtml(object){
     projectCardHeader.appendChild(projectNav);
 
     newLiItem.appendChild(projectCardHeader);
+
+    if(object.editActive){
+        newLiItem.appendChild(returnProjectEditFormHtml(object));
+    };
+
     newLiItem.appendChild(returnTodoList(object.id));
 
     return newLiItem;
@@ -221,7 +236,15 @@ function returnTodoItem(object){
     });
 
     const btnTodoEdit = btnGeneric.cloneNode();
-    btnTodoEdit.textContent = "Edit";
+    if(object.editActive){
+        btnTodoEdit.textContent = "Cancel Edit";
+    }else{
+        btnTodoEdit.textContent = "Edit";
+    };
+    btnTodoEdit.addEventListener("click", ()=>{
+        object.setEditMode();
+        updateUI();
+    });
 
     const btnTodoRemove = btnGeneric.cloneNode();
     btnTodoRemove.textContent = "Remove";
@@ -240,6 +263,57 @@ function returnTodoItem(object){
     todoItem.appendChild(todoNav);
 
     return todoItem;
+};
+
+function returnProjectEditFormHtml(object){
+        const formCard = document.createElement("form")
+        formCard.setAttribute("class", "project-form");
+        formCard.setAttribute("id", object.id);
+
+        const genericInput = document.createElement("input");
+        genericInput.setAttribute("type", "text");
+        const genericLabel = document.createElement("label");
+
+        //title, description, date inputs
+        const inputTitle = genericInput.cloneNode()
+        inputTitle.setAttribute("id", "pname");
+        inputTitle.setAttribute("name", "title");
+        const labelTitle = genericLabel.cloneNode();
+        labelTitle.setAttribute("for", "pname");
+        labelTitle.textContent = "Project Name";
+
+        const inputDescription = genericInput.cloneNode();
+        inputDescription.setAttribute("id", "pdescription");
+        inputDescription.setAttribute("name", "description");
+        const labelDescription = genericLabel.cloneNode();
+        labelDescription.setAttribute("for", "pdescription");
+        labelDescription.textContent = "Description";
+
+        const btn_submit = genericInput.cloneNode();
+        btn_submit.setAttribute("type", "submit");
+        btn_submit.setAttribute("value", "Save");
+        btn_submit.setAttribute("id", "form-project-submit-btn");
+
+        btn_submit.addEventListener("click", (e)=>{
+            e.preventDefault()
+            const newFormData = new FormData(formCard);
+            const newProjectItem = {};
+            for(const [key, value] of newFormData){
+                newProjectItem[key] = value;
+            };
+            projectUpdate(object.id, newProjectItem);
+            object.setEditMode();
+            updateUI();
+        });
+
+        //add all elements to form
+        formCard.appendChild(labelTitle);
+        formCard.appendChild(inputTitle);
+        formCard.appendChild(labelDescription);
+        formCard.appendChild(inputDescription);
+        formCard.appendChild(btn_submit);
+
+        return formCard;
 };
 
 function updateUI(){
