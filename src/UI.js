@@ -144,7 +144,16 @@ function returnProjectItemHtml(object){
     projectCardHeader.setAttribute("class", "project-card-heading");
 
     const btnExpand = btnGeneric.cloneNode();
-    btnExpand.textContent = "Expand";
+    if(object.cardExpanded){
+        btnExpand.textContent = "Collapse";
+    }else{
+        btnExpand.textContent = "Expand";
+    };
+    btnExpand.addEventListener("click", (e)=>{
+        e.preventDefault();
+        object.toggleDetails();
+        updateUI();
+    });
 
     const projectTitle = document.createElement("h1");
     projectTitle.setAttribute("class", "project-title");
@@ -191,7 +200,9 @@ function returnProjectItemHtml(object){
         newLiItem.appendChild(returnProjectEditFormHtml(object));
     };
 
-    newLiItem.appendChild(returnTodoList(object.id));
+    if(object.cardExpanded){
+        newLiItem.appendChild(returnTodoList(object.id));
+    };
 
     return newLiItem;
 };
