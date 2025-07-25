@@ -1,4 +1,4 @@
-import { projectGetAll, projectRetrieve, todoGetAllForProject } from "./dbActions";
+import { projectGetAll, projectRetrieve, todoGetAllForProject, todoRetrieve } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -177,7 +177,6 @@ function returnTodoList(projectId){
 
     for (let index = 0; index < allTodoItems.length; index++) {
         const element = allTodoItems[index];
-        console.log(element)
         todoList.appendChild(returnTodoItem(element));
     }
 
@@ -200,7 +199,16 @@ function returnTodoItem(object){
     todoNav.setAttribute("class", "todo-nav");
 
     const btnTodoComplete = btnGeneric.cloneNode();
-    btnTodoComplete.textContent = "Mark Completed";
+    if(object.completed){
+        btnTodoComplete.textContent = "Mark Incomplete";
+    }else{
+        btnTodoComplete.textContent = "Mark Completed";
+    };
+    btnTodoComplete.setAttribute("data-id", object.id);
+    btnTodoComplete.addEventListener("click", (e)=>{
+        object.setCompleted();
+        updateUI();
+    });
 
     const btnTodoEdit = btnGeneric.cloneNode();
     btnTodoEdit.textContent = "Edit";
@@ -221,10 +229,6 @@ function returnTodoItem(object){
 };
 
 function updateUI(){
-    toggleProjectDetails();
-    showProjectsSideBar();
-    showProjectsMainContent();
-
     showNavBar();
     showSideBar();
     showMainContent();
