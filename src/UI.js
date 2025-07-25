@@ -1,4 +1,4 @@
-import { projectDelete, projectGetAll, projectRetrieve, projectUpdate, todoDelete, todoGetAllForProject, todoRetrieve } from "./dbActions";
+import { projectDelete, projectGetAll, projectRetrieve, projectUpdate, todoDelete, todoGetAllForProject, todoRetrieve, todoUpdate } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -262,6 +262,10 @@ function returnTodoItem(object){
 
     todoItem.appendChild(todoNav);
 
+    if(object.editActive){
+        todoItem.appendChild(returnTodoEditFormHtml(object));
+    };
+
     return todoItem;
 };
 
@@ -311,6 +315,67 @@ function returnProjectEditFormHtml(object){
         formCard.appendChild(inputTitle);
         formCard.appendChild(labelDescription);
         formCard.appendChild(inputDescription);
+        formCard.appendChild(btn_submit);
+
+        return formCard;
+};
+
+function returnTodoEditFormHtml(object){
+        const formCard = document.createElement("form")
+        formCard.setAttribute("class", "todo-form");
+        formCard.setAttribute("id", object.id);
+
+        const genericInput = document.createElement("input");
+        genericInput.setAttribute("type", "text");
+        const genericLabel = document.createElement("label");
+
+        //title, description, date inputs
+        const inputTitle = genericInput.cloneNode()
+        inputTitle.setAttribute("id", "iname");
+        inputTitle.setAttribute("name", "title");
+        const labelTitle = genericLabel.cloneNode();
+        labelTitle.setAttribute("for", "iname");
+        labelTitle.textContent = "Task Name";
+
+        const inputDescription = genericInput.cloneNode();
+        inputDescription.setAttribute("id", "idescription");
+        inputDescription.setAttribute("name", "description");
+        const labelDescription = genericLabel.cloneNode();
+        labelDescription.setAttribute("for", "idescription");
+        labelDescription.textContent = "Description";
+
+        const inputDueDate = genericInput.cloneNode();
+        inputDueDate.setAttribute("id", "iduedate");
+        inputDueDate.setAttribute("name", "dueDate");
+        inputDueDate.setAttribute("type", "date")
+        const labelDueDate = genericLabel.cloneNode();
+        labelDueDate.setAttribute("for", "idescription");
+        labelDueDate.textContent = "Due Date";
+
+        const btn_submit = genericInput.cloneNode();
+        btn_submit.setAttribute("type", "submit");
+        btn_submit.setAttribute("value", "Save");
+        btn_submit.setAttribute("id", "form-todo-submit-btn");
+
+        btn_submit.addEventListener("click", (e)=>{
+            e.preventDefault()
+            const newFormData = new FormData(formCard);
+            const newTodoItem = {};
+            for(const [key, value] of newFormData){
+                newTodoItem[key] = value;
+            };
+            todoUpdate(object.id, newTodoItem);
+            object.setEditMode();
+            updateUI();
+        });
+
+        //add all elements to form
+        formCard.appendChild(labelTitle);
+        formCard.appendChild(inputTitle);
+        formCard.appendChild(labelDescription);
+        formCard.appendChild(inputDescription);
+        formCard.appendChild(labelDueDate);
+        formCard.appendChild(inputDueDate);
         formCard.appendChild(btn_submit);
 
         return formCard;
