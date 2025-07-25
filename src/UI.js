@@ -1,4 +1,4 @@
-import { projectGetAll, projectRetrieve, todoDelete, todoGetAllForProject, todoRetrieve } from "./dbActions";
+import { projectDelete, projectGetAll, projectRetrieve, todoDelete, todoGetAllForProject, todoRetrieve } from "./dbActions";
 
 const divSidebar = document.querySelector("#content-sidebar");
 const divMain = document.querySelector("#content-main");
@@ -68,6 +68,7 @@ function showProjectsSideBar(){
 /*Below code is in the process of refactoring the above code. The purpose is to remove all UI related functions from classes and move them to separate UI module (here)*/
 
 function showNavBar(){
+    /*Generate a list of projects for sidebar*/
     const divNavbar = document.querySelector("#main-navbar");
     divNavbar.textContent = "";
 
@@ -109,6 +110,7 @@ function showSideBar(){
     divSidebar.appendChild(projectList);
 };
 function showMainContent(){
+    /*Generate a list of projects/todo items for main page content*/
     const mainContentDiv = document.querySelector("#content-main");
     divMain.textContent = "";
 
@@ -118,6 +120,7 @@ function showMainContent(){
 };
 
 function returnProjectsListHtml(){
+    /*Generate a project list as "ul" element*/
     const projectList = document.createElement("ul");
 
     const projectArray = projectRetrieve("getAll");
@@ -132,6 +135,7 @@ function returnProjectsListHtml(){
 };
 
 function returnProjectItemHtml(object){
+    /*Generate project item as "li" element*/
     const newLiItem = document.createElement("li");
     newLiItem.setAttribute("class", "project-card");
 
@@ -155,6 +159,10 @@ function returnProjectItemHtml(object){
     btnEdit.textContent = "Edit";
     const btnRemove = btnGeneric.cloneNode();
     btnRemove.textContent = "Remove";
+    btnRemove.addEventListener("click", ()=>{
+        projectDelete(object.id);
+        updateUI();
+    });
 
     projectNav.appendChild(btnEdit);
     projectNav.appendChild(btnRemove);
@@ -171,6 +179,7 @@ function returnProjectItemHtml(object){
 };
 
 function returnTodoList(projectId){
+    /*Generate todo item list as "ul" element*/
     const allTodoItems = todoGetAllForProject(projectId);
     const todoList = document.createElement("ul");
     todoList.setAttribute("class", "todo-list-card");
@@ -184,6 +193,7 @@ function returnTodoList(projectId){
 };
 
 function returnTodoItem(object){
+    /*Generate a todo item as "li" element*/
     const todoItem = document.createElement("li");
     todoItem.setAttribute("class", "todo-card");
 
