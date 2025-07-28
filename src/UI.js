@@ -1,4 +1,4 @@
-import { projectDelete, projectRetrieve, projectUpdate, todoRetrieve, todoDelete, todoUpdate } from "./dbActions";
+import { projectDelete, projectRetrieve, projectUpdate, todoRetrieve, todoDelete, todoUpdate, projectCreateNew } from "./dbActions";
 
 const btnGeneric = document.createElement("button");
 
@@ -9,12 +9,16 @@ function showNavBar(){
 
     const btn_NewProject = document.createElement("button");
     btn_NewProject.textContent = "Create new todo list";
+    btn_NewProject.addEventListener("click", ()=>{
+        document.querySelector("#form-new-project").style.display = "block";
+    });
 
     const btn_NewTodo = document.createElement("button");
     btn_NewTodo.textContent = "Create new todo item";
 
     divNavbar.appendChild(btn_NewProject);
     divNavbar.appendChild(btn_NewTodo);
+    divNavbar.appendChild(returnNewProjectForm());
 };
 
 function showSideBar(){
@@ -355,6 +359,66 @@ function returnTodoEditFormHtml(object){
         formCard.appendChild(labelAssignToProject);
         formCard.appendChild(inputAssignToProject);
         formCard.appendChild(btn_submit);
+
+        return formCard;
+};
+
+function returnNewProjectForm(){
+        const formCard = document.createElement("form")
+        formCard.setAttribute("class", "project-form");
+        formCard.setAttribute("id", "form-new-project");
+        formCard.style.display = "none";
+
+        const genericInput = document.createElement("input");
+        genericInput.setAttribute("type", "text");
+        const genericLabel = document.createElement("label");
+
+        //title, description
+        const inputTitle = genericInput.cloneNode()
+        inputTitle.setAttribute("id", "pname");
+        inputTitle.setAttribute("name", "title");
+        inputTitle.setAttribute("value", "New Todo List");
+        const labelTitle = genericLabel.cloneNode();
+        labelTitle.setAttribute("for", "pname");
+        labelTitle.textContent = "Project Name";
+
+        const inputDescription = genericInput.cloneNode();
+        inputDescription.setAttribute("id", "pdescription");
+        inputDescription.setAttribute("name", "description");
+        inputDescription.setAttribute("value", "New Todo List Description");
+        const labelDescription = genericLabel.cloneNode();
+        labelDescription.setAttribute("for", "pdescription");
+        labelDescription.textContent = "Description";
+
+        const btn_submit = genericInput.cloneNode();
+        btn_submit.setAttribute("type", "submit");
+        btn_submit.setAttribute("value", "Save");
+        btn_submit.setAttribute("id", "form-new-project-submit-btn");
+
+        btn_submit.addEventListener("click", (e)=>{
+            e.preventDefault()
+            const newFormData = new FormData(formCard);
+            const newProjectItem = {};
+            for(const [key, value] of newFormData){
+                newProjectItem[key] = value;
+            };
+            projectCreateNew(newProjectItem.title, newProjectItem.description);
+            updateUI();
+        });
+
+        const btn_cancel = document.createElement("button");
+        btn_cancel.textContent = "Cancel";
+        btn_cancel.addEventListener("click", ()=>{
+            updateUI();
+        });
+
+        //add all elements to form
+        formCard.appendChild(labelTitle);
+        formCard.appendChild(inputTitle);
+        formCard.appendChild(labelDescription);
+        formCard.appendChild(inputDescription);
+        formCard.appendChild(btn_submit);
+        formCard.appendChild(btn_cancel);
 
         return formCard;
 };
