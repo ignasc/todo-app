@@ -24,6 +24,9 @@ class itemTodo{
     }
 
     updateTodoObject(newDataObject){
+        if(newDataObject.projectId != ""){
+            this.setProjectId(newDataObject.projectId);
+        };
         if(newDataObject.title != ""){
             this.setTitle(newDataObject.title);
         };

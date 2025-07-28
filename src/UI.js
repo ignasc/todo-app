@@ -310,6 +310,24 @@ function returnTodoEditFormHtml(object){
         labelDueDate.setAttribute("for", "idescription");
         labelDueDate.textContent = "Due Date";
 
+        const inputAssignToProject = document.createElement("select");
+        inputAssignToProject.setAttribute("name", "projectId");
+        inputAssignToProject.setAttribute("id", "project-id-list");
+        const labelAssignToProject = genericLabel.cloneNode();
+        labelAssignToProject.setAttribute("for", "project-id-list");
+        labelAssignToProject.textContent = "Select project:"
+        const allProjects = projectRetrieve("getAll");
+        for (let index = 0; index < allProjects.length; index++) {
+            const element = allProjects[index];
+            const newListOption = document.createElement("option");
+            newListOption.setAttribute("value", element.id);
+            newListOption.textContent = element.title;
+            if(object.projectId == element.id){
+                newListOption.defaultSelected = true;
+            };
+            inputAssignToProject.appendChild(newListOption);
+        }
+
         const btn_submit = genericInput.cloneNode();
         btn_submit.setAttribute("type", "submit");
         btn_submit.setAttribute("value", "Save");
@@ -334,6 +352,8 @@ function returnTodoEditFormHtml(object){
         formCard.appendChild(inputDescription);
         formCard.appendChild(labelDueDate);
         formCard.appendChild(inputDueDate);
+        formCard.appendChild(labelAssignToProject);
+        formCard.appendChild(inputAssignToProject);
         formCard.appendChild(btn_submit);
 
         return formCard;
