@@ -236,6 +236,7 @@ function returnProjectEditFormHtml(object){
         const inputTitle = genericInput.cloneNode()
         inputTitle.setAttribute("id", "pname");
         inputTitle.setAttribute("name", "title");
+        inputTitle.setAttribute("value", object.title);
         const labelTitle = genericLabel.cloneNode();
         labelTitle.setAttribute("for", "pname");
         labelTitle.textContent = "Project Name";
@@ -243,6 +244,7 @@ function returnProjectEditFormHtml(object){
         const inputDescription = genericInput.cloneNode();
         inputDescription.setAttribute("id", "pdescription");
         inputDescription.setAttribute("name", "description");
+        inputDescription.setAttribute("value", object.description);
         const labelDescription = genericLabel.cloneNode();
         labelDescription.setAttribute("for", "pdescription");
         labelDescription.textContent = "Description";
@@ -287,6 +289,7 @@ function returnTodoEditFormHtml(object){
         const inputTitle = genericInput.cloneNode()
         inputTitle.setAttribute("id", "iname");
         inputTitle.setAttribute("name", "title");
+        inputTitle.setAttribute("value", object.title);
         const labelTitle = genericLabel.cloneNode();
         labelTitle.setAttribute("for", "iname");
         labelTitle.textContent = "Task Name";
@@ -294,6 +297,7 @@ function returnTodoEditFormHtml(object){
         const inputDescription = genericInput.cloneNode();
         inputDescription.setAttribute("id", "idescription");
         inputDescription.setAttribute("name", "description");
+        inputDescription.setAttribute("value", object.description);
         const labelDescription = genericLabel.cloneNode();
         labelDescription.setAttribute("for", "idescription");
         labelDescription.textContent = "Description";
@@ -301,7 +305,7 @@ function returnTodoEditFormHtml(object){
         const inputDueDate = genericInput.cloneNode();
         inputDueDate.setAttribute("id", "iduedate");
         inputDueDate.setAttribute("name", "dueDate");
-        inputDueDate.setAttribute("type", "date")
+        inputDueDate.setAttribute("type", "date");
         const labelDueDate = genericLabel.cloneNode();
         labelDueDate.setAttribute("for", "idescription");
         labelDueDate.textContent = "Due Date";
