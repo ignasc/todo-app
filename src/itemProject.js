@@ -28,7 +28,7 @@ class projectList{
         };
     }
 
-    toggleDetails(){
+    toggleDetails(flag = false){
         this.cardExpanded = !this.cardExpanded;
     }
     setTitle(title){
@@ -37,10 +37,10 @@ class projectList{
     setDescription(desc){
         this.description = desc;
     }
-    setCompleted(){
+    setCompleted(flag = false){
         this.completed = !this.completed;
     }
-    setEditMode(){
+    setEditMode(flag = false){
         this.editActive = !this.editActive;
     }
 };

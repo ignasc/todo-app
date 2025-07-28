@@ -41,12 +41,23 @@ function showSideBar(){
         const newButton = btnProject.cloneNode();
         newButton.addEventListener("click", (e)=>{
             e.preventDefault();
-            projectRetrieve(e.target.id).toggleDetails();
-            updateUI();
+            projectRetrieve(e.target.getAttribute("data-id")).toggleDetails();
+            const todoList = document.querySelector("#todo-list-" + element.id);
+            switch (todoList.style.display) {
+                case "none":
+                    todoList.style.display = "block";
+                    document.querySelector("#btn-exp-" + element.id).textContent = "Collapse";
+                    element.toggleDetails(true);
+                    break;
+                default:
+                    todoList.style.display = "none";
+                    document.querySelector("#btn-exp-" + element.id).textContent = "Expand";
+                    element.toggleDetails(false);
+                    break;
+            }
         });
         newButton.textContent = element.title;
-        newButton.setAttribute("id", element.id)
-        newItem.setAttribute("data-id", element.id)
+        newButton.setAttribute("data-id", element.id)
 
         newItem.appendChild(newButton);
         projectList.appendChild(newItem);
@@ -84,11 +95,13 @@ function returnProjectItemHtml(object){
     /*Generate project item as "li" element*/
     const newLiItem = document.createElement("li");
     newLiItem.setAttribute("class", "project-card");
+    newLiItem.setAttribute("id", object.id);
 
     const projectCardHeader = document.createElement("div");
     projectCardHeader.setAttribute("class", "project-card-heading");
 
     const btnExpand = document.createElement("button");
+    btnExpand.setAttribute("id","btn-exp-" + object.id)
     if(object.cardExpanded){
         btnExpand.textContent = "Collapse";
     }else{
@@ -96,8 +109,19 @@ function returnProjectItemHtml(object){
     };
     btnExpand.addEventListener("click", (e)=>{
         e.preventDefault();
-        object.toggleDetails();
-        updateUI();
+        const todoList = document.querySelector("#todo-list-" + object.id);
+        switch (todoList.style.display) {
+            case "none":
+                e.target.textContent = "Collapse";
+                todoList.style.display = "block";
+                object.toggleDetails(true);
+                break;
+            default:
+                e.target.textContent = "Expand";
+                todoList.style.display = "none";
+                object.toggleDetails(false);
+                break;
+        }
     });
 
     const projectTitle = document.createElement("h1");
@@ -112,6 +136,7 @@ function returnProjectItemHtml(object){
     projectNav.setAttribute("class", "project-nav");
 
     const btnEdit = document.createElement("button");
+    btnEdit.setAttribute("id", "btn-edit-" + object.id)
     if(object.editActive){
         btnEdit.textContent = "Cancel Edit";
     }else{
@@ -119,8 +144,17 @@ function returnProjectItemHtml(object){
     };
     btnEdit.addEventListener("click", (e)=>{
         e.preventDefault();
-        object.setEditMode();
-        updateUI();
+        const editForm = document.querySelector("#edit-" + object.id);
+        switch (editForm.style.display) {
+            case "none":
+                e.target.textContent = "Cancel Edit";
+                editForm.style.display = "block";
+                break;
+            default:
+                e.target.textContent = "Edit";
+                editForm.style.display = "none";
+                break;
+        }
     });
 
     const btnRemove = document.createElement("button");
@@ -128,7 +162,8 @@ function returnProjectItemHtml(object){
     btnRemove.addEventListener("click", (e)=>{
         e.preventDefault();
         projectDelete(object.id);
-        updateUI();
+        showSideBar();
+        newLiItem.remove();
     });
 
     projectNav.appendChild(btnEdit);
@@ -140,14 +175,8 @@ function returnProjectItemHtml(object){
     projectCardHeader.appendChild(projectNav);
 
     newLiItem.appendChild(projectCardHeader);
-
-    if(object.editActive){
-        newLiItem.appendChild(returnProjectEditFormHtml(object));
-    };
-
-    if(object.cardExpanded){
-        newLiItem.appendChild(returnTodoList(object.id));
-    };
+    newLiItem.appendChild(returnProjectEditFormHtml(object));
+    newLiItem.appendChild(returnTodoList(object.id));
 
     return newLiItem;
 };
@@ -157,6 +186,12 @@ function returnTodoList(projectId){
     const allTodoItems = todoRetrieve(projectId, true);
     const todoList = document.createElement("ul");
     todoList.setAttribute("class", "todo-list-card");
+    todoList.setAttribute("id", "todo-list-" + projectId);
+    if(projectRetrieve(projectId).cardExpanded){
+        todoList.style.display = "block";
+    }else{
+        todoList.style.display = "none";
+    };
 
     for (let index = 0; index < allTodoItems.length; index++) {
         const element = allTodoItems[index];
@@ -192,7 +227,11 @@ function returnTodoItem(object){
     btnTodoComplete.addEventListener("click", (e)=>{
         e.preventDefault();
         object.setCompleted();
-        updateUI();
+        if(object.completed){
+            btnTodoComplete.textContent = "Mark Incomplete";
+        }else{
+            btnTodoComplete.textContent = "Mark Completed";
+        };
     });
 
     const btnTodoEdit = document.createElement("button");
@@ -203,8 +242,20 @@ function returnTodoItem(object){
     };
     btnTodoEdit.addEventListener("click", (e)=>{
         e.preventDefault();
+        const todoEditForm = document.querySelector("#edit-" + object.id);
         object.setEditMode();
-        updateUI();
+        switch (todoEditForm.style.display) {
+            case "none":
+                todoEditForm.style.display = "block";
+                e.target.textContent = "Cancel Edit";
+                object.setEditMode(true);
+                break;
+            default:
+                todoEditForm.style.display = "none";
+                e.target.textContent = "Edit";
+                object.setEditMode(false);
+                break;
+        }
     });
 
     const btnTodoRemove = document.createElement("button");
@@ -212,7 +263,7 @@ function returnTodoItem(object){
     btnTodoRemove.addEventListener("click", (e)=>{
         e.preventDefault();
         todoDelete(object.id);
-        updateUI();
+        todoItem.remove();
     });
 
     todoItem.appendChild(todoTitle);
@@ -223,10 +274,7 @@ function returnTodoItem(object){
     todoNav.appendChild(btnTodoRemove);
 
     todoItem.appendChild(todoNav);
-
-    if(object.editActive){
-        todoItem.appendChild(returnTodoEditFormHtml(object));
-    };
+    todoItem.appendChild(returnTodoEditFormHtml(object));
 
     return todoItem;
 };
@@ -234,13 +282,14 @@ function returnTodoItem(object){
 function returnProjectEditFormHtml(object){
         const formCard = document.createElement("form")
         formCard.setAttribute("class", "project-form");
-        formCard.setAttribute("id", object.id);
+        formCard.setAttribute("id", "edit-" + object.id);
+        formCard.style.display = "none";
 
         const genericInput = document.createElement("input");
         genericInput.setAttribute("type", "text");
         const genericLabel = document.createElement("label");
 
-        //title, description, date inputs
+        //title, description
         const inputTitle = genericInput.cloneNode()
         inputTitle.setAttribute("id", "pname");
         inputTitle.setAttribute("name", "title");
@@ -270,7 +319,8 @@ function returnProjectEditFormHtml(object){
                 newProjectItem[key] = value;
             };
             projectUpdate(object.id, newProjectItem);
-            object.setEditMode();
+            document.querySelector("#edit-" + object.id).style.display = "none";
+            //document.querySelector("#btn-edit-" + object.id).textContent = "Edit";
             updateUI();
         });
 
@@ -287,7 +337,8 @@ function returnProjectEditFormHtml(object){
 function returnTodoEditFormHtml(object){
         const formCard = document.createElement("form")
         formCard.setAttribute("class", "todo-form");
-        formCard.setAttribute("id", object.id);
+        formCard.setAttribute("id", "edit-" + object.id);
+        formCard.style.display = "none";
 
         const genericInput = document.createElement("input");
         genericInput.setAttribute("type", "text");
@@ -349,7 +400,6 @@ function returnTodoEditFormHtml(object){
                 newTodoItem[key] = value;
             };
             todoUpdate(object.id, newTodoItem);
-            object.setEditMode();
             updateUI();
         });
 
