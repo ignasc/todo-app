@@ -494,7 +494,6 @@ function returnNewTodoForm(){
         for(const [key, value] of newFormData){
             newTodoItem[key] = value;
         };
-        console.log(newTodoItem);
         todoCreateNew(newTodoItem.projectId, newTodoItem.title, newTodoItem.description, newTodoItem.dueDate, newTodoItem.priority = 0, newTodoItem.completed = false);
         updateUI();
     });
