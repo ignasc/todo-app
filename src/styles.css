@@ -9,7 +9,7 @@ body{
     font-family: "Roboto", sans-serif;
     display: grid;
     grid-template-columns: 1fr 5fr;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: minmax(50px, max-content) 1fr;
     gap: 5px;
 
     margin: 10px;
