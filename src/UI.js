@@ -7,22 +7,30 @@ function showNavBar(){
     const divNavbar = document.querySelector("#main-navbar");
     divNavbar.textContent = "";
 
+    const navbarButtons = document.createElement("div");
+    navbarButtons.setAttribute("id", "navbar-buttons");
+
+    const navbarForms = document.createElement("div");
+    navbarForms.setAttribute("id", "new-forms");
+
     const btn_NewProject = document.createElement("button");
     btn_NewProject.textContent = "Create new todo list";
     btn_NewProject.addEventListener("click", ()=>{
-        document.querySelector("#form-new-project").style.display = "block";
+        document.querySelector("#form-new-project").style.display = "flex";
     });
 
     const btn_NewTodo = document.createElement("button");
     btn_NewTodo.textContent = "Create new todo item";
     btn_NewTodo.addEventListener("click", ()=>{
-        document.querySelector("#form-new-todo").style.display = "block";
+        document.querySelector("#form-new-todo").style.display = "flex";
     });
 
-    divNavbar.appendChild(btn_NewProject);
-    divNavbar.appendChild(btn_NewTodo);
-    divNavbar.appendChild(returnNewProjectForm());
-    divNavbar.appendChild(returnNewTodoForm());
+    navbarButtons.appendChild(btn_NewProject);
+    navbarButtons.appendChild(btn_NewTodo);
+    divNavbar.appendChild(navbarButtons);
+    navbarForms.appendChild(returnNewProjectForm());
+    navbarForms.appendChild(returnNewTodoForm());
+    divNavbar.appendChild(navbarForms);
 };
 
 function showSideBar(){
@@ -427,6 +435,7 @@ function returnNewProjectForm(){
     const genericInput = document.createElement("input");
     genericInput.setAttribute("type", "text");
     const genericLabel = document.createElement("label");
+    const divWrapper = document.createElement("div");
 
     //title, description
     const inputTitle = genericInput.cloneNode()
@@ -469,12 +478,21 @@ function returnNewProjectForm(){
     });
 
     //add all elements to form
-    formCard.appendChild(labelTitle);
-    formCard.appendChild(inputTitle);
-    formCard.appendChild(labelDescription);
-    formCard.appendChild(inputDescription);
-    formCard.appendChild(btn_submit);
-    formCard.appendChild(btn_cancel);
+    const formDivTitle = divWrapper.cloneNode();
+    formDivTitle.setAttribute("id", "form-new-project-title");
+    formDivTitle.appendChild(labelTitle);
+    formDivTitle.appendChild(inputTitle);
+    const formDivDesc = divWrapper.cloneNode();
+    formDivDesc.setAttribute("id", "form-new-project-desc");
+    formDivDesc.appendChild(labelDescription);
+    formDivDesc.appendChild(inputDescription);
+    const formDivBtn = divWrapper.cloneNode();
+    formDivBtn.setAttribute("id", "form-new-project-btn");
+    formDivBtn.appendChild(btn_submit);
+    formDivBtn.appendChild(btn_cancel);
+    formCard.appendChild(formDivTitle);
+    formCard.appendChild(formDivDesc);
+    formCard.appendChild(formDivBtn);
 
     return formCard;
 };
@@ -488,6 +506,7 @@ function returnNewTodoForm(){
     const genericInput = document.createElement("input");
     genericInput.setAttribute("type", "text");
     const genericLabel = document.createElement("label");
+    const divWrapper = document.createElement("div");
 
     //title, description, date inputs
     const inputTitle = genericInput.cloneNode()
@@ -556,16 +575,31 @@ function returnNewTodoForm(){
     });
 
     //add all elements to form
-    formCard.appendChild(labelTitle);
-    formCard.appendChild(inputTitle);
-    formCard.appendChild(labelDescription);
-    formCard.appendChild(inputDescription);
-    formCard.appendChild(labelDueDate);
-    formCard.appendChild(inputDueDate);
-    formCard.appendChild(labelAssignToProject);
-    formCard.appendChild(inputAssignToProject);
-    formCard.appendChild(btn_submit);
-    formCard.appendChild(btn_cancel);
+    const formDivTitle = divWrapper.cloneNode();
+    formDivTitle.setAttribute("id", "form-new-todo-title");
+    formDivTitle.appendChild(labelTitle);
+    formDivTitle.appendChild(inputTitle);
+    const formDivDesc = divWrapper.cloneNode();
+    formDivDesc.setAttribute("id", "form-new-todo-desc");
+    formDivDesc.appendChild(labelDescription);
+    formDivDesc.appendChild(inputDescription);
+    const formDivDueDate = divWrapper.cloneNode();
+    formDivDueDate.setAttribute("id", "form-new-todo-duedate");
+    formDivDueDate.appendChild(labelDueDate);
+    formDivDueDate.appendChild(inputDueDate);
+    const formDivProjectSelect = divWrapper.cloneNode();
+    formDivProjectSelect.setAttribute("id", "form-new-todo-projectselect");
+    formDivProjectSelect.appendChild(labelAssignToProject);
+    formDivProjectSelect.appendChild(inputAssignToProject);
+    const formDivBtn = divWrapper.cloneNode();
+    formDivBtn.setAttribute("id", "form-new-todo-btn");
+    formDivBtn.appendChild(btn_submit);
+    formDivBtn.appendChild(btn_cancel);
+    formCard.appendChild(formDivTitle);
+    formCard.appendChild(formDivDesc);
+    formCard.appendChild(formDivDueDate);
+    formCard.appendChild(formDivProjectSelect);
+    formCard.appendChild(formDivBtn);
 
     return formCard;
 };
