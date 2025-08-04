@@ -1,13 +1,28 @@
-body * {
+/*body * {
     border: 1px solid red;
 }
 body > * {
     border: 1px solid black;
-}
+}*/
 
 :root{
     --border-radius-small: 2px;
     --border-radius-big: 5px;
+
+    --bg-main-color: rgb(233, 255, 251);
+    --bg-main-box-shadow: 0px 1px 5px 1px rgb(96, 109, 106);
+    --bg-main-border: 1px solid rgb(216, 235, 231);
+
+    --bg-project-item: rgb(180, 226, 217);
+    --bg-project-box-shadow: 0px 1px 1px 0px rgb(96, 109, 106);
+}
+
+.main-style {
+    background-color: var(--bg-main-color);
+    border: var(--bg-main-border);
+    border-radius: 5px;
+    box-shadow: var(--bg-main-box-shadow);
+    overflow: hidden;
 }
 
 body{
@@ -24,6 +39,8 @@ body{
 #main-navbar {
     grid-column: 1 / -1;
     grid-row: 1 / 2;
+    padding: 10px;
+    border: var(--bg-main-border);
 
     display: flex;
     flex-direction: column;
@@ -121,6 +138,11 @@ body{
 }
 
 .project-card {
+    padding: 5px;
+    background: var(--bg-project-item);
+    box-shadow: var(--bg-project-box-shadow);
+    border-radius: var(--border-radius-big);
+
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -158,6 +180,9 @@ body{
 
 .project-form {
     padding: 5px 10px 5px 10px;
+    background-color: var(--bg-main-color);
+    border-radius: var(--border-radius-big);
+    border: 1px solid gray;
 
     display: flex;
     flex-direction: column;
@@ -200,6 +225,10 @@ body{
     gap: 5px;
 }
 .todo-form {
+    background-color: var(--bg-main-color);
+    border-radius: var(--border-radius-big);
+    border: 1px solid gray;
+
     flex-grow: 1;
     flex-basis: 100%;
     padding: 5px 10px 5px 10px;
