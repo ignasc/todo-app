@@ -1,5 +1,9 @@
 import { projectDelete, projectRetrieve, projectUpdate, todoRetrieve, todoDelete, todoUpdate, projectCreateNew, todoCreateNew } from "./dbActions";
 
+import imgCheckmark from "./img/check-circle.svg";
+import imgEdit from "./img/pencil-outline.svg";
+import imgDelete from "./img/delete-outline.svg";
+
 const btnGeneric = document.createElement("button");
 
 function showNavBar(){
@@ -218,6 +222,13 @@ function returnTodoItem(object){
     todoTitle.setAttribute("class", "todo-title");
     todoTitle.textContent = object.title;
 
+    const iconCompleted = new Image();
+    iconCompleted.src = imgCheckmark;
+    const iconEdit = new Image();
+    iconEdit.src = imgEdit;
+    const iconDelete = new Image();
+    iconDelete.src = imgDelete;
+
     const todoDescription = document.createElement("p");
     todoDescription.setAttribute("class", "todo-description");
     todoDescription.textContent = object.description;
@@ -226,27 +237,40 @@ function returnTodoItem(object){
     todoNav.setAttribute("class", "todo-nav");
 
     const btnTodoComplete = document.createElement("button");
+
     if(object.completed){
-        btnTodoComplete.textContent = "Mark Incomplete";
+        //btnTodoComplete.textContent = "Completed";
+        btnTodoComplete.appendChild(iconCompleted);
+        iconCompleted.setAttribute("class", "btn-completed");
     }else{
-        btnTodoComplete.textContent = "Mark Completed";
+        //btnTodoComplete.textContent = "Incomplete";
+        btnTodoComplete.appendChild(iconCompleted);
+        iconCompleted.setAttribute("class", "btn-incomplete");
     };
     btnTodoComplete.setAttribute("data-id", object.id);
     btnTodoComplete.addEventListener("click", (e)=>{
         e.preventDefault();
         object.setCompleted();
         if(object.completed){
-            btnTodoComplete.textContent = "Mark Incomplete";
+            //btnTodoComplete.textContent = "Completed";
+            //btnTodoComplete.appendChild(iconCompleted);
+            iconCompleted.setAttribute("class", "btn-completed");
         }else{
-            btnTodoComplete.textContent = "Mark Completed";
+            //btnTodoComplete.textContent = "Incomplete";
+            //btnTodoComplete.appendChild(iconCompleted);
+            iconCompleted.setAttribute("class", "btn-incomplete");
         };
     });
 
     const btnTodoEdit = document.createElement("button");
+    btnTodoEdit.appendChild(iconEdit);
     if(object.editActive){
-        btnTodoEdit.textContent = "Cancel Edit";
+        //btnTodoEdit.textContent = "Cancel Edit";
+        iconEdit.setAttribute("class", "btn-edit-active");
     }else{
-        btnTodoEdit.textContent = "Edit";
+        //btnTodoEdit.textContent = "Edit";
+        //btnTodoEdit.appendChild(iconEdit);
+        iconEdit.setAttribute("class", "btn-edit-inactive");
     };
     btnTodoEdit.addEventListener("click", (e)=>{
         e.preventDefault();
@@ -255,19 +279,25 @@ function returnTodoItem(object){
         switch (todoEditForm.style.display) {
             case "none":
                 todoEditForm.style.display = "flex";
-                e.target.textContent = "Cancel Edit";
+                //e.target.textContent = "Cancel Edit";
+                //btnTodoEdit.appendChild(iconEdit);
+                iconEdit.setAttribute("class", "btn-edit-active");
                 object.setEditMode(true);
                 break;
             default:
                 todoEditForm.style.display = "none";
-                e.target.textContent = "Edit";
+                //e.target.textContent = "Edit";
+                //btnTodoEdit.appendChild(iconEdit);
+                iconEdit.setAttribute("class", "btn-edit-inactive");
                 object.setEditMode(false);
                 break;
         }
     });
 
     const btnTodoRemove = document.createElement("button");
-    btnTodoRemove.textContent = "Remove";
+    //btnTodoRemove.textContent = "Remove";
+    btnTodoRemove.appendChild(iconDelete);
+    iconDelete.setAttribute("class", "btn-remove");
     btnTodoRemove.addEventListener("click", (e)=>{
         e.preventDefault();
         todoDelete(object.id);
