@@ -236,9 +236,6 @@ function returnTodoItem(object){
     todoDescription.setAttribute("class", "todo-description");
     todoDescription.textContent = object.description;
 
-    const todoNav = document.createElement("div");
-    todoNav.setAttribute("class", "todo-nav");
-
     const btnTodoComplete = document.createElement("button");
 
     if(object.completed){
@@ -312,6 +309,8 @@ function returnTodoItem(object){
     todoHeader.appendChild(todoTitle);
     todoHeader.appendChild(todoDescription);
 
+    const todoNav = document.createElement("div");
+    todoNav.setAttribute("class", "todo-nav");
     todoNav.appendChild(btnTodoComplete);
     todoNav.appendChild(btnTodoEdit);
     todoNav.appendChild(btnTodoRemove);
