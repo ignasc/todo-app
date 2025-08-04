@@ -5,6 +5,11 @@ body > * {
     border: 1px solid black;
 }
 
+:root{
+    --border-radius-small: 2px;
+    --border-radius-big: 5px;
+}
+
 body{
     font-family: "Roboto", sans-serif;
     display: grid;
@@ -75,24 +80,50 @@ body{
     flex-direction: column;
 }
 
-#content-main {
-    grid-column: 2 / -1;
-    grid-row: 2 / -1;
-    
-}
-
 #content-sidebar {
     grid-column: 1 / 2;
     grid-row: 2 / -1;
 
     display: flex;
     flex-direction: column;
+}
+
+#content-sidebar > ul {
+    padding: 5px;
+    height: 100%;
+
+    display: flex;
     justify-content: flex-start;
-    align-items: stretch;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#content-sidebar > ul > li {
+    overflow: hidden;
+    border-radius: var(--border-radius-small);
 }
 
 #content-sidebar > ul > li > button {
     width: 100%;
+}
+
+#content-main {
+    grid-column: 2 / -1;
+    grid-row: 2 / -1;
+}
+
+#content-main > ul {
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .project-card-heading {
@@ -123,6 +154,70 @@ body{
     display: flex;
     gap: 3px;
     padding: 2px;
+}
+
+.project-form {
+    padding: 5px 10px 5px 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#form-div-project-title, #form-div-project-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-list-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.todo-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.todo-title {
+    flex-grow: 1;
+    flex-basis: 1;
+}
+.todo-description {
+    flex-grow: 10;
+    flex-basis: 1;
+}
+.todo-nav {
+    flex-grow: 1;
+    flex-basis: max-content;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 5px;
+}
+.todo-form {
+    flex-grow: 1;
+    flex-basis: 100%;
+    padding: 5px 10px 5px 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#form-div-todo-title, #form-div-todo-description, #form-div-todo-duedate, #form-div-todo-assignproject {
+    border-radius: var(--border-radius-small);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-form > input {
+    border-radius: var(--border-radius-small);
 }
 
 .required {

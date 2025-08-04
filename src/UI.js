@@ -53,7 +53,7 @@ function showSideBar(){
             const todoList = document.querySelector("#todo-list-" + element.id);
             switch (todoList.style.display) {
                 case "none":
-                    todoList.style.display = "block";
+                    todoList.style.display = "flex";
                     document.querySelector("#btn-exp-" + element.id).textContent = "Collapse";
                     element.toggleDetails(true);
                     break;
@@ -121,7 +121,7 @@ function returnProjectItemHtml(object){
         switch (todoList.style.display) {
             case "none":
                 e.target.textContent = "Collapse";
-                todoList.style.display = "block";
+                todoList.style.display = "flex";
                 object.toggleDetails(true);
                 break;
             default:
@@ -156,7 +156,7 @@ function returnProjectItemHtml(object){
         switch (editForm.style.display) {
             case "none":
                 e.target.textContent = "Cancel Edit";
-                editForm.style.display = "block";
+                editForm.style.display = "flex";
                 break;
             default:
                 e.target.textContent = "Edit";
@@ -196,7 +196,7 @@ function returnTodoList(projectId){
     todoList.setAttribute("class", "todo-list-card");
     todoList.setAttribute("id", "todo-list-" + projectId);
     if(projectRetrieve(projectId).cardExpanded){
-        todoList.style.display = "block";
+        todoList.style.display = "flex";
     }else{
         todoList.style.display = "none";
     };
@@ -254,7 +254,7 @@ function returnTodoItem(object){
         object.setEditMode();
         switch (todoEditForm.style.display) {
             case "none":
-                todoEditForm.style.display = "block";
+                todoEditForm.style.display = "flex";
                 e.target.textContent = "Cancel Edit";
                 object.setEditMode(true);
                 break;
@@ -296,6 +296,7 @@ function returnProjectEditFormHtml(object){
         const genericInput = document.createElement("input");
         genericInput.setAttribute("type", "text");
         const genericLabel = document.createElement("label");
+        const divWrapper = document.createElement("div");
 
         //title, description
         const inputTitle = genericInput.cloneNode()
@@ -333,10 +334,18 @@ function returnProjectEditFormHtml(object){
         });
 
         //add all elements to form
-        formCard.appendChild(labelTitle);
-        formCard.appendChild(inputTitle);
-        formCard.appendChild(labelDescription);
-        formCard.appendChild(inputDescription);
+        const formDivTitle = divWrapper.cloneNode();
+        formDivTitle.setAttribute("id", "form-div-project-title");
+        formDivTitle.appendChild(labelTitle);
+        formDivTitle.appendChild(inputTitle);
+        formCard.appendChild(formDivTitle);
+
+        const formDivDesc = divWrapper.cloneNode();
+        formDivDesc.setAttribute("id", "form-div-project-description");
+        formDivDesc.appendChild(labelDescription);
+        formDivDesc.appendChild(inputDescription);
+        formCard.appendChild(formDivDesc);
+
         formCard.appendChild(btn_submit);
 
         return formCard;
@@ -351,6 +360,7 @@ function returnTodoEditFormHtml(object){
         const genericInput = document.createElement("input");
         genericInput.setAttribute("type", "text");
         const genericLabel = document.createElement("label");
+        const divWrapper = document.createElement("div");
 
         //title, description, date inputs
         const inputTitle = genericInput.cloneNode()
@@ -412,14 +422,30 @@ function returnTodoEditFormHtml(object){
         });
 
         //add all elements to form
-        formCard.appendChild(labelTitle);
-        formCard.appendChild(inputTitle);
-        formCard.appendChild(labelDescription);
-        formCard.appendChild(inputDescription);
-        formCard.appendChild(labelDueDate);
-        formCard.appendChild(inputDueDate);
-        formCard.appendChild(labelAssignToProject);
-        formCard.appendChild(inputAssignToProject);
+        const formDivTitle = divWrapper.cloneNode();
+        formDivTitle.setAttribute("id", "form-div-todo-title");
+        formDivTitle.appendChild(labelTitle);
+        formDivTitle.appendChild(inputTitle);
+        formCard.appendChild(formDivTitle);
+
+        const formDivDesc = divWrapper.cloneNode();
+        formDivDesc.setAttribute("id", "form-div-todo-description");
+        formDivDesc.appendChild(labelDescription);
+        formDivDesc.appendChild(inputDescription);
+        formCard.appendChild(formDivDesc);
+
+        const formDivDueDate = divWrapper.cloneNode();
+        formDivDueDate.setAttribute("id", "form-div-todo-duedate");
+        formDivDueDate.appendChild(labelDueDate);
+        formDivDueDate.appendChild(inputDueDate);
+        formCard.appendChild(formDivDueDate);
+
+        const formDivAssignProject = divWrapper.cloneNode();
+        formDivAssignProject.setAttribute("id", "form-div-todo-assignproject");
+        formDivAssignProject.appendChild(labelAssignToProject);
+        formDivAssignProject.appendChild(inputAssignToProject);
+        formCard.appendChild(formDivAssignProject);
+
         formCard.appendChild(btn_submit);
 
         return formCard;
