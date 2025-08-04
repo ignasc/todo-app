@@ -236,10 +236,16 @@ body{
     flex-direction: row;
     justify-content: flex-end;
     gap: 5px;
+    height: 1.5rem;
 }
 
-.btn-completed, .btn-incomplete, .btn-edit-active, .btn-edit-inactive, .btn-remove {
-    height: 20px;
+.todo-nav > button {
+    background-color: var(--bg-todo-card);
+    border: none;
+}
+
+.todo-nav > button > img {
+    height: 100%;
 }
 
 .btn-completed, .btn-edit-active {

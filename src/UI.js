@@ -1,6 +1,7 @@
 import { projectDelete, projectRetrieve, projectUpdate, todoRetrieve, todoDelete, todoUpdate, projectCreateNew, todoCreateNew } from "./dbActions";
 
-import imgCheckmark from "./img/check-circle.svg";
+import imgCheckmarkComplete from "./img/checkbox-marked-outline.svg";
+import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
 import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
 
@@ -223,7 +224,9 @@ function returnTodoItem(object){
     todoTitle.textContent = object.title;
 
     const iconCompleted = new Image();
-    iconCompleted.src = imgCheckmark;
+    iconCompleted.src = imgCheckmarkComplete;
+    const iconIncomplete = new Image();
+    iconIncomplete.src = imgCheckmarkIncomplete;
     const iconEdit = new Image();
     iconEdit.src = imgEdit;
     const iconDelete = new Image();
@@ -239,26 +242,26 @@ function returnTodoItem(object){
     const btnTodoComplete = document.createElement("button");
 
     if(object.completed){
-        //btnTodoComplete.textContent = "Completed";
+        btnTodoComplete.textContent = "";
         btnTodoComplete.appendChild(iconCompleted);
         iconCompleted.setAttribute("class", "btn-completed");
     }else{
-        //btnTodoComplete.textContent = "Incomplete";
-        btnTodoComplete.appendChild(iconCompleted);
-        iconCompleted.setAttribute("class", "btn-incomplete");
+        btnTodoComplete.textContent = "";
+        btnTodoComplete.appendChild(iconIncomplete);
+        iconIncomplete.setAttribute("class", "btn-incomplete");
     };
     btnTodoComplete.setAttribute("data-id", object.id);
     btnTodoComplete.addEventListener("click", (e)=>{
         e.preventDefault();
         object.setCompleted();
         if(object.completed){
-            //btnTodoComplete.textContent = "Completed";
-            //btnTodoComplete.appendChild(iconCompleted);
+            btnTodoComplete.textContent = "";
+            btnTodoComplete.appendChild(iconCompleted);
             iconCompleted.setAttribute("class", "btn-completed");
         }else{
-            //btnTodoComplete.textContent = "Incomplete";
-            //btnTodoComplete.appendChild(iconCompleted);
-            iconCompleted.setAttribute("class", "btn-incomplete");
+            btnTodoComplete.textContent = "";
+            btnTodoComplete.appendChild(iconIncomplete);
+            iconIncomplete.setAttribute("class", "btn-incomplete");
         };
     });
 
