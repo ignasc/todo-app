@@ -223,6 +223,9 @@ function returnTodoItem(object){
     todoTitle.setAttribute("class", "todo-title");
     todoTitle.textContent = object.title;
 
+    const todoDueDate = document.createElement("p");
+    todoDueDate.textContent = object.dueDate;
+
     const iconCompleted = new Image();
     iconCompleted.src = imgCheckmarkComplete;
     const iconIncomplete = new Image();
@@ -307,6 +310,7 @@ function returnTodoItem(object){
     const todoHeader = document.createElement("div");
     todoHeader.setAttribute("id","todo-card-header");
     todoHeader.appendChild(todoTitle);
+    todoHeader.appendChild(todoDueDate);
     todoHeader.appendChild(todoDescription);
 
     const todoNav = document.createElement("div");

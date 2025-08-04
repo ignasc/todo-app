@@ -48,6 +48,7 @@ class itemTodo{
         this.description = desc;
     }
     setDueDate(dueDate){
+        console.log(dueDate)
         this.dueDate = dueDate;
     }
     setPriority(prio){

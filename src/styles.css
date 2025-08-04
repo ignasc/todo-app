@@ -213,39 +213,41 @@ body{
     box-shadow: var(--bg-todo-box-shadow);
 
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
 }
 
-.todo-title {
-    flex-grow: 1;
-    flex-basis: 1;
-}
-
-.todo-description {
+#todo-card-header {
     flex-grow: 10;
     flex-basis: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .todo-nav {
-    flex-grow: 1;
-    flex-basis: max-content;
+    flex-grow: 0;
+    flex-basis: 1;
 
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     gap: 5px;
-    height: 1.5rem;
+    height: 2rem;
 }
 
 .todo-nav > button {
     background-color: var(--bg-todo-card);
     border: none;
+    border: none;
 }
 
 .todo-nav > button > img {
-    height: 100%;
+    height: 1.2rem;
 }
 
 .btn-completed, .btn-edit-active {
