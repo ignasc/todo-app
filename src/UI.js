@@ -307,13 +307,16 @@ function returnTodoItem(object){
         todoItem.remove();
     });
 
-    todoItem.appendChild(todoTitle);
-    todoItem.appendChild(todoDescription);
+    const todoHeader = document.createElement("div");
+    todoHeader.setAttribute("id","todo-card-header");
+    todoHeader.appendChild(todoTitle);
+    todoHeader.appendChild(todoDescription);
 
     todoNav.appendChild(btnTodoComplete);
     todoNav.appendChild(btnTodoEdit);
     todoNav.appendChild(btnTodoRemove);
 
+    todoItem.appendChild(todoHeader);
     todoItem.appendChild(todoNav);
     todoItem.appendChild(returnTodoEditFormHtml(object));
 
