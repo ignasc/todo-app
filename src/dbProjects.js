@@ -6,11 +6,11 @@ const allProjects = getAllProjects();
 
 if(allProjects.length > 0){
     //localStorage has projects stored, restore them
-    //console.log("Local storage has " + allProjects.length + " projects");
+    console.log("Local storage has " + allProjects.length + " projects");
 
     for (let index = 0; index < allProjects.length; index++) {
         const element = JSON.parse(allProjects[index]);
-        //console.log(element)
+        console.log(element)
         projectDB.push(new projectList(element.title, element.description, element.id))
     }
 } else{

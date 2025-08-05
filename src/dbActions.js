@@ -2,13 +2,12 @@ import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects"
 import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
-import { deleteTodo, storeProject, storeTodo } from "./localStorage";
+import { storeProject } from "./localStorage";
 
 //main CRUD operations for todo item db
 function todoCreateNew(projectId, title, description, dueDate, priority, completed){
     const newTodoItem = new itemTodo(projectId,title, description, dueDate, priority = 0, completed = false);
     todoDB.push(newTodoItem);
-    storeTodo(newTodoItem);
 };
 
 function todoRetrieve(id, getAll = false){
@@ -27,7 +26,6 @@ function todoUpdate(id, updateObject = {}){
         if(element.id == id){
 
             todoDB[index].updateTodoObject(updateObject);
-            storeTodo(element);
 
             break;
         };
@@ -40,8 +38,6 @@ function todoDelete(id){
 
         if(elementId == id){
             todoDB.splice(index, 1);
-            deleteTodo(id);
-
             break;
         };
     };

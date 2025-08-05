@@ -1,5 +1,5 @@
 class itemTodo{
-    constructor(projectId, title, description, dueDate, completed, id = "I" + crypto.randomUUID()){
+    constructor(projectId, title, description, dueDate, priority, completed, id = "I" + crypto.randomUUID()){
         this.id = id;
         this.projectId = projectId;
         this.title = title;
