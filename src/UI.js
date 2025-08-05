@@ -6,6 +6,8 @@ import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
 import { localStorageSetItem } from "./localStorage";
 
+import { getDate } from "./dateDisplay.js";
+
 const btnGeneric = document.createElement("button");
 
 function showNavBar(){
@@ -225,7 +227,8 @@ function returnTodoItem(object){
     todoTitle.textContent = object.title;
 
     const todoDueDate = document.createElement("p");
-    todoDueDate.textContent = object.dueDate;
+    //todoDueDate.textContent = object.dueDate;
+    todoDueDate.textContent = getDate();
 
     const iconCompleted = new Image();
     iconCompleted.src = imgCheckmarkComplete;
