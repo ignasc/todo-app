@@ -4,6 +4,7 @@ import imgCheckmarkComplete from "./img/checkbox-marked-outline.svg";
 import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
 import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
+import { localStorageSetItem } from "./localStorage";
 
 const btnGeneric = document.createElement("button");
 
@@ -263,6 +264,7 @@ function returnTodoItem(object){
             btnTodoComplete.appendChild(iconIncomplete);
             iconIncomplete.setAttribute("class", "btn-incomplete");
         };
+        localStorageSetItem(object);
     });
 
     const btnTodoEdit = document.createElement("button");
