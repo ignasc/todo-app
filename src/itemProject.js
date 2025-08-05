@@ -1,9 +1,8 @@
 class projectList{
-    constructor(title, description){
-        this.id = "P" + crypto.randomUUID();
+    constructor(title, description, id = "P" + crypto.randomUUID()){
+        this.id = id;
         this.title = title;
         this.description = description;
-        this.completed = false;
         this.cardExpanded = false;
         this.editActive = false;
     }
@@ -13,9 +12,6 @@ class projectList{
             "id":this.id,
             "title":this.title,
             "description":this.description,
-            "completed":this.completed,
-            "cardExpanded":this.cardExpanded,
-            "editActive":this.editActive,
         };
     }
 

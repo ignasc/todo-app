@@ -2,6 +2,7 @@ import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects"
 import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
+import { storeProject } from "./localStorage";
 
 //main CRUD operations for todo item db
 function todoCreateNew(projectId, title, description, dueDate, priority, completed){
@@ -44,7 +45,9 @@ function todoDelete(id){
 
 //CRUD operations for projects db
 function projectCreateNew(title, description){
-    projectDB.push(new projectList(title, description));
+    const newProjectObject = new projectList(title, description);
+    projectDB.push(newProjectObject);
+    storeProject(newProjectObject);
 };
 
 function projectRetrieve(id){
@@ -63,6 +66,7 @@ function projectUpdate(id, updateObject = {}){
         if(element.id == id){
 
             projectDB[index].updateProjectObject(updateObject);
+            storeProject(projectDB[index]);
 
             break;
         };
