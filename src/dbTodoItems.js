@@ -17,7 +17,7 @@ function randomIntFromInterval(min,max){
 
 // Add temporary items for development purposes.
 for (let i = 0; i < 10; i++) {
-    todoDB.push(new itemTodo(debugProjectIds[randomIntFromInterval(0, debugProjectIds.length-1)],"Todo No."+i,"To do item No."+i,new Date(), 6, false));
+    todoDB.push(new itemTodo(debugProjectIds[randomIntFromInterval(0, debugProjectIds.length-1)],"Todo No."+i,"To do item No."+i,new Date(), false));
 }
 
 // add todo items to localStorage

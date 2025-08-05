@@ -4,8 +4,8 @@ import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
 
 //main CRUD operations for todo item db
-function todoCreateNew(projectId, title, description, dueDate, priority, completed){
-    const newTodoItem = new itemTodo(projectId,title, description, dueDate, priority = 0, completed = false);
+function todoCreateNew(projectId, title, description, dueDate, completed){
+    const newTodoItem = new itemTodo(projectId,title, description, dueDate, completed = false);
     todoDB.push(newTodoItem);
 };
 
