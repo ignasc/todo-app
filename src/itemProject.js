@@ -1,6 +1,6 @@
 class projectList{
-    constructor(title, description){
-        this.id = "P" + crypto.randomUUID();
+    constructor(title, description, id = "P" + crypto.randomUUID()){
+        this.id = id;
         this.title = title;
         this.description = description;
         this.completed = false;
