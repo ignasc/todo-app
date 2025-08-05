@@ -5,7 +5,11 @@ import projectDB from "./dbProjects";
 import itemTodo from "./itemTodo";
 
 const todoDB = [];
-const debugProjectIds = [projectDB[0].id, projectDB[1].id, projectDB[2].id] // debug
+const debugProjectIds = [];
+for (let index = 0; index < projectDB.length; index++) {
+    const id = projectDB[index].id;
+    debugProjectIds.push(id);
+}
 function randomIntFromInterval(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
