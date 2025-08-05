@@ -63,6 +63,74 @@ function getAllProjects(){
     return allProjectArray;
 };
 
-function storeTodo(object){};
+function storeTodo(object){
+    if (!storageAvailable("localStorage")) {
+    console.log("Storage NOT available");
+    return;
+    }
 
-export {storageAvailable, storeProject, getProject, getAllProjects, storeTodo};
+    const todoToStore = JSON.stringify(object.getTodoObject());
+
+    localStorage.setItem(object.id, todoToStore)
+};
+
+function getTodo(id){
+    if (!storageAvailable("localStorage")) {
+    console.log("Storage NOT available");
+    return;
+    }
+
+    const todo = localStorage.getItem(id);
+
+    if(todo){
+        return JSON.parse(todo);
+    } else {
+        return -1;
+    };
+};
+
+function deleteTodo(id){
+    if (!storageAvailable("localStorage")) {
+    console.log("Storage NOT available");
+    return;
+    };
+
+    localStorage.removeItem(id);
+}
+
+function getAllTodos(){
+    if (!storageAvailable("localStorage")) {
+    console.log("Storage NOT available");
+    return;
+    }
+
+    const localStorageKeys = Object.keys(localStorage);
+    const allTodosArray = [];
+
+    for (let index = 0; index < localStorageKeys.length; index++) {
+        const elementId = localStorageKeys[index];
+        
+        if(elementId[0] == "I"){
+            allTodosArray.push(localStorage.getItem(elementId));
+        };
+    }
+
+    return allTodosArray;
+};
+
+function updateLocalStorate(){
+    const allProjects = getAllProjects();
+    const allTodos = getAllTodos();
+
+    for (let index = 0; index < allProjects.length; index++) {
+        const element = allProjects[index];
+        localStorage.setItem(element.id, JSON.stringify(element.getProjectObject()));
+    }
+
+    for (let index = 0; index < allTodos.length; index++) {
+        const element = allTodos[index];
+        localStorage.setItem(element.id, JSON.stringify(element.getProjectObject()));
+    }
+};
+
+export {storageAvailable, storeProject, getProject, getAllProjects, storeTodo, getTodo, deleteTodo, getAllTodos, updateLocalStorate};
