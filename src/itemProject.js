@@ -8,7 +8,7 @@ class projectList{
         this.editActive = false;
     }
 
-    getProjectObject(){
+    getObject(){
         return {
             "id":this.id,
             "title":this.title,

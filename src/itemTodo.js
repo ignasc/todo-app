@@ -10,7 +10,7 @@ class itemTodo{
         this.editActive = false;
     }
 
-    getTodoObject(){
+    getObject(){
         return {
             "id":this.id,
             "projectId":this.projectId,
