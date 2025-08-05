@@ -2,11 +2,13 @@ import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects"
 import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
+import { localStorageRemoveItem, localStorageSetItem } from "./localStorage";
 
 //main CRUD operations for todo item db
 function todoCreateNew(projectId, title, description, dueDate, completed){
     const newTodoItem = new itemTodo(projectId,title, description, dueDate, completed = false);
     todoDB.push(newTodoItem);
+    localStorageSetItem(newTodoItem);
 };
 
 function todoRetrieve(id, getAll = false){
@@ -25,6 +27,7 @@ function todoUpdate(id, updateObject = {}){
         if(element.id == id){
 
             todoDB[index].updateTodoObject(updateObject);
+            localStorageSetItem(todoDB[index]);
 
             break;
         };
@@ -37,6 +40,7 @@ function todoDelete(id){
 
         if(elementId == id){
             todoDB.splice(index, 1);
+            localStorageRemoveItem(id);
             break;
         };
     };
@@ -44,7 +48,9 @@ function todoDelete(id){
 
 //CRUD operations for projects db
 function projectCreateNew(title, description){
-    projectDB.push(new projectList(title, description));
+    const newProjectItem = new projectList(title, description);
+    projectDB.push(newProjectItem);
+    localStorageSetItem(newProjectItem);
 };
 
 function projectRetrieve(id){
@@ -62,7 +68,8 @@ function projectUpdate(id, updateObject = {}){
 
         if(element.id == id){
 
-            projectDB[index].updateProjectObject(updateObject);
+            element.updateProjectObject(updateObject);
+            localStorageSetItem(element);
 
             break;
         };
@@ -75,6 +82,7 @@ function projectDelete(id){
 
         if(elementId == id){
             projectDB.splice(index, 1);
+            localStorageRemoveItem(id);
             break;
         };
     };
