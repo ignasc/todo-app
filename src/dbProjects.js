@@ -9,7 +9,7 @@ if(allProjectKeys.length > 0){
         const id = allProjectKeys[index];
         const projectItem = localStorageGetItem(id);
         projectDB.push(new projectList(projectItem.title,projectItem.description, projectItem.id));
-    }
+    };
 } else{
     //create project DB with random items for testing purposes
     // Add few items to db for testing purposes

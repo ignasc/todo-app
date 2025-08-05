@@ -17,7 +17,7 @@ class itemTodo{
             "title":this.title,
             "description":this.description,
             "dueDate":this.dueDate,
-            "priority":this.priority,
+            //"priority":this.priority,
             "completed":this.completed,
             "editActive":this.editActive,
         };
