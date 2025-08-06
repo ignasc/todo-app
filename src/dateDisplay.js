@@ -1,11 +1,13 @@
-import {formatISO} from "date-fns";
+import { formatISO } from "date-fns";
 
-function getDate(dateString){
-    const newDate = formatISO(new Date(), {representation: "date"});
+function formatDateToISO(dateString){
+    console.log("format date executed")
+    const newDate = formatISO(dateString, {representation: "date"});
 
-    console.log(newDate);
+    console.log("Formatted from " + dateString + " to " + formatISO(dateString, {representation: "date"}));
+    //console.log(new Date("2025-01-01"));
 
-    return newDate  ;
+    return newDate;
 };
 
-export {getDate};
+export {formatDateToISO};

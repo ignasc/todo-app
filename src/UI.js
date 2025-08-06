@@ -6,7 +6,7 @@ import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
 import { localStorageSetItem } from "./localStorage";
 
-import { getDate } from "./dateDisplay.js";
+import { formatDateToISO } from "./dateDisplay.js";
 
 const btnGeneric = document.createElement("button");
 
@@ -227,8 +227,8 @@ function returnTodoItem(object){
     todoTitle.textContent = object.title;
 
     const todoDueDate = document.createElement("p");
-    //todoDueDate.textContent = object.dueDate;
-    todoDueDate.textContent = getDate();
+    todoDueDate.textContent = object.dueDate;
+    //todoDueDate.textContent = formatDateToISO(object.dueDate);
 
     const iconCompleted = new Image();
     iconCompleted.src = imgCheckmarkComplete;
@@ -427,6 +427,7 @@ function returnTodoEditFormHtml(object){
         inputDueDate.setAttribute("id", "iduedate");
         inputDueDate.setAttribute("name", "dueDate");
         inputDueDate.setAttribute("type", "date");
+        inputDueDate.defaultValue = object.dueDate;
         const labelDueDate = genericLabel.cloneNode();
         labelDueDate.setAttribute("for", "idescription");
         labelDueDate.textContent = "Due Date";
@@ -461,6 +462,7 @@ function returnTodoEditFormHtml(object){
             for(const [key, value] of newFormData){
                 newTodoItem[key] = value;
             };
+            console.log(newTodoItem)
             todoUpdate(object.id, newTodoItem);
             updateUI();
         });
