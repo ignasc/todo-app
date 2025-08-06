@@ -25,12 +25,11 @@ class itemTodo{
         if(newDataObject.projectId != ""){
             this.setProjectId(newDataObject.projectId);
         };
-        if(newDataObject.title != ""){
-            this.setTitle(newDataObject.title);
-        };
-        if(newDataObject.description != ""){
-            this.setDescription(newDataObject.description);
-        };
+
+        this.setTitle(newDataObject.title);
+
+        this.setDescription(newDataObject.description);
+
         if(newDataObject.dueDate != ""){
             this.setDueDate(newDataObject.dueDate);
         };

@@ -5,7 +5,7 @@ import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
 import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
 import { localStorageSetItem } from "./localStorage";
-import { calculateDaysRemainingFromNow } from "./dateDisplay";
+import { calculateDaysRemainingFromNow, formatDateToISO } from "./dateDisplay";
 
 function showNavBar(){
     /*Generate a list of projects for sidebar*/
@@ -591,6 +591,7 @@ function returnNewTodoForm(){
     inputDueDate.setAttribute("id", "iduedate");
     inputDueDate.setAttribute("name", "dueDate");
     inputDueDate.setAttribute("type", "date");
+    inputDueDate.defaultValue = formatDateToISO(new Date());
     const labelDueDate = genericLabel.cloneNode();
     labelDueDate.setAttribute("for", "idescription");
     labelDueDate.textContent = "Due Date";
