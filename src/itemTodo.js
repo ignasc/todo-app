@@ -21,7 +21,7 @@ class itemTodo{
         };
     }
 
-    updateTodoObject(newDataObject){
+    updateObject(newDataObject){
         if(newDataObject.projectId != ""){
             this.setProjectId(newDataObject.projectId);
         };
@@ -47,9 +47,6 @@ class itemTodo{
     }
     setDueDate(dueDate){
         this.dueDate = dueDate;
-    }
-    setPriority(prio){
-        this.priority = prio;
     }
     setCompleted(){
         this.completed = !this.completed;

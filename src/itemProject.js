@@ -3,7 +3,6 @@ class projectList{
         this.id = id;
         this.title = title;
         this.description = description;
-        this.completed = false;
         this.cardExpanded = false;
         this.editActive = false;
     }
@@ -13,13 +12,12 @@ class projectList{
             "id":this.id,
             "title":this.title,
             "description":this.description,
-            "completed":this.completed,
             "cardExpanded":this.cardExpanded,
             "editActive":this.editActive,
         };
     }
 
-    updateProjectObject(newDataObject){
+    updateObject(newDataObject){
         if(newDataObject.title != ""){
             this.setTitle(newDataObject.title);
         };
@@ -36,9 +34,6 @@ class projectList{
     }
     setDescription(desc){
         this.description = desc;
-    }
-    setCompleted(flag = false){
-        this.completed = !this.completed;
     }
     setEditMode(flag = false){
         this.editActive = !this.editActive;

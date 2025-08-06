@@ -90,7 +90,7 @@ function showMainContent(){
 };
 
 function returnProjectsListHtml(){
-    /*Generate a project list as "ul" element*/
+    /*Generate a project item list as "ul" element*/
     const projectList = document.createElement("ul");
 
     const projectArray = projectRetrieve("getAll");
@@ -178,6 +178,8 @@ function returnProjectItemHtml(object){
         showSideBar();
         newLiItem.remove();
     });
+
+    //Assemble the element
 
     projectNav.appendChild(btnEdit);
     projectNav.appendChild(btnRemove);
@@ -299,6 +301,8 @@ function returnTodoItem(object){
         todoDelete(object.id);
         todoItem.remove();
     });
+
+    //Assemble the element
 
     const todoHeader = document.createElement("div");
     todoHeader.setAttribute("id","todo-card-header");

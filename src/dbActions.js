@@ -26,7 +26,7 @@ function todoUpdate(id, updateObject = {}){
 
         if(element.id == id){
 
-            todoDB[index].updateTodoObject(updateObject);
+            todoDB[index].updateObject(updateObject);
             localStorageSetItem(todoDB[index]);
 
             break;
@@ -68,7 +68,7 @@ function projectUpdate(id, updateObject = {}){
 
         if(element.id == id){
 
-            element.updateProjectObject(updateObject);
+            element.updateObject(updateObject);
             localStorageSetItem(element);
 
             break;

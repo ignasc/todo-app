@@ -30,11 +30,6 @@ function localStorageRemoveItem(id){
     localStorage.removeItem(id);
 };
 
-function localStorageUpdateAll(){
-    const allKeys = Object.keys(localStorage);
-    return allKeys;
-};
-
 function localStorageAllProjects(){
     const localStorageKeys = Object.keys(localStorage);
     const allProjectKeys = [];
@@ -59,4 +54,4 @@ function localStorageAllTodos(){
     return allTodoKeys;
 };
 
-export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageUpdateAll, localStorageAllProjects, localStorageAllTodos};
+export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageAllProjects, localStorageAllTodos};
