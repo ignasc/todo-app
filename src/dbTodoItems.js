@@ -1,5 +1,5 @@
 //DEBUG
-import { formatDateToISO } from "./dateDisplay.js";
+import { formatDateToISO, generateRandomFutureDate } from "./dateDisplay.js";
 import projectDB from "./dbProjects";
 //DEBUG END
 
@@ -12,6 +12,7 @@ for (let index = 0; index < projectDB.length; index++) {
     const id = projectDB[index].id;
     debugProjectIds.push(id);
 }
+
 function randomIntFromInterval(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
@@ -29,7 +30,7 @@ if(allTodoKeys.length > 0){
     //create todo DB with random items for testing purposes
     // Add temporary items for development purposes.
     for (let i = 0; i < 10; i++) {
-        todoDB.push(new itemTodo(debugProjectIds[randomIntFromInterval(0, debugProjectIds.length-1)],"Todo No."+i,"To do item No."+i, formatDateToISO(new Date()), false));
+        todoDB.push(new itemTodo(debugProjectIds[randomIntFromInterval(0, debugProjectIds.length-1)],"Todo No."+i,"To do item No."+i, formatDateToISO(generateRandomFutureDate()), false));
     };
 
     // add todo items to localStorage
