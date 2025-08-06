@@ -5,7 +5,6 @@ class itemTodo{
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        //this.priority = priority;
         this.completed = completed;
         this.editActive = false;
     }
@@ -17,7 +16,6 @@ class itemTodo{
             "title":this.title,
             "description":this.description,
             "dueDate":this.dueDate,
-            //"priority":this.priority,
             "completed":this.completed,
             "editActive":this.editActive,
         };

@@ -6,10 +6,6 @@ import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
 import { localStorageSetItem } from "./localStorage";
 
-import { formatDateToISO } from "./dateDisplay.js";
-
-const btnGeneric = document.createElement("button");
-
 function showNavBar(){
     /*Generate a list of projects for sidebar*/
     const divNavbar = document.querySelector("#main-navbar");
@@ -228,7 +224,6 @@ function returnTodoItem(object){
 
     const todoDueDate = document.createElement("p");
     todoDueDate.textContent = object.dueDate;
-    //todoDueDate.textContent = formatDateToISO(object.dueDate);
 
     const iconCompleted = new Image();
     iconCompleted.src = imgCheckmarkComplete;
@@ -273,11 +268,8 @@ function returnTodoItem(object){
     const btnTodoEdit = document.createElement("button");
     btnTodoEdit.appendChild(iconEdit);
     if(object.editActive){
-        //btnTodoEdit.textContent = "Cancel Edit";
         iconEdit.setAttribute("class", "btn-edit-active");
     }else{
-        //btnTodoEdit.textContent = "Edit";
-        //btnTodoEdit.appendChild(iconEdit);
         iconEdit.setAttribute("class", "btn-edit-inactive");
     };
     btnTodoEdit.addEventListener("click", (e)=>{
@@ -287,15 +279,11 @@ function returnTodoItem(object){
         switch (todoEditForm.style.display) {
             case "none":
                 todoEditForm.style.display = "flex";
-                //e.target.textContent = "Cancel Edit";
-                //btnTodoEdit.appendChild(iconEdit);
                 iconEdit.setAttribute("class", "btn-edit-active");
                 object.setEditMode(true);
                 break;
             default:
                 todoEditForm.style.display = "none";
-                //e.target.textContent = "Edit";
-                //btnTodoEdit.appendChild(iconEdit);
                 iconEdit.setAttribute("class", "btn-edit-inactive");
                 object.setEditMode(false);
                 break;
@@ -303,7 +291,6 @@ function returnTodoItem(object){
     });
 
     const btnTodoRemove = document.createElement("button");
-    //btnTodoRemove.textContent = "Remove";
     btnTodoRemove.appendChild(iconDelete);
     iconDelete.setAttribute("class", "btn-remove");
     btnTodoRemove.addEventListener("click", (e)=>{
@@ -373,7 +360,6 @@ function returnProjectEditFormHtml(object){
             };
             projectUpdate(object.id, newProjectItem);
             document.querySelector("#edit-" + object.id).style.display = "none";
-            //document.querySelector("#btn-edit-" + object.id).textContent = "Edit";
             updateUI();
         });
 
@@ -462,7 +448,6 @@ function returnTodoEditFormHtml(object){
             for(const [key, value] of newFormData){
                 newTodoItem[key] = value;
             };
-            console.log(newTodoItem)
             todoUpdate(object.id, newTodoItem);
             updateUI();
         });

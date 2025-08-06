@@ -28,7 +28,6 @@ if(allTodoKeys.length > 0){
 } else{
     //create todo DB with random items for testing purposes
     // Add temporary items for development purposes.
-    console.log(formatDateToISO("1988-09-17"))
     for (let i = 0; i < 10; i++) {
         todoDB.push(new itemTodo(debugProjectIds[randomIntFromInterval(0, debugProjectIds.length-1)],"Todo No."+i,"To do item No."+i, formatDateToISO(new Date()), false));
     };
