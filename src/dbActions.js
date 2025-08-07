@@ -75,6 +75,7 @@ function projectUpdate(id, updateObject = {}){
             break;
         };
     };
+    localStorageSaveProjects(projectDB);
 };
 
 function projectDelete(id){
@@ -87,6 +88,7 @@ function projectDelete(id){
             break;
         };
     };
+    localStorageSaveProjects(projectDB);
 };
 
 export {
