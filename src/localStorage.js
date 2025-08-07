@@ -26,11 +26,12 @@ function localStorageSetItem(object){
     const objectString = JSON.stringify(object.getObject());
     localStorage.setItem(object.id, objectString);
 };
+
 function localStorageRemoveItem(id){
     localStorage.removeItem(id);
 };
 
-function localStorageAllProjects(){
+function localStorageGetAllProjects(){
     const localStorageKeys = Object.keys(localStorage);
     const allProjectKeys = [];
     for (let index = 0; index < localStorageKeys.length; index++) {
@@ -42,7 +43,7 @@ function localStorageAllProjects(){
     return allProjectKeys;
 };
 
-function localStorageAllTodos(){
+function localStorageGetAllTodos(){
     const localStorageKeys = Object.keys(localStorage);
     const allTodoKeys = [];
     for (let index = 0; index < localStorageKeys.length; index++) {
@@ -54,4 +55,4 @@ function localStorageAllTodos(){
     return allTodoKeys;
 };
 
-export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageAllProjects, localStorageAllTodos};
+export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageGetAllProjects, localStorageGetAllTodos};

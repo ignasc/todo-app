@@ -1,8 +1,8 @@
 import projectList from "./itemProject";
-import { localStorageAllProjects, localStorageGetItem, localStorageSetItem } from "./localStorage";
+import { localStorageGetAllProjects, localStorageGetItem, localStorageSetItem } from "./localStorage";
 
 const projectDB = [];
-const allProjectKeys = localStorageAllProjects();
+const allProjectKeys = localStorageGetAllProjects();
 if(allProjectKeys.length > 0){
     //create project DB from local storage
     for (let index = 0; index < allProjectKeys.length; index++) {

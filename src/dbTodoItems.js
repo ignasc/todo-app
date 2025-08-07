@@ -4,7 +4,7 @@ import projectDB from "./dbProjects";
 //DEBUG END
 
 import itemTodo from "./itemTodo";
-import { localStorageAllTodos, localStorageGetItem, localStorageSetItem } from "./localStorage";
+import { localStorageGetAllTodos, localStorageGetItem, localStorageSetItem } from "./localStorage";
 
 const todoDB = [];
 const debugProjectIds = [];
@@ -17,7 +17,7 @@ function randomIntFromInterval(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-const allTodoKeys = localStorageAllTodos();
+const allTodoKeys = localStorageGetAllTodos();
 if(allTodoKeys.length > 0){
     //create todo DB from local storage
     for (let index = 0; index < allTodoKeys.length; index++) {
