@@ -1,9 +1,20 @@
-import { add, formatDistanceToNow, formatISO } from "date-fns";
+import { add, compareAsc, formatDistanceToNow, formatISO } from "date-fns";
 
 function formatDateToISO(dateString){
     const newDate = formatISO(dateString, {representation: "date"});
 
     return newDate;
+};
+
+function isDateLessOrEqualThanToday(dateToCompare){
+    /*
+    Comparing to today's date:
+    1 - date is future
+    0 - date is today
+    -1 - date is in the past
+    */
+    const currentDate = formatDateToISO(new Date());
+    return compareAsc(dateToCompare, currentDate);
 };
 
 function generateRandomFutureDate(){
@@ -12,7 +23,7 @@ function generateRandomFutureDate(){
         years: 0,
         months: 0,
         weeks: 0,
-        days: randomIntFromInterval(1,99),
+        days: randomIntFromInterval(-99,99),
         hours: 0,
         minutes: 0,
         seconds: 0,
@@ -26,12 +37,26 @@ function randomIntFromInterval(min,max){
     return Math.floor(Math.random() * (max - min + 1) + min)
 };
 
-function calculateDaysRemainingFromNow(dateString){
-    const newDistance = formatDistanceToNow(dateString,{
-        addSuffix: true,
-    });
+function returnDueDateMessage(dateString){
+    const datePositionFromCurrent = isDateLessOrEqualThanToday(dateString, new Date());
 
-    return newDistance;
+    if(datePositionFromCurrent == 1){
+        const newDistance = formatDistanceToNow(dateString,{
+            addSuffix: true,
+        });
+
+        return "due " + newDistance;
+    };
+
+    if(datePositionFromCurrent == -1){
+        const newDistance = formatDistanceToNow(dateString,{
+            addSuffix: false,
+        });
+
+        return "overdue " + newDistance + " ago";
+    } else{
+        return "due today";
+    };
 };
 
-export {formatDateToISO, generateRandomFutureDate, calculateDaysRemainingFromNow};
+export { formatDateToISO, generateRandomFutureDate, returnDueDateMessage };

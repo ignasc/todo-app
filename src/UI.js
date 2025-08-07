@@ -5,7 +5,7 @@ import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
 import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
 import { localStorageSaveTodos } from "./localStorage";
-import { calculateDaysRemainingFromNow, formatDateToISO } from "./dateDisplay";
+import { returnDueDateMessage, formatDateToISO } from "./dateDisplay";
 import todoDB from "./dbTodoItems";
 
 function showNavBar(){
@@ -227,7 +227,7 @@ function returnTodoItem(object){
     todoTitle.textContent = object.title;
 
     const todoDueDate = document.createElement("p");
-    todoDueDate.textContent = object.dueDate + " (" + calculateDaysRemainingFromNow(object.dueDate) + ")";
+    todoDueDate.textContent = object.dueDate + " (" + returnDueDateMessage(object.dueDate) + ")";
 
     const iconCompleted = new Image();
     iconCompleted.src = imgCheckmarkComplete;
