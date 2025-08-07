@@ -82,4 +82,4 @@ function localStorageGetTodos(){
     return localStorage.getItem("todoDB");
 };
 
-export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageGetAllProjects, localStorageGetAllTodos, localStorageSaveProjects};
+export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageGetAllProjects, localStorageGetAllTodos, localStorageSaveProjects, localStorageSaveTodos};

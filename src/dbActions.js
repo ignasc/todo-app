@@ -2,13 +2,14 @@ import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects"
 import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
-import { localStorageRemoveItem, localStorageSaveProjects, localStorageSetItem } from "./localStorage";
+import { localStorageRemoveItem, localStorageSaveProjects, localStorageSaveTodos, localStorageSetItem } from "./localStorage";
 
 //main CRUD operations for todo item db
 function todoCreateNew(projectId, title, description, dueDate, completed){
     const newTodoItem = new itemTodo(projectId,title, description, dueDate, completed = false);
     todoDB.push(newTodoItem);
     localStorageSetItem(newTodoItem);
+    localStorageSaveTodos(todoDB);
 };
 
 function todoRetrieve(id, getAll = false){
@@ -32,6 +33,7 @@ function todoUpdate(id, updateObject = {}){
             break;
         };
     };
+    localStorageSaveTodos(todoDB);
 };
 
 function todoDelete(id){
@@ -44,6 +46,7 @@ function todoDelete(id){
             break;
         };
     };
+    localStorageSaveTodos(todoDB);
 };
 
 //CRUD operations for projects db
