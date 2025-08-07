@@ -8,7 +8,7 @@ import { localStorageRemoveItem, localStorageSaveProjects, localStorageSaveTodos
 function todoCreateNew(projectId, title, description, dueDate, completed){
     const newTodoItem = new itemTodo(projectId,title, description, dueDate, completed = false);
     todoDB.push(newTodoItem);
-    localStorageSetItem(newTodoItem);
+    //localStorageSetItem(newTodoItem);
     localStorageSaveTodos(todoDB);
 };
 
@@ -28,12 +28,12 @@ function todoUpdate(id, updateObject = {}){
         if(element.id == id){
 
             todoDB[index].updateObject(updateObject);
-            localStorageSetItem(todoDB[index]);
+            //localStorageSetItem(todoDB[index]);
+            localStorageSaveTodos(todoDB);
 
             break;
         };
     };
-    localStorageSaveTodos(todoDB);
 };
 
 function todoDelete(id){
@@ -42,18 +42,18 @@ function todoDelete(id){
 
         if(elementId == id){
             todoDB.splice(index, 1);
-            localStorageRemoveItem(id);
+            //localStorageRemoveItem(id);
+            localStorageSaveTodos(todoDB);
             break;
         };
     };
-    localStorageSaveTodos(todoDB);
 };
 
 //CRUD operations for projects db
 function projectCreateNew(title, description){
     const newProjectItem = new projectList(title, description);
     projectDB.push(newProjectItem);
-    localStorageSetItem(newProjectItem);
+    //localStorageSetItem(newProjectItem);
     localStorageSaveProjects(projectDB);
 };
 
@@ -73,7 +73,7 @@ function projectUpdate(id, updateObject = {}){
         if(element.id == id){
 
             element.updateObject(updateObject);
-            localStorageSetItem(element);
+            //localStorageSetItem(element);
 
             break;
         };
@@ -87,7 +87,7 @@ function projectDelete(id){
 
         if(elementId == id){
             projectDB.splice(index, 1);
-            localStorageRemoveItem(id);
+            //localStorageRemoveItem(id);
             break;
         };
     };

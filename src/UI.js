@@ -4,8 +4,9 @@ import imgCheckmarkComplete from "./img/checkbox-marked-outline.svg";
 import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
 import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
-import { localStorageSetItem } from "./localStorage";
+import { localStorageSaveTodos, localStorageSetItem } from "./localStorage";
 import { calculateDaysRemainingFromNow, formatDateToISO } from "./dateDisplay";
+import todoDB from "./dbTodoItems";
 
 function showNavBar(){
     /*Generate a list of projects for sidebar*/
@@ -265,7 +266,8 @@ function returnTodoItem(object){
             btnTodoComplete.appendChild(iconIncomplete);
             iconIncomplete.setAttribute("class", "btn-incomplete");
         };
-        localStorageSetItem(object);
+        //localStorageSetItem(object);
+        localStorageSaveTodos(todoDB);
     });
 
     const btnTodoEdit = document.createElement("button");
