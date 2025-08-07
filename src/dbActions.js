@@ -2,13 +2,12 @@ import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects"
 import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
-import { localStorageRemoveItem, localStorageSaveProjects, localStorageSaveTodos, localStorageSetItem } from "./localStorage";
+import { localStorageSaveProjects, localStorageSaveTodos } from "./localStorage";
 
 //main CRUD operations for todo item db
 function todoCreateNew(projectId, title, description, dueDate, completed){
     const newTodoItem = new itemTodo(projectId,title, description, dueDate, completed = false);
     todoDB.push(newTodoItem);
-    //localStorageSetItem(newTodoItem);
     localStorageSaveTodos(todoDB);
 };
 
@@ -28,7 +27,6 @@ function todoUpdate(id, updateObject = {}){
         if(element.id == id){
 
             todoDB[index].updateObject(updateObject);
-            //localStorageSetItem(todoDB[index]);
             localStorageSaveTodos(todoDB);
 
             break;
@@ -42,7 +40,6 @@ function todoDelete(id){
 
         if(elementId == id){
             todoDB.splice(index, 1);
-            //localStorageRemoveItem(id);
             localStorageSaveTodos(todoDB);
             break;
         };
@@ -53,7 +50,6 @@ function todoDelete(id){
 function projectCreateNew(title, description){
     const newProjectItem = new projectList(title, description);
     projectDB.push(newProjectItem);
-    //localStorageSetItem(newProjectItem);
     localStorageSaveProjects(projectDB);
 };
 
@@ -73,7 +69,6 @@ function projectUpdate(id, updateObject = {}){
         if(element.id == id){
 
             element.updateObject(updateObject);
-            //localStorageSetItem(element);
 
             break;
         };
@@ -87,11 +82,10 @@ function projectDelete(id){
 
         if(elementId == id){
             projectDB.splice(index, 1);
-            //localStorageRemoveItem(id);
+            localStorageSaveProjects(projectDB);
             break;
         };
     };
-    localStorageSaveProjects(projectDB);
 };
 
 export {

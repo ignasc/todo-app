@@ -4,7 +4,7 @@ import imgCheckmarkComplete from "./img/checkbox-marked-outline.svg";
 import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
 import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
-import { localStorageSaveTodos, localStorageSetItem } from "./localStorage";
+import { localStorageSaveTodos } from "./localStorage";
 import { calculateDaysRemainingFromNow, formatDateToISO } from "./dateDisplay";
 import todoDB from "./dbTodoItems";
 
@@ -266,7 +266,6 @@ function returnTodoItem(object){
             btnTodoComplete.appendChild(iconIncomplete);
             iconIncomplete.setAttribute("class", "btn-incomplete");
         };
-        //localStorageSetItem(object);
         localStorageSaveTodos(todoDB);
     });
 
