@@ -30,6 +30,8 @@ if(storageAvailable("localStorage")){
 };
 
 //Show details of the first project in the list by default
-projectDB[0].toggleDetails();
+if(projectDB.length > 0){
+    projectDB[0].toggleDetails();
+};
 
 export default projectDB;
