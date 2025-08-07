@@ -55,4 +55,31 @@ function localStorageGetAllTodos(){
     return allTodoKeys;
 };
 
-export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageGetAllProjects, localStorageGetAllTodos};
+function stringifyDatabase(objectDB){
+    const arrayForLocalStorage = [];
+
+    for (let index = 0; index < objectDB.length; index++) {
+        const element = objectDB[index];
+        arrayForLocalStorage.push(JSON.stringify(element));
+    }
+
+    return JSON.stringify(arrayForLocalStorage);
+};
+
+function localStorageSaveProjects(projectDB){
+    localStorage.setItem("projectDB", stringifyDatabase(projectDB));
+}
+
+function localStorageSaveTodos(todoDB){
+    localStorage.setItem("todoDB", stringifyDatabase(todoDB));
+}
+
+function localStorageGetProjects(){
+    return localStorage.getItem("projectDB");
+};
+
+function localStorageGetTodos(){
+    return localStorage.getItem("todoDB");
+};
+
+export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageGetAllProjects, localStorageGetAllTodos, localStorageSaveProjects};

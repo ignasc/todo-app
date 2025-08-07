@@ -2,7 +2,7 @@ import todoDB from "./dbTodoItems";
 import projectDB from "./dbProjects"
 import projectList from "./itemProject";
 import itemTodo from "./itemTodo";
-import { localStorageRemoveItem, localStorageSetItem } from "./localStorage";
+import { localStorageRemoveItem, localStorageSaveProjects, localStorageSetItem } from "./localStorage";
 
 //main CRUD operations for todo item db
 function todoCreateNew(projectId, title, description, dueDate, completed){
@@ -51,6 +51,7 @@ function projectCreateNew(title, description){
     const newProjectItem = new projectList(title, description);
     projectDB.push(newProjectItem);
     localStorageSetItem(newProjectItem);
+    localStorageSaveProjects(projectDB);
 };
 
 function projectRetrieve(id){
