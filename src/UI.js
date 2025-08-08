@@ -22,20 +22,22 @@ function showNavBar(){
     const btn_NewProject = document.createElement("button");
     btn_NewProject.textContent = "Create new todo list";
     btn_NewProject.addEventListener("click", ()=>{
+        navbarForms.textContent = "";
+        navbarForms.appendChild(returnNewProjectForm());
         document.querySelector("#form-new-project").style.display = "flex";
     });
 
     const btn_NewTodo = document.createElement("button");
     btn_NewTodo.textContent = "Create new todo item";
     btn_NewTodo.addEventListener("click", ()=>{
+        navbarForms.textContent = "";
+        navbarForms.appendChild(returnNewTodoForm());
         document.querySelector("#form-new-todo").style.display = "flex";
     });
 
     navbarButtons.appendChild(btn_NewProject);
     navbarButtons.appendChild(btn_NewTodo);
     divNavbar.appendChild(navbarButtons);
-    navbarForms.appendChild(returnNewProjectForm());
-    navbarForms.appendChild(returnNewTodoForm());
     divNavbar.appendChild(navbarForms);
 };
 
