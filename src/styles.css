@@ -160,6 +160,12 @@ body{
 .project-card-heading > button{
     flex: 0, 1, 2ch; /*grow,shrink,basis*/
     padding: 0;
+    background: var(--bg-project-item);
+    border: none;
+}
+
+.project-card-heading > button > img:hover {
+    filter: brightness(0) saturate(100%) invert(84%) sepia(77%) saturate(7324%) hue-rotate(172deg) brightness(117%) contrast(111%);
 }
 
 .project-card-heading > h1{
