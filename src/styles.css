@@ -158,12 +158,12 @@ body{
 }
 
 .project-card-heading > button{
-    flex-grow: 1;
-    max-width: max-content;
+    flex: 0, 1, 2ch; /*grow,shrink,basis*/
+    padding: 0;
 }
 
 .project-card-heading > h1{
-    flex-grow: 1;
+    flex-grow: 0;
     flex-basis: content;
 
     align-self: center;
@@ -258,6 +258,10 @@ body{
 
 .btn-incomplete, .btn-edit-inactive, .btn-remove:hover {
     filter: invert(14%) sepia(87%) saturate(7480%) hue-rotate(4deg) brightness(97%) contrast(121%);
+}
+
+.btn-icon {
+    width: 2.5ch;
 }
 
 .todo-form {

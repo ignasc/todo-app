@@ -67,15 +67,24 @@ function showSideBar(){
                 e.preventDefault();
                 projectRetrieve(e.target.getAttribute("data-id")).toggleDetails();
                 const todoList = document.querySelector("#todo-list-" + element.id);
+
+                const btnExpand = document.querySelector("#btn-exp-" + element.id);
+                const btnImage = new Image();
+                btnImage.setAttribute("class", "btn-icon");
+
                 switch (todoList.style.display) {
                     case "none":
                         todoList.style.display = "flex";
-                        document.querySelector("#btn-exp-" + element.id).textContent = "Collapse";
+                        btnExpand.textContent = "";
+                        btnImage.src = getButtonIcon("collapse");
+                        btnExpand.appendChild(btnImage);
                         element.toggleDetails(true);
                         break;
                     default:
                         todoList.style.display = "none";
-                        document.querySelector("#btn-exp-" + element.id).textContent = "Expand";
+                        btnExpand.textContent = "";
+                        btnImage.src = getButtonIcon("expand");
+                        btnExpand.appendChild(btnImage);
                         element.toggleDetails(false);
                         break;
                 }
@@ -136,21 +145,37 @@ function returnProjectItemHtml(object){
     const btnExpand = document.createElement("button");
     btnExpand.setAttribute("id","btn-exp-" + object.id)
     if(object.cardExpanded){
-        btnExpand.textContent = "Collapse";
+        btnExpand.textContent = "";
+        const btnImage = new Image();
+        btnImage.setAttribute("class", "btn-icon");
+        btnImage.src = getButtonIcon("collapse");
+        btnExpand.appendChild(btnImage);
     }else{
-        btnExpand.textContent = "Expand";
+        btnExpand.textContent = "";
+        const btnImage = new Image();
+        btnImage.setAttribute("class", "btn-icon");
+        btnImage.src = getButtonIcon("expand");
+        btnExpand.appendChild(btnImage);
     };
     btnExpand.addEventListener("click", (e)=>{
         e.preventDefault();
         const todoList = document.querySelector("#todo-list-" + object.id);
+
+        const btnImage = new Image();
+        btnImage.setAttribute("class", "btn-icon");
+
         switch (todoList.style.display) {
             case "none":
-                e.target.textContent = "Collapse";
+                btnExpand.textContent = "";
+                btnImage.src = getButtonIcon("collapse");
+                btnExpand.appendChild(btnImage);
                 todoList.style.display = "flex";
                 object.toggleDetails(true);
                 break;
             default:
-                e.target.textContent = "Expand";
+                btnExpand.textContent = "";
+                btnImage.src = getButtonIcon("expand");
+                btnExpand.appendChild(btnImage);
                 todoList.style.display = "none";
                 object.toggleDetails(false);
                 break;
