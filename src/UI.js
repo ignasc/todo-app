@@ -4,6 +4,9 @@ import imgCheckmarkComplete from "./img/checkbox-marked-outline.svg";
 import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
 import imgEdit from "./img/pencil-outline.svg";
 import imgDelete from "./img/delete-outline.svg";
+import imgExpand from "./img/chevron-down.svg";
+import imgCollapse from "./img/chevron-up.svg";
+import imgNotAvailable from "./img/image-off-outline.svg";
 import { localStorageSaveTodos } from "./localStorage";
 import { returnDueDateMessage, formatDateToISO } from "./dateDisplay";
 import todoDB from "./dbTodoItems";
@@ -247,13 +250,13 @@ function returnTodoItem(object){
     todoDueDate.textContent = object.dueDate + " (" + returnDueDateMessage(object.dueDate) + ")";
 
     const iconCompleted = new Image();
-    iconCompleted.src = imgCheckmarkComplete;
+    iconCompleted.src = getButtonIcon("checked");
     const iconIncomplete = new Image();
-    iconIncomplete.src = imgCheckmarkIncomplete;
+    iconIncomplete.src = getButtonIcon("unchecked");
     const iconEdit = new Image();
-    iconEdit.src = imgEdit;
+    iconEdit.src = getButtonIcon("edit");
     const iconDelete = new Image();
-    iconDelete.src = imgDelete;
+    iconDelete.src = getButtonIcon("remove");
 
     const todoDescription = document.createElement("p");
     todoDescription.setAttribute("class", "todo-description");
@@ -684,6 +687,34 @@ function returnNewTodoForm(){
     formCard.appendChild(formDivBtn);
 
     return formCard;
+};
+
+function getButtonIcon(iconType){
+    let iconSelected;
+    switch (iconType) {
+        case "expand":
+            iconSelected = imgExpand;
+            break;
+        case "collapse":
+            iconSelected = imgCollapse;
+            break;
+        case "checked":
+            iconSelected = imgCheckmarkComplete;
+            break;
+        case "unchecked":
+            iconSelected = imgCheckmarkIncomplete;
+            break;
+        case "edit":
+            iconSelected = imgEdit;
+            break;
+        case "remove":
+            iconSelected = imgDelete;
+            break;
+        default:
+            iconSelected = imgNotAvailable;
+            break;
+    }
+    return iconSelected;
 };
 
 function updateUI(){
