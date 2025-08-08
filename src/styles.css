@@ -262,7 +262,7 @@ body{
     /*filter: invert(100%) sepia(26%) saturate(5347%) hue-rotate(19deg) brightness(96%) contrast(101%);*/
 }
 
-.btn-incomplete, .btn-edit-inactive, .btn-remove:hover {
+.btn-edit-inactive:hover, .btn-remove:hover {
     filter: invert(14%) sepia(87%) saturate(7480%) hue-rotate(4deg) brightness(97%) contrast(121%);
 }
 
