@@ -51,32 +51,38 @@ function showSideBar(){
     const btnProject = document.createElement("button");
     const projects = projectRetrieve("getAll");
 
-    for (let i = 0; i < projects.length; i++) {
-        const element = projects[i];
-        const newItem = projectItem.cloneNode();
-        const newButton = btnProject.cloneNode();
-        newButton.addEventListener("click", (e)=>{
-            e.preventDefault();
-            projectRetrieve(e.target.getAttribute("data-id")).toggleDetails();
-            const todoList = document.querySelector("#todo-list-" + element.id);
-            switch (todoList.style.display) {
-                case "none":
-                    todoList.style.display = "flex";
-                    document.querySelector("#btn-exp-" + element.id).textContent = "Collapse";
-                    element.toggleDetails(true);
-                    break;
-                default:
-                    todoList.style.display = "none";
-                    document.querySelector("#btn-exp-" + element.id).textContent = "Expand";
-                    element.toggleDetails(false);
-                    break;
-            }
-        });
-        newButton.textContent = element.title;
-        newButton.setAttribute("data-id", element.id)
+    if(projects.length == 0){
+        divSidebar.style.display = "none";
+    } else{
+        divSidebar.style.display = "flex";
 
-        newItem.appendChild(newButton);
-        projectList.appendChild(newItem);
+        for (let i = 0; i < projects.length; i++) {
+            const element = projects[i];
+            const newItem = projectItem.cloneNode();
+            const newButton = btnProject.cloneNode();
+            newButton.addEventListener("click", (e)=>{
+                e.preventDefault();
+                projectRetrieve(e.target.getAttribute("data-id")).toggleDetails();
+                const todoList = document.querySelector("#todo-list-" + element.id);
+                switch (todoList.style.display) {
+                    case "none":
+                        todoList.style.display = "flex";
+                        document.querySelector("#btn-exp-" + element.id).textContent = "Collapse";
+                        element.toggleDetails(true);
+                        break;
+                    default:
+                        todoList.style.display = "none";
+                        document.querySelector("#btn-exp-" + element.id).textContent = "Expand";
+                        element.toggleDetails(false);
+                        break;
+                }
+            });
+            newButton.textContent = element.title;
+            newButton.setAttribute("data-id", element.id)
+
+            newItem.appendChild(newButton);
+            projectList.appendChild(newItem);
+        };
     };
 
     divSidebar.appendChild(projectList);
@@ -89,7 +95,12 @@ function showMainContent(){
 
     const fullListOfProjects = returnProjectsListHtml();
 
-    mainContentDiv.appendChild(fullListOfProjects);
+    if(fullListOfProjects.childElementCount > 0){
+        mainContentDiv.style.display = "block";
+        mainContentDiv.appendChild(fullListOfProjects);
+    } else{
+        mainContentDiv.style.display = "none";
+    };
 };
 
 function returnProjectsListHtml(){
@@ -180,6 +191,7 @@ function returnProjectItemHtml(object){
         projectDelete(object.id);
         showSideBar();
         newLiItem.remove();
+        showMainContent();
     });
 
     //Assemble the element
