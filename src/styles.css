@@ -308,6 +308,10 @@ body{
     align-content: center;
 }
 
+.footer {
+    font-size: 0.75rem;
+}
+
 .footer > p > a {
     text-decoration: underline;
 }
