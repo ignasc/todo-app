@@ -158,24 +158,25 @@ body{
 }
 
 .project-card-heading > button{
-    flex: 1;
+    flex-grow: 1;
     max-width: max-content;
 }
 
 .project-card-heading > h1{
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: content;
 
     align-self: center;
 }
 
 .project-card-heading > p{
-    flex: 2;
+    flex-grow: 4;
 
     align-self: center;
 }
 
 .project-card-heading > .project-nav{
-    flex: 1;
+    flex-grow: 1;
     max-width: max-content;
 
     display: flex;

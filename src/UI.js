@@ -120,6 +120,9 @@ function returnProjectsListHtml(){
 
 function returnProjectItemHtml(object){
     /*Generate project item as "li" element*/
+    const todoList = returnTodoList(object.id);
+    const itemCountText = "Items: " + todoList.childElementCount;
+
     const newLiItem = document.createElement("li");
     newLiItem.setAttribute("class", "project-card");
     newLiItem.setAttribute("id", object.id);
@@ -153,7 +156,7 @@ function returnProjectItemHtml(object){
 
     const projectTitle = document.createElement("h1");
     projectTitle.setAttribute("class", "project-title");
-    projectTitle.textContent = object.title;
+    projectTitle.textContent = object.title + " (" + itemCountText + ")";
 
     const projectDescription = document.createElement("p");
     projectDescription.setAttribute("class", "project-description-p");
@@ -206,7 +209,7 @@ function returnProjectItemHtml(object){
 
     newLiItem.appendChild(projectCardHeader);
     newLiItem.appendChild(returnProjectEditFormHtml(object));
-    newLiItem.appendChild(returnTodoList(object.id));
+    newLiItem.appendChild(todoList);
 
     return newLiItem;
 };
@@ -315,6 +318,7 @@ function returnTodoItem(object){
         e.preventDefault();
         todoDelete(object.id);
         todoItem.remove();
+        showMainContent();
     });
 
     //Assemble the element
