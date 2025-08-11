@@ -28,6 +28,7 @@ function showNavBar(){
         navbarForms.textContent = "";
         navbarForms.appendChild(returnNewProjectForm());
         document.querySelector("#form-new-project").style.display = "flex";
+        document.querySelector("#new-forms").style.display = "flex";
     });
 
     const btn_NewTodo = document.createElement("button");
@@ -36,6 +37,7 @@ function showNavBar(){
         navbarForms.textContent = "";
         navbarForms.appendChild(returnNewTodoForm());
         document.querySelector("#form-new-todo").style.display = "flex";
+        document.querySelector("#new-forms").style.display = "flex";
     });
 
     navbarButtons.appendChild(btn_NewProject);
@@ -268,10 +270,11 @@ function returnTodoItem(object){
     todoItem.setAttribute("class", "todo-card");
 
     const todoTitle = document.createElement("p");
-    todoTitle.setAttribute("class", "todo-title");
+    todoTitle.setAttribute("id", "todo-title");
     todoTitle.textContent = object.title;
 
     const todoDueDate = document.createElement("p");
+    todoDueDate.setAttribute("id", "todo-duedate");
     todoDueDate.textContent = object.dueDate + " (" + returnDueDateMessage(object.dueDate) + ")";
 
     const iconCompleted = new Image();
@@ -284,7 +287,7 @@ function returnTodoItem(object){
     iconDelete.src = getButtonIcon("remove");
 
     const todoDescription = document.createElement("p");
-    todoDescription.setAttribute("class", "todo-description");
+    todoDescription.setAttribute("id", "todo-description");
     todoDescription.textContent = object.description;
 
     const btnTodoComplete = document.createElement("button");
@@ -576,6 +579,7 @@ function returnNewProjectForm(){
             newProjectItem[key] = value;
         };
         projectCreateNew(newProjectItem.title, newProjectItem.description);
+        document.querySelector("#new-forms").style.display = "none";
         updateUI();
     });
 
@@ -583,7 +587,7 @@ function returnNewProjectForm(){
     btn_cancel.textContent = "Cancel";
     btn_cancel.addEventListener("click", (e)=>{
         e.preventDefault();
-        document.querySelector("#" + newProjectFormId).style.display = "none";
+        document.querySelector("#new-forms").style.display = "none";
     });
 
     //add all elements to form
@@ -681,7 +685,7 @@ function returnNewTodoForm(){
     btn_cancel.textContent = "Cancel";
     btn_cancel.addEventListener("click", (e)=>{
         e.preventDefault();
-        document.querySelector("#" + newTodoFormId).style.display = "none";
+        document.querySelector("#new-forms").style.display = "none";
     });
 
     //add all elements to form
@@ -746,5 +750,6 @@ function updateUI(){
     showNavBar();
     showSideBar();
     showMainContent();
+    document.querySelector("#new-forms").style.display = "none";
 };
 export {updateUI};

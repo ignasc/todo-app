@@ -2,19 +2,20 @@
     --border-radius-small: 5px;
     --border-radius-big: 10px;
 
-    --bg-main-color: rgb(233, 255, 251);
-    --bg-main-box-shadow: 0px 1px 5px 1px rgb(96, 109, 106);
-    --bg-main-border: 1px solid rgb(216, 235, 231);
+    --bg-main-color: rgb(255, 255, 255);
+    --bg-main-box-shadow: 0px 1px 1px 1px rgb(182, 182, 182);
+    --bg-main-border: 1px solid rgb(204, 204, 204);
+    --bg-main-hover: rgb(243, 243, 243);
 
-    --bg-project-item: rgb(180, 226, 217);
-    --bg-project-box-shadow: 0px 1px 1px 0px rgb(96, 109, 106);
-    --bg-project-border: 1px solid rgb(56, 123, 126);
+    --bg-project-item: rgb(255, 255, 255);
+    --bg-project-box-shadow: 0px 1px 1px 0px rgb(255, 255, 255);
+    --bg-project-border: 1px solid rgb(255, 255, 255);
 
-    --bg-todo-card: rgb(190, 226, 227);
-    --bg-todo-box-shadow:0px 1px 1px 0px rgb(179, 179, 179);
-    --bg-todo-border: 1px solid rgb(56, 123, 126);
+    --bg-todo-card: rgb(255, 255, 255);
+    --bg-todo-box-shadow:0px 1px 1px 0px rgb(255, 255, 255);
+    --bg-todo-border: 1px solid rgb(255, 255, 255);
 
-    --form-border: 1px solid gray;
+    --form-border: 1px solid rgb(255, 255, 255);
 
     --filter-expand-hover: brightness(0) saturate(100%) invert(84%) sepia(77%) saturate(7324%) hue-rotate(172deg) brightness(117%) contrast(111%);
     --filter-checkmark-complete: invert(28%) sepia(96%) saturate(2790%) hue-rotate(92deg) brightness(88%) contrast(105%);
@@ -23,9 +24,7 @@
 
 .main-style {
     background-color: var(--bg-main-color);
-    border: var(--bg-main-border);
     border-radius: var(--border-radius-big);
-    box-shadow: var(--bg-main-box-shadow);
     overflow: hidden;
 }
 
@@ -35,7 +34,7 @@ body{
     grid-template-columns: 1fr 5fr;
     grid-template-rows: minmax(50px, max-content) 1fr 50px;
     gap: 5px;
-
+    background-color: var(--bg-main-color);
     margin: 10px;
     padding: 10px;
 }
@@ -50,6 +49,7 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 2px;
+    box-shadow: var(--bg-main-box-shadow);
 }
 
 #navbar-buttons {
@@ -66,6 +66,8 @@ body{
     align-items: flex-start;
 
     gap: 25px;
+    border: var(--bg-main-border);
+    border-radius: var(--border-radius-big);
 }
 
 #form-new-project, #form-new-todo {
@@ -107,6 +109,8 @@ body{
 
     display: flex;
     flex-direction: column;
+    border: var(--bg-main-border);
+    box-shadow: var(--bg-main-box-shadow);
 }
 
 #content-sidebar > ul {
@@ -139,8 +143,6 @@ body{
 }
 
 #content-main > ul {
-    padding: 5px;
-
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -149,8 +151,8 @@ body{
 .project-card {
     padding: 5px;
     background: var(--bg-project-item);
-    border: var(--bg-project-border);
-    box-shadow: var(--bg-project-box-shadow);
+    border: var(--bg-main-border);
+    box-shadow: var(--bg-main-box-shadow);
     border-radius: var(--border-radius-big);
 
     display: flex;
@@ -160,6 +162,8 @@ body{
 
 .project-card-heading {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     gap: 5px;
 }
 
@@ -181,19 +185,35 @@ body{
     align-self: center;
 }
 
-.project-card-heading > p{
+.project-description-p{
     flex-grow: 4;
+    flex-basis: 100%;
 
     align-self: center;
+    order: 1;
+    margin-left: 2rem;
+    font-size: 0.75rem;
 }
 
-.project-card-heading > .project-nav{
+.project-nav{
     flex-grow: 1;
-    max-width: max-content;
+    flex-basis: max-content;
 
     display: flex;
+    justify-content: flex-end;
     gap: 3px;
     padding: 2px;
+}
+
+.project-nav > button {
+    background-color: var(--bg-main-color);
+    border: 0px;
+}
+
+.project-nav > button:hover {
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--bg-main-box-shadow);
+    background-color: var(--bg-main-hover);
 }
 
 .project-form {
@@ -215,15 +235,16 @@ body{
 .todo-list-card {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 1ch;
+    margin: 0ch 0.5ch 1ch 2ch;
 }
 
 .todo-card {
     padding: 5px;
     border-radius: var(--border-radius-big);
     background-color: var(--bg-todo-card);
-    border: var(--bg-todo-border);
-    box-shadow: var(--bg-todo-box-shadow);
+    border: var(--bg-main-border);
+    box-shadow: var(--bg-main-box-shadow);
 
     display: flex;
     justify-content: center;
@@ -240,6 +261,10 @@ body{
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+#todo-duedate, #todo-description {
+    font-size: 0.75rem;
 }
 
 .todo-nav {
@@ -299,9 +324,8 @@ body{
     border-radius: var(--border-radius-small);
 }
 
-.footer {
+#footer-main {
     background-color: var(--bg-main-color);
-    box-shadow: var(--bg-main-box-shadow);
     border: var(--bg-main-border);
     border-radius: var(--border-radius-big);
     grid-column: 1 / -1;
@@ -312,11 +336,12 @@ body{
     align-content: center;
 }
 
-.footer {
+#footer-main {
     font-size: 0.75rem;
+    box-shadow: var(--bg-main-box-shadow);
 }
 
-.footer > p > a {
+#footer-main > p > a {
     text-decoration: underline;
 }
 
