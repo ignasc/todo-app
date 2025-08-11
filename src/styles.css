@@ -2,18 +2,20 @@
     --border-radius-small: 5px;
     --border-radius-big: 10px;
 
-    --bg-main-color: rgb(255, 255, 255);
-    --bg-main-box-shadow: 0px 1px 1px 1px rgb(182, 182, 182);
-    --bg-main-border: 1px solid rgb(204, 204, 204);
-    --bg-main-hover: rgb(243, 243, 243);
+    --bg-main-color: rgb(254, 250, 224);
+    --bg-main-box-shadow: 0px 1px 1px 1px rgb(188, 108, 37);
+    --bg-main-border: 1px solid rgb(188, 108, 37);
+    --bg-main-hover: rgb(221, 161, 94);
 
     --bg-project-item: rgb(255, 255, 255);
     --bg-project-box-shadow: 0px 1px 1px 0px rgb(255, 255, 255);
     --bg-project-border: 1px solid rgb(255, 255, 255);
 
-    --bg-todo-card: rgb(255, 255, 255);
+    --bg-todo-card: rgb(254, 250, 224);
     --bg-todo-box-shadow:0px 1px 1px 0px rgb(255, 255, 255);
     --bg-todo-border: 1px solid rgb(255, 255, 255);
+
+    --bg-generic-input: white;
 
     --form-border: 1px solid rgb(255, 255, 255);
 
@@ -62,6 +64,16 @@ body{
     padding: 2px;
 }
 
+#navbar-buttons > button {
+    /*background-color: var(--bg-main-color);
+    border: var(--bg-main-border);
+    border-radius: var(--border-radius-small);*/
+}
+
+#navbar-buttons > button:hover {
+    /*background-color: var(--bg-main-hover);*/
+}
+
 #new-forms {
     display: flex;
     flex-direction: row;
@@ -105,6 +117,10 @@ body{
     flex-direction: column;
 }
 
+select {
+    background-color: var(--bg-generic-input);
+}
+
 #content-sidebar {
     grid-column: 1 / 2;
     grid-row: 2 / -2;
@@ -127,16 +143,20 @@ body{
 
 #content-sidebar > ul > li {
     overflow: hidden;
-    border-radius: var(--border-radius-small);
+    /*border-radius: var(--border-radius-small);
+    border: var(--bg-main-border);*/
 }
 
 #content-sidebar > ul > li > button {
     width: 100%;
-    background: var(--bg-project-item);
+    /*border: none;
+    background-color: var(--bg-main-color);*/
 }
 
 #content-sidebar > ul > li > button:hover {
-    background-color: var(--bg-main-color);
+    /*box-shadow: var(--bg-main-box-shadow);
+    background-color: var(--bg-main-hover);*/
+
 }
 
 #content-main {
@@ -152,7 +172,7 @@ body{
 
 .project-card {
     padding: 5px;
-    background: var(--bg-project-item);
+    background-color: var(--bg-main-color);
     border: var(--bg-main-border);
     box-shadow: var(--bg-main-box-shadow);
     border-radius: var(--border-radius-big);
@@ -172,12 +192,13 @@ body{
 .project-card-heading > button{
     flex: 0, 1, 2ch; /*grow,shrink,basis*/
     padding: 0;
-    background: var(--bg-project-item);
+    /*background: var(--bg-main-color);
+    border: none;*/
     border: none;
 }
 
 .project-card-heading > button > img:hover {
-    filter: var(--filter-expand-hover);
+    /*box-shadow: var(--bg-main-box-shadow);*/
 }
 
 .project-card-heading > h1{
@@ -208,14 +229,13 @@ body{
 }
 
 .project-nav > button {
-    background-color: var(--bg-main-color);
-    border: 0px;
+    /*background-color: var(--bg-main-color);
+    border-radius: var(--border-radius-small);
+    border: 0px;*/
 }
 
 .project-nav > button:hover {
-    border-radius: var(--border-radius-small);
-    box-shadow: var(--bg-main-box-shadow);
-    background-color: var(--bg-main-hover);
+    /*box-shadow: var(--bg-main-box-shadow);*/
 }
 
 .project-form {
@@ -364,6 +384,16 @@ body{
 
 .highlight-overdue {
     filter: brightness(0) saturate(100%) invert(22%) sepia(75%) saturate(3851%) hue-rotate(345deg) brightness(86%) contrast(105%);
+}
+
+.btn-generic-style {
+    background-color: var(--bg-main-color);
+    border: var(--bg-main-border);
+    border-radius: var(--border-radius-small);
+}
+
+.btn-generic-style:hover {
+    background-color: var(--bg-main-hover);
 }
 
 .required {

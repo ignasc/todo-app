@@ -24,6 +24,7 @@ function showNavBar(){
 
     const btn_NewProject = document.createElement("button");
     btn_NewProject.textContent = "Create new todo list";
+    btn_NewProject.setAttribute("class", "btn-generic-style");
     btn_NewProject.addEventListener("click", ()=>{
         navbarForms.textContent = "";
         navbarForms.appendChild(returnNewProjectForm());
@@ -33,6 +34,7 @@ function showNavBar(){
 
     const btn_NewTodo = document.createElement("button");
     btn_NewTodo.textContent = "Create new todo item";
+    btn_NewTodo.setAttribute("class", "btn-generic-style");
     btn_NewTodo.addEventListener("click", ()=>{
         navbarForms.textContent = "";
         navbarForms.appendChild(returnNewTodoForm());
@@ -54,6 +56,7 @@ function showSideBar(){
     const projectList = document.createElement("ul");
     const projectItem = document.createElement("li")
     const btnProject = document.createElement("button");
+    btnProject.setAttribute("class", "btn-generic-style");
     const projects = projectRetrieve("getAll");
 
     if(projects.length == 0){
@@ -146,6 +149,7 @@ function returnProjectItemHtml(object){
 
     const btnExpand = document.createElement("button");
     btnExpand.setAttribute("id","btn-exp-" + object.id)
+    btnExpand.setAttribute("class", "btn-generic-style")
     if(object.cardExpanded){
         btnExpand.textContent = "";
         const btnImage = new Image();
@@ -197,6 +201,7 @@ function returnProjectItemHtml(object){
 
     const btnEdit = document.createElement("button");
     btnEdit.setAttribute("id", "btn-edit-" + object.id)
+    btnEdit.setAttribute("class", "btn-generic-style");
     if(object.editActive){
         btnEdit.textContent = "Cancel Edit";
     }else{
@@ -219,6 +224,7 @@ function returnProjectItemHtml(object){
 
     const btnRemove = document.createElement("button");
     btnRemove.textContent = "Remove";
+    btnRemove.setAttribute("class", "btn-generic-style");
     btnRemove.addEventListener("click", (e)=>{
         e.preventDefault();
         projectDelete(object.id);
@@ -401,6 +407,7 @@ function returnProjectEditFormHtml(object){
         btn_submit.setAttribute("type", "submit");
         btn_submit.setAttribute("value", "Save");
         btn_submit.setAttribute("id", "form-project-submit-btn");
+        btn_submit.setAttribute("class", "btn-generic-style");
 
         btn_submit.addEventListener("click", (e)=>{
             e.preventDefault()
@@ -491,6 +498,7 @@ function returnTodoEditFormHtml(object){
         btn_submit.setAttribute("type", "submit");
         btn_submit.setAttribute("value", "Save");
         btn_submit.setAttribute("id", "form-todo-submit-btn");
+        btn_submit.setAttribute("class", "btn-generic-style");
 
         btn_submit.addEventListener("click", (e)=>{
             e.preventDefault()
@@ -566,6 +574,7 @@ function returnNewProjectForm(){
     btn_submit.setAttribute("type", "submit");
     btn_submit.setAttribute("value", "Save");
     btn_submit.setAttribute("id", "form-new-project-submit-btn");
+    btn_submit.setAttribute("class", "btn-generic-style");
 
     btn_submit.addEventListener("click", (e)=>{
         e.preventDefault()
@@ -581,6 +590,7 @@ function returnNewProjectForm(){
 
     const btn_cancel = document.createElement("button");
     btn_cancel.textContent = "Cancel";
+    btn_cancel.setAttribute("class", "btn-generic-style");
     btn_cancel.addEventListener("click", (e)=>{
         e.preventDefault();
         document.querySelector("#new-forms").style.display = "none";
@@ -665,6 +675,7 @@ function returnNewTodoForm(){
     btn_submit.setAttribute("type", "submit");
     btn_submit.setAttribute("value", "Save");
     btn_submit.setAttribute("id", "form-new-todo-submit-btn");
+    btn_submit.setAttribute("class", "btn-generic-style");
 
     btn_submit.addEventListener("click", (e)=>{
         e.preventDefault()
@@ -679,6 +690,7 @@ function returnNewTodoForm(){
 
     const btn_cancel = document.createElement("button");
     btn_cancel.textContent = "Cancel";
+    btn_cancel.setAttribute("class", "btn-generic-style");
     btn_cancel.addEventListener("click", (e)=>{
         e.preventDefault();
         document.querySelector("#new-forms").style.display = "none";
