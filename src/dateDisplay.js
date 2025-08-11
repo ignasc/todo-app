@@ -1,5 +1,7 @@
 import { add, compareAsc, formatDistanceToNow, formatISO } from "date-fns";
 
+import imgAlert from "./img/alert-rhombus.svg";
+
 function formatDateToISO(dateString){
     const newDate = formatISO(dateString, {representation: "date"});
 
@@ -40,6 +42,9 @@ function randomIntFromInterval(min,max){
 function returnDueDateMessage(dateString){
     const datePositionFromCurrent = isDateLessOrEqualThanToday(dateString, new Date());
 
+    const iconAlert = new Image();
+    iconAlert.src = imgAlert;
+
     const dueDateMessageElement = document.createElement("p")
     dueDateMessageElement.setAttribute("id", "todo-duedate");
 
@@ -57,8 +62,12 @@ function returnDueDateMessage(dateString){
         });
 
         dueDateMessageElement.textContent = dateString + " (overdue " + newDistance + " ago)";
+        iconAlert.setAttribute("class", "highlight-overdue")
+        dueDateMessageElement.appendChild(iconAlert);
     } else{
         dueDateMessageElement.textContent = dateString + " (due today)";
+        iconAlert.setAttribute("class", "highlight-duetoday")
+        dueDateMessageElement.appendChild(iconAlert);
     };
 
     return dueDateMessageElement;

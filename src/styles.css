@@ -17,6 +17,8 @@
 
     --form-border: 1px solid rgb(255, 255, 255);
 
+    --image-icon-height: 1.2rem;
+
     --filter-expand-hover: brightness(0) saturate(100%) invert(84%) sepia(77%) saturate(7324%) hue-rotate(172deg) brightness(117%) contrast(111%);
     --filter-checkmark-complete: invert(28%) sepia(96%) saturate(2790%) hue-rotate(92deg) brightness(88%) contrast(105%);
     --filter-edit-delete: invert(14%) sepia(87%) saturate(7480%) hue-rotate(4deg) brightness(97%) contrast(121%);
@@ -284,7 +286,7 @@ body{
 }
 
 .todo-nav > button > img {
-    height: 1.2rem;
+    height: var(--image-icon-height);
 }
 
 .btn-incomplete:hover, .btn-completed, .btn-edit-active {
@@ -343,6 +345,25 @@ body{
 
 #footer-main > p > a {
     text-decoration: underline;
+}
+
+#todo-duedate {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+#todo-duedate > img {
+    height: 1rem;
+}
+
+.highlight-duetoday {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(91%) saturate(1276%) hue-rotate(2deg) brightness(106%) contrast(103%);
+}
+
+.highlight-overdue {
+    filter: brightness(0) saturate(100%) invert(22%) sepia(75%) saturate(3851%) hue-rotate(345deg) brightness(86%) contrast(105%);
 }
 
 .required {
