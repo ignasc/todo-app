@@ -13,6 +13,12 @@
     --bg-todo-card: rgb(190, 226, 227);
     --bg-todo-box-shadow:0px 1px 1px 0px rgb(179, 179, 179);
     --bg-todo-border: 1px solid rgb(56, 123, 126);
+
+    --form-border: 1px solid gray;
+
+    --filter-expand-hover: brightness(0) saturate(100%) invert(84%) sepia(77%) saturate(7324%) hue-rotate(172deg) brightness(117%) contrast(111%);
+    --filter-checkmark-complete: invert(28%) sepia(96%) saturate(2790%) hue-rotate(92deg) brightness(88%) contrast(105%);
+    --filter-edit-delete: invert(14%) sepia(87%) saturate(7480%) hue-rotate(4deg) brightness(97%) contrast(121%);
 }
 
 .main-style {
@@ -165,7 +171,7 @@ body{
 }
 
 .project-card-heading > button > img:hover {
-    filter: brightness(0) saturate(100%) invert(84%) sepia(77%) saturate(7324%) hue-rotate(172deg) brightness(117%) contrast(111%);
+    filter: var(--filter-expand-hover);
 }
 
 .project-card-heading > h1{
@@ -194,7 +200,7 @@ body{
     padding: 5px 10px 5px 10px;
     background-color: var(--bg-main-color);
     border-radius: var(--border-radius-big);
-    border: 1px solid gray;
+    border: var(--form-border);
 
     display: flex;
     flex-direction: column;
@@ -250,20 +256,18 @@ body{
 .todo-nav > button {
     background-color: var(--bg-todo-card);
     border: none;
-    border: none;
 }
 
 .todo-nav > button > img {
     height: 1.2rem;
 }
 
-.btn-completed, .btn-edit-active {
-    filter: invert(28%) sepia(96%) saturate(2790%) hue-rotate(92deg) brightness(88%) contrast(105%);
-    /*filter: invert(100%) sepia(26%) saturate(5347%) hue-rotate(19deg) brightness(96%) contrast(101%);*/
+.btn-incomplete:hover, .btn-completed, .btn-edit-active {
+    filter: var(--filter-checkmark-complete);
 }
 
 .btn-edit-inactive:hover, .btn-remove:hover {
-    filter: invert(14%) sepia(87%) saturate(7480%) hue-rotate(4deg) brightness(97%) contrast(121%);
+    filter: var(--filter-edit-delete);
 }
 
 .btn-icon {
@@ -273,7 +277,7 @@ body{
 .todo-form {
     background-color: var(--bg-main-color);
     border-radius: var(--border-radius-big);
-    border: 1px solid gray;
+    border: var(--form-border);
 
     flex-grow: 1;
     flex-basis: 100%;
