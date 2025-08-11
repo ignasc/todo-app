@@ -64,16 +64,6 @@ body{
     padding: 2px;
 }
 
-#navbar-buttons > button {
-    /*background-color: var(--bg-main-color);
-    border: var(--bg-main-border);
-    border-radius: var(--border-radius-small);*/
-}
-
-#navbar-buttons > button:hover {
-    /*background-color: var(--bg-main-hover);*/
-}
-
 #new-forms {
     display: flex;
     flex-direction: row;
@@ -143,20 +133,10 @@ select {
 
 #content-sidebar > ul > li {
     overflow: hidden;
-    /*border-radius: var(--border-radius-small);
-    border: var(--bg-main-border);*/
 }
 
 #content-sidebar > ul > li > button {
     width: 100%;
-    /*border: none;
-    background-color: var(--bg-main-color);*/
-}
-
-#content-sidebar > ul > li > button:hover {
-    /*box-shadow: var(--bg-main-box-shadow);
-    background-color: var(--bg-main-hover);*/
-
 }
 
 #content-main {
@@ -192,13 +172,7 @@ select {
 .project-card-heading > button{
     flex: 0, 1, 2ch; /*grow,shrink,basis*/
     padding: 0;
-    /*background: var(--bg-main-color);
-    border: none;*/
     border: none;
-}
-
-.project-card-heading > button > img:hover {
-    /*box-shadow: var(--bg-main-box-shadow);*/
 }
 
 .project-card-heading > h1{
@@ -226,16 +200,6 @@ select {
     justify-content: flex-end;
     gap: 3px;
     padding: 2px;
-}
-
-.project-nav > button {
-    /*background-color: var(--bg-main-color);
-    border-radius: var(--border-radius-small);
-    border: 0px;*/
-}
-
-.project-nav > button:hover {
-    /*box-shadow: var(--bg-main-box-shadow);*/
 }
 
 .project-form {
