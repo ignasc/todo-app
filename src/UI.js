@@ -273,10 +273,6 @@ function returnTodoItem(object){
     todoTitle.setAttribute("id", "todo-title");
     todoTitle.textContent = object.title;
 
-    const todoDueDate = document.createElement("p");
-    todoDueDate.setAttribute("id", "todo-duedate");
-    todoDueDate.textContent = object.dueDate + " (" + returnDueDateMessage(object.dueDate) + ")";
-
     const iconCompleted = new Image();
     iconCompleted.src = getButtonIcon("checked");
     const iconIncomplete = new Image();
@@ -357,7 +353,7 @@ function returnTodoItem(object){
     const todoHeader = document.createElement("div");
     todoHeader.setAttribute("id","todo-card-header");
     todoHeader.appendChild(todoTitle);
-    todoHeader.appendChild(todoDueDate);
+    todoHeader.appendChild(returnDueDateMessage(object.dueDate));
     todoHeader.appendChild(todoDescription);
 
     const todoNav = document.createElement("div");

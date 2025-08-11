@@ -40,12 +40,15 @@ function randomIntFromInterval(min,max){
 function returnDueDateMessage(dateString){
     const datePositionFromCurrent = isDateLessOrEqualThanToday(dateString, new Date());
 
+    const dueDateMessageElement = document.createElement("p")
+    dueDateMessageElement.setAttribute("id", "todo-duedate");
+
     if(datePositionFromCurrent == 1){
         const newDistance = formatDistanceToNow(dateString,{
             addSuffix: true,
         });
 
-        return "due " + newDistance;
+        dueDateMessageElement.textContent = dateString + " (due " + newDistance + ")";
     };
 
     if(datePositionFromCurrent == -1){
@@ -53,10 +56,12 @@ function returnDueDateMessage(dateString){
             addSuffix: false,
         });
 
-        return "overdue " + newDistance + " ago";
+        dueDateMessageElement.textContent = dateString + " (overdue " + newDistance + " ago)";
     } else{
-        return "due today";
+        dueDateMessageElement.textContent = dateString + " (due today)";
     };
+
+    return dueDateMessageElement;
 };
 
 export { formatDateToISO, generateRandomFutureDate, returnDueDateMessage };
