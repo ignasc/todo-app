@@ -54,9 +54,7 @@ function returnDueDateMessage(dateString){
         });
 
         dueDateMessageElement.textContent = dateString + " (due " + newDistance + ")";
-    };
-
-    if(datePositionFromCurrent == -1){
+    } else if(datePositionFromCurrent == -1){
         const newDistance = formatDistanceToNow(dateString,{
             addSuffix: false,
         });
