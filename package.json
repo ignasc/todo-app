@@ -4,9 +4,9 @@
   "description": "generic webpack template for html, css and javascript",
   "main": "index.js",
   "scripts": {
-    "test": "eslint ./src/*",
-    "fix": "eslint --fix ./src/*",
-    "prebuild": "eslint ./src/*",
+    "test": "eslint ./src/",
+    "fix": "eslint --fix ./src/",
+    "prebuild": "eslint ./src/",
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "deploy": "git subtree push --prefix dist origin gh-pages"

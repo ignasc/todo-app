@@ -376,169 +376,169 @@ function returnTodoItem(object){
 };
 
 function returnProjectEditFormHtml(object){
-        const formCard = document.createElement("form")
-        formCard.setAttribute("class", "project-form");
-        formCard.setAttribute("id", "edit-" + object.id);
-        formCard.style.display = "none";
+    const formCard = document.createElement("form")
+    formCard.setAttribute("class", "project-form");
+    formCard.setAttribute("id", "edit-" + object.id);
+    formCard.style.display = "none";
 
-        const genericInput = document.createElement("input");
-        genericInput.setAttribute("type", "text");
-        const genericLabel = document.createElement("label");
-        const divWrapper = document.createElement("div");
+    const genericInput = document.createElement("input");
+    genericInput.setAttribute("type", "text");
+    const genericLabel = document.createElement("label");
+    const divWrapper = document.createElement("div");
 
-        //title, description
-        const inputTitle = genericInput.cloneNode()
-        inputTitle.setAttribute("id", "pname");
-        inputTitle.setAttribute("name", "title");
-        inputTitle.setAttribute("value", object.title);
-        const labelTitle = genericLabel.cloneNode();
-        labelTitle.setAttribute("for", "pname");
-        labelTitle.textContent = "Project Name";
+    //title, description
+    const inputTitle = genericInput.cloneNode()
+    inputTitle.setAttribute("id", "pname");
+    inputTitle.setAttribute("name", "title");
+    inputTitle.setAttribute("value", object.title);
+    const labelTitle = genericLabel.cloneNode();
+    labelTitle.setAttribute("for", "pname");
+    labelTitle.textContent = "Project Name";
 
-        const inputDescription = genericInput.cloneNode();
-        inputDescription.setAttribute("id", "pdescription");
-        inputDescription.setAttribute("name", "description");
-        inputDescription.setAttribute("value", object.description);
-        const labelDescription = genericLabel.cloneNode();
-        labelDescription.setAttribute("for", "pdescription");
-        labelDescription.textContent = "Description";
+    const inputDescription = genericInput.cloneNode();
+    inputDescription.setAttribute("id", "pdescription");
+    inputDescription.setAttribute("name", "description");
+    inputDescription.setAttribute("value", object.description);
+    const labelDescription = genericLabel.cloneNode();
+    labelDescription.setAttribute("for", "pdescription");
+    labelDescription.textContent = "Description";
 
-        const btn_submit = genericInput.cloneNode();
-        btn_submit.setAttribute("type", "submit");
-        btn_submit.setAttribute("value", "Save");
-        btn_submit.setAttribute("id", "form-project-submit-btn");
-        btn_submit.setAttribute("class", "btn-generic-style");
+    const btn_submit = genericInput.cloneNode();
+    btn_submit.setAttribute("type", "submit");
+    btn_submit.setAttribute("value", "Save");
+    btn_submit.setAttribute("id", "form-project-submit-btn");
+    btn_submit.setAttribute("class", "btn-generic-style");
 
-        btn_submit.addEventListener("click", (e)=>{
-            e.preventDefault()
-            const newFormData = new FormData(formCard);
-            const newProjectItem = {};
-            for(const [key, value] of newFormData){
-                newProjectItem[key] = value;
-            };
-            projectUpdate(object.id, newProjectItem);
-            document.querySelector("#edit-" + object.id).style.display = "none";
-            updateUI();
-        });
+    btn_submit.addEventListener("click", (e)=>{
+        e.preventDefault()
+        const newFormData = new FormData(formCard);
+        const newProjectItem = {};
+        for(const [key, value] of newFormData){
+            newProjectItem[key] = value;
+        };
+        projectUpdate(object.id, newProjectItem);
+        document.querySelector("#edit-" + object.id).style.display = "none";
+        updateUI();
+    });
 
-        //add all elements to form
-        const formDivTitle = divWrapper.cloneNode();
-        formDivTitle.setAttribute("id", "form-div-project-title");
-        formDivTitle.appendChild(labelTitle);
-        formDivTitle.appendChild(inputTitle);
-        formCard.appendChild(formDivTitle);
+    //add all elements to form
+    const formDivTitle = divWrapper.cloneNode();
+    formDivTitle.setAttribute("id", "form-div-project-title");
+    formDivTitle.appendChild(labelTitle);
+    formDivTitle.appendChild(inputTitle);
+    formCard.appendChild(formDivTitle);
 
-        const formDivDesc = divWrapper.cloneNode();
-        formDivDesc.setAttribute("id", "form-div-project-description");
-        formDivDesc.appendChild(labelDescription);
-        formDivDesc.appendChild(inputDescription);
-        formCard.appendChild(formDivDesc);
+    const formDivDesc = divWrapper.cloneNode();
+    formDivDesc.setAttribute("id", "form-div-project-description");
+    formDivDesc.appendChild(labelDescription);
+    formDivDesc.appendChild(inputDescription);
+    formCard.appendChild(formDivDesc);
 
-        formCard.appendChild(btn_submit);
+    formCard.appendChild(btn_submit);
 
-        return formCard;
+    return formCard;
 };
 
 function returnTodoEditFormHtml(object){
-        const formCard = document.createElement("form")
-        formCard.setAttribute("class", "todo-form");
-        formCard.setAttribute("id", "edit-" + object.id);
-        formCard.style.display = "none";
+    const formCard = document.createElement("form")
+    formCard.setAttribute("class", "todo-form");
+    formCard.setAttribute("id", "edit-" + object.id);
+    formCard.style.display = "none";
 
-        const genericInput = document.createElement("input");
-        genericInput.setAttribute("type", "text");
-        const genericLabel = document.createElement("label");
-        const divWrapper = document.createElement("div");
+    const genericInput = document.createElement("input");
+    genericInput.setAttribute("type", "text");
+    const genericLabel = document.createElement("label");
+    const divWrapper = document.createElement("div");
 
-        //title, description, date inputs
-        const inputTitle = genericInput.cloneNode()
-        inputTitle.setAttribute("id", "iname");
-        inputTitle.setAttribute("name", "title");
-        inputTitle.setAttribute("value", object.title);
-        const labelTitle = genericLabel.cloneNode();
-        labelTitle.setAttribute("for", "iname");
-        labelTitle.textContent = "Task Name";
+    //title, description, date inputs
+    const inputTitle = genericInput.cloneNode()
+    inputTitle.setAttribute("id", "iname");
+    inputTitle.setAttribute("name", "title");
+    inputTitle.setAttribute("value", object.title);
+    const labelTitle = genericLabel.cloneNode();
+    labelTitle.setAttribute("for", "iname");
+    labelTitle.textContent = "Task Name";
 
-        const inputDescription = genericInput.cloneNode();
-        inputDescription.setAttribute("id", "idescription");
-        inputDescription.setAttribute("name", "description");
-        inputDescription.setAttribute("value", object.description);
-        const labelDescription = genericLabel.cloneNode();
-        labelDescription.setAttribute("for", "idescription");
-        labelDescription.textContent = "Description";
+    const inputDescription = genericInput.cloneNode();
+    inputDescription.setAttribute("id", "idescription");
+    inputDescription.setAttribute("name", "description");
+    inputDescription.setAttribute("value", object.description);
+    const labelDescription = genericLabel.cloneNode();
+    labelDescription.setAttribute("for", "idescription");
+    labelDescription.textContent = "Description";
 
-        const inputDueDate = genericInput.cloneNode();
-        inputDueDate.setAttribute("id", "iduedate");
-        inputDueDate.setAttribute("name", "dueDate");
-        inputDueDate.setAttribute("type", "date");
-        inputDueDate.defaultValue = object.dueDate;
-        const labelDueDate = genericLabel.cloneNode();
-        labelDueDate.setAttribute("for", "idescription");
-        labelDueDate.textContent = "Due Date";
+    const inputDueDate = genericInput.cloneNode();
+    inputDueDate.setAttribute("id", "iduedate");
+    inputDueDate.setAttribute("name", "dueDate");
+    inputDueDate.setAttribute("type", "date");
+    inputDueDate.defaultValue = object.dueDate;
+    const labelDueDate = genericLabel.cloneNode();
+    labelDueDate.setAttribute("for", "idescription");
+    labelDueDate.textContent = "Due Date";
 
-        const inputAssignToProject = document.createElement("select");
-        inputAssignToProject.setAttribute("name", "projectId");
-        inputAssignToProject.setAttribute("id", "project-id-list");
-        const labelAssignToProject = genericLabel.cloneNode();
-        labelAssignToProject.setAttribute("for", "project-id-list");
-        labelAssignToProject.textContent = "Select project:"
-        const allProjects = projectRetrieve("getAll");
-        for (let index = 0; index < allProjects.length; index++) {
-            const element = allProjects[index];
-            const newListOption = document.createElement("option");
-            newListOption.setAttribute("value", element.id);
-            newListOption.textContent = element.title;
-            if(object.projectId == element.id){
-                newListOption.defaultSelected = true;
-            };
-            inputAssignToProject.appendChild(newListOption);
-        }
+    const inputAssignToProject = document.createElement("select");
+    inputAssignToProject.setAttribute("name", "projectId");
+    inputAssignToProject.setAttribute("id", "project-id-list");
+    const labelAssignToProject = genericLabel.cloneNode();
+    labelAssignToProject.setAttribute("for", "project-id-list");
+    labelAssignToProject.textContent = "Select project:"
+    const allProjects = projectRetrieve("getAll");
+    for (let index = 0; index < allProjects.length; index++) {
+        const element = allProjects[index];
+        const newListOption = document.createElement("option");
+        newListOption.setAttribute("value", element.id);
+        newListOption.textContent = element.title;
+        if(object.projectId == element.id){
+            newListOption.defaultSelected = true;
+        };
+        inputAssignToProject.appendChild(newListOption);
+    }
 
-        const btn_submit = genericInput.cloneNode();
-        btn_submit.setAttribute("type", "submit");
-        btn_submit.setAttribute("value", "Save");
-        btn_submit.setAttribute("id", "form-todo-submit-btn");
-        btn_submit.setAttribute("class", "btn-generic-style");
+    const btn_submit = genericInput.cloneNode();
+    btn_submit.setAttribute("type", "submit");
+    btn_submit.setAttribute("value", "Save");
+    btn_submit.setAttribute("id", "form-todo-submit-btn");
+    btn_submit.setAttribute("class", "btn-generic-style");
 
-        btn_submit.addEventListener("click", (e)=>{
-            e.preventDefault()
-            const newFormData = new FormData(formCard);
-            const newTodoItem = {};
-            for(const [key, value] of newFormData){
-                newTodoItem[key] = value;
-            };
-            todoUpdate(object.id, newTodoItem);
-            updateUI();
-        });
+    btn_submit.addEventListener("click", (e)=>{
+        e.preventDefault()
+        const newFormData = new FormData(formCard);
+        const newTodoItem = {};
+        for(const [key, value] of newFormData){
+            newTodoItem[key] = value;
+        };
+        todoUpdate(object.id, newTodoItem);
+        updateUI();
+    });
 
-        //add all elements to form
-        const formDivTitle = divWrapper.cloneNode();
-        formDivTitle.setAttribute("id", "form-div-todo-title");
-        formDivTitle.appendChild(labelTitle);
-        formDivTitle.appendChild(inputTitle);
-        formCard.appendChild(formDivTitle);
+    //add all elements to form
+    const formDivTitle = divWrapper.cloneNode();
+    formDivTitle.setAttribute("id", "form-div-todo-title");
+    formDivTitle.appendChild(labelTitle);
+    formDivTitle.appendChild(inputTitle);
+    formCard.appendChild(formDivTitle);
 
-        const formDivDesc = divWrapper.cloneNode();
-        formDivDesc.setAttribute("id", "form-div-todo-description");
-        formDivDesc.appendChild(labelDescription);
-        formDivDesc.appendChild(inputDescription);
-        formCard.appendChild(formDivDesc);
+    const formDivDesc = divWrapper.cloneNode();
+    formDivDesc.setAttribute("id", "form-div-todo-description");
+    formDivDesc.appendChild(labelDescription);
+    formDivDesc.appendChild(inputDescription);
+    formCard.appendChild(formDivDesc);
 
-        const formDivDueDate = divWrapper.cloneNode();
-        formDivDueDate.setAttribute("id", "form-div-todo-duedate");
-        formDivDueDate.appendChild(labelDueDate);
-        formDivDueDate.appendChild(inputDueDate);
-        formCard.appendChild(formDivDueDate);
+    const formDivDueDate = divWrapper.cloneNode();
+    formDivDueDate.setAttribute("id", "form-div-todo-duedate");
+    formDivDueDate.appendChild(labelDueDate);
+    formDivDueDate.appendChild(inputDueDate);
+    formCard.appendChild(formDivDueDate);
 
-        const formDivAssignProject = divWrapper.cloneNode();
-        formDivAssignProject.setAttribute("id", "form-div-todo-assignproject");
-        formDivAssignProject.appendChild(labelAssignToProject);
-        formDivAssignProject.appendChild(inputAssignToProject);
-        formCard.appendChild(formDivAssignProject);
+    const formDivAssignProject = divWrapper.cloneNode();
+    formDivAssignProject.setAttribute("id", "form-div-todo-assignproject");
+    formDivAssignProject.appendChild(labelAssignToProject);
+    formDivAssignProject.appendChild(inputAssignToProject);
+    formCard.appendChild(formDivAssignProject);
 
-        formCard.appendChild(btn_submit);
+    formCard.appendChild(btn_submit);
 
-        return formCard;
+    return formCard;
 };
 
 function returnNewProjectForm(){
@@ -684,7 +684,7 @@ function returnNewTodoForm(){
         for(const [key, value] of newFormData){
             newTodoItem[key] = value;
         };
-        todoCreateNew(newTodoItem.projectId, newTodoItem.title, newTodoItem.description, newTodoItem.dueDate, newTodoItem.priority = 0, newTodoItem.completed = false);
+        todoCreateNew(newTodoItem.projectId, newTodoItem.title, newTodoItem.description, newTodoItem.dueDate, newTodoItem.priority = 0);
         updateUI();
     });
 

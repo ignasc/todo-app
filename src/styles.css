@@ -7,13 +7,7 @@
     --bg-main-border: 1px solid rgb(188, 108, 37);
     --bg-main-hover: rgb(221, 161, 94);
 
-    --bg-project-item: rgb(255, 255, 255);
-    --bg-project-box-shadow: 0px 1px 1px 0px rgb(255, 255, 255);
-    --bg-project-border: 1px solid rgb(255, 255, 255);
-
     --bg-todo-card: rgb(255, 253, 242);
-    --bg-todo-box-shadow:0px 1px 1px 0px rgb(255, 255, 255);
-    --bg-todo-border: 1px solid rgb(255, 255, 255);
 
     --bg-generic-input: white;
 
@@ -95,11 +89,9 @@ body{
 
 #form-new-project-btn > button, input {
     flex-grow: 1;
-    flex-basis: 1;
 }
 #form-new-todo-btn > button, input {
     flex-grow: 1;
-    flex-basis: 1;
 }
 
 #form-new-todo-title, #form-new-todo-desc, #form-new-todo-duedate, #form-new-todo-projectselect {
@@ -170,7 +162,7 @@ select {
 }
 
 .project-card-heading > button{
-    flex: 0, 1, 2ch; /*grow,shrink,basis*/
+    flex: 0 1 2ch; /*grow,shrink,basis*/
     padding: 0;
     border: none;
 }
@@ -242,7 +234,6 @@ select {
 
 #todo-card-header {
     flex-grow: 10;
-    flex-basis: 1;
 
     display: flex;
     flex-direction: column;
@@ -255,7 +246,6 @@ select {
 
 .todo-nav {
     flex-grow: 0;
-    flex-basis: 1;
 
     display: flex;
     flex-direction: row;

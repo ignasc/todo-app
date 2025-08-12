@@ -55,8 +55,8 @@ function projectCreateNew(title, description){
 
 function projectRetrieve(id){
     if(id == "getAll"){
-    /*self note: this is reference to original array, spread operator does not work either as keypair values inside array elements are still references to original array values*/
-    return projectDB;
+        /*self note: this is reference to original array, spread operator does not work either as keypair values inside array elements are still references to original array values*/
+        return projectDB;
     };
     const filteredItem = projectDB.filter((element)=>{return element.id == id});
     return filteredItem[0];
