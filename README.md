@@ -1,6 +1,8 @@
 # Todo list app
 
-A basic todo list app. Build in progress.
+A basic todo list app.
+
+[Live Preview](https://ignasc.github.io/todo-app/)
 
 ## Features
 
