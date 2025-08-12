@@ -30,8 +30,8 @@ if(storageAvailable("localStorage")){
     } else{
         //create todo DB with random items for testing purposes
         todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with DUE date.", formatDateToISO(generateCustomDateFromNow(1, randomIntFromInterval(1,999))), false));
-        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with DUE TODAY date.", formatDateToISO(new Date()), false));
-        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with OVERDUE date.", formatDateToISO(generateCustomDateFromNow(-1, randomIntFromInterval(1,999))), false));
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.2","This is a sample todo no.2 item for demonstration purposes with DUE TODAY date.", formatDateToISO(new Date()), false));
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.3","This is a sample todo no.3 item for demonstration purposes with OVERDUE date.", formatDateToISO(generateCustomDateFromNow(-1, randomIntFromInterval(1,999))), false));
 
         //store projects to localStorage if available
         const arrayForLocalStorage = [];
