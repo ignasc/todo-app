@@ -2,13 +2,21 @@
 
 A basic todo list app. Build in progress.
 
-## Personal thoughts
+## Features
 
-Initially I had classes of todo items and project lists include methods that generate an html element, which can be used in front-end UI. But quickly realised that it was not a great idea since classes for mostly related to backend. I separated UI methods from backend code and it had quite a few benefits:
-* Cleaner, more organised code: I split larger methods into smaller ones that are responsible for a specific task.
-* Object classes are not cluttered with large code.
-* Much easier to implement new features.
-* Object classes do not break UI display if missing.
+* Create/modify/delete todo items.
+* Create/modify/delete todo lists/groups.
+* Group items into projects/lists.
+
+## Learning experience
+
+Things I learned more about:
+* How to use localStorage to preserve data during browsing session.
+* Using JS modules to organise and separate code into smaller pieces.
+* Practice "SOLID" principles of coding.
+* Managing project using npm packages and webpack.
+* Managing code using git and github. New features used: unstage files, revert older commits, branching and merging.
+* Using Eslint to keep good coding practices.
 
 ## Webpack notes
 
