@@ -36,6 +36,7 @@ function showNavBar(){
     btn_NewTodo.textContent = "Create new todo item";
     btn_NewTodo.setAttribute("class", "btn-generic-style");
     btn_NewTodo.addEventListener("click", ()=>{
+        if(projectRetrieve("getAll").length == 0){return}; //prevent showing form if no projects available
         navbarForms.textContent = "";
         navbarForms.appendChild(returnNewTodoForm());
         document.querySelector("#form-new-todo").style.display = "flex";

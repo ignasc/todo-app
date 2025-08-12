@@ -6,6 +6,7 @@ import { localStorageSaveProjects, localStorageSaveTodos } from "./localStorage"
 
 //main CRUD operations for todo item db
 function todoCreateNew(projectId, title, description, dueDate, completed){
+    if(projectRetrieve("getAll").length == 0){return};//prevent creation of todo item if no project list available.
     const newTodoItem = new itemTodo(projectId,title, description, dueDate, completed = false);
     todoDB.push(newTodoItem);
     localStorageSaveTodos(todoDB);
