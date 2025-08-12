@@ -36,4 +36,11 @@ Below are the scripts that have been added to `package.json` file
 
 `"start"`: starts a dev server with the developer version app
 
-`"deploy"`: pushes `gh-pages` branch to github. Branch must have changes already commited to it.
+`"deploy"`: this script does the following steps in order:
+* checks out `gh-pages` branch,
+* merges `main` branch into `gh-pages` branch,
+* runs `build` script (see above of what it does),
+* adds `dist` folder contents to be committed,
+* commits `dist` folder contents,
+* pushes the commit to remote repository,
+* switches back to `main` branch.
