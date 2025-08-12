@@ -1,5 +1,5 @@
 //DEBUG
-import { formatDateToISO, generateRandomFutureDate } from "./dateDisplay.js";
+import { formatDateToISO, generateCustomDateFromNow } from "./dateDisplay.js";
 import projectDB from "./dbProjects";
 //DEBUG END
 
@@ -7,10 +7,11 @@ import itemTodo from "./itemTodo";
 import { storageAvailable } from "./localStorage";
 
 const todoDB = [];
-const debugProjectIds = [];
+//if DB was not stored in localStorage, it will be made with one default item.
+const projectIds = [];
 for (let index = 0; index < projectDB.length; index++) {
     const id = projectDB[index].id;
-    debugProjectIds.push(id);
+    projectIds.push(id);
 }
 
 function randomIntFromInterval(min,max){
@@ -28,9 +29,9 @@ if(storageAvailable("localStorage")){
         };
     } else{
         //create todo DB with random items for testing purposes
-        for (let i = 0; i < 10; i++) {
-            todoDB.push(new itemTodo(debugProjectIds[randomIntFromInterval(0, debugProjectIds.length-1)],"Todo No."+i,"To do item No."+i, formatDateToISO(generateRandomFutureDate()), false));
-        };
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with DUE date.", formatDateToISO(generateCustomDateFromNow(1, randomIntFromInterval(1,999))), false));
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with DUE TODAY date.", formatDateToISO(new Date()), false));
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with OVERDUE date.", formatDateToISO(generateCustomDateFromNow(-1, randomIntFromInterval(1,999))), false));
 
         //store projects to localStorage if available
         const arrayForLocalStorage = [];

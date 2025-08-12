@@ -19,24 +19,22 @@ function isDateLessOrEqualThanToday(dateToCompare){
     return compareAsc(dateToCompare, currentDate);
 };
 
-function generateRandomFutureDate(){
-    /*This function is temporary to generate some random dates for due items*/
+function generateCustomDateFromNow(direction, days){
+    /*This function is to generate custom date based on supplied parameters:
+    direction (-1 or 1) - generate date before current (-1) or after current (1) date.
+    days - number of days to add or subtract to/from current date.
+    */
     const newDate = add(new Date(), {
         years: 0,
         months: 0,
         weeks: 0,
-        days: randomIntFromInterval(-99,99),
+        days: direction == -1 ? -1 * days : days,
         hours: 0,
         minutes: 0,
         seconds: 0,
 
     })
     return newDate;
-};
-
-function randomIntFromInterval(min,max){
-    //Temporary int generator for generateRandomFutureDate function
-    return Math.floor(Math.random() * (max - min + 1) + min)
 };
 
 function returnDueDateMessage(dateString){
@@ -71,4 +69,4 @@ function returnDueDateMessage(dateString){
     return dueDateMessageElement;
 };
 
-export { formatDateToISO, generateRandomFutureDate, returnDueDateMessage };
+export { formatDateToISO, generateCustomDateFromNow, returnDueDateMessage };

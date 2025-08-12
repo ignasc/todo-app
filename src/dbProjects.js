@@ -13,11 +13,8 @@ if(storageAvailable("localStorage")){
             projectDB.push(new projectList(projectItem.title,projectItem.description, projectItem.id));
         };
     } else{
-        //create project DB with random items for testing purposes
-        // Add few items to db for testing purposes
+        //create project DB with a default project list
         projectDB.push(new projectList("Default List","Default list for all todo's"));
-        projectDB.push(new projectList("Custom List 01","List of todos for project 01"));
-        projectDB.push(new projectList("Custom List 02","List of todos for project 02"));
 
         //store projects to localStorage if available
         const arrayForLocalStorage = [];
