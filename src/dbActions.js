@@ -77,6 +77,13 @@ function projectUpdate(id, updateObject = {}){
 };
 
 function projectDelete(id){
+    const allTodosForProject = todoRetrieve(id, true);
+
+    for (let index = 0; index < allTodosForProject.length; index++) {
+        const elementId = allTodosForProject[index].id;
+        todoDelete(elementId);
+    }
+
     for (let index = 0; index < projectDB.length; index++) {
         const elementId = projectDB[index].id;
 
