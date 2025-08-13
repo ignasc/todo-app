@@ -14,48 +14,48 @@ function storageAvailable(type) {
             storage &&
             storage.length !== 0
         );
-    };
-};
+    }
+}
 
-function localStorageGetItem(id){
+function localStorageGetItem(id) {
     const newObject = JSON.parse(localStorage.getItem(id));
     return newObject;
-};
+}
 
-function localStorageSetItem(object){
+function localStorageSetItem(object) {
     const objectString = JSON.stringify(object.getObject());
     localStorage.setItem(object.id, objectString);
-};
+}
 
-function localStorageRemoveItem(id){
+function localStorageRemoveItem(id) {
     localStorage.removeItem(id);
-};
+}
 
-function localStorageGetAllProjects(){
+function localStorageGetAllProjects() {
     const localStorageKeys = Object.keys(localStorage);
     const allProjectKeys = [];
     for (let index = 0; index < localStorageKeys.length; index++) {
         const id = localStorageKeys[index];
-        if(id[0] == "P"){
+        if (id[0] == "P") {
             allProjectKeys.push(id);
-        };
+        }
     }
     return allProjectKeys;
-};
+}
 
-function localStorageGetAllTodos(){
+function localStorageGetAllTodos() {
     const localStorageKeys = Object.keys(localStorage);
     const allTodoKeys = [];
     for (let index = 0; index < localStorageKeys.length; index++) {
         const id = localStorageKeys[index];
-        if(id[0] == "I"){
+        if (id[0] == "I") {
             allTodoKeys.push(id);
-        };
+        }
     }
     return allTodoKeys;
-};
+}
 
-function stringifyDatabase(objectDB){
+function stringifyDatabase(objectDB) {
     const arrayForLocalStorage = [];
 
     for (let index = 0; index < objectDB.length; index++) {
@@ -64,14 +64,23 @@ function stringifyDatabase(objectDB){
     }
 
     return JSON.stringify(arrayForLocalStorage);
-};
+}
 
-function localStorageSaveProjects(projectDB){
+function localStorageSaveProjects(projectDB) {
     localStorage.setItem("projectDB", stringifyDatabase(projectDB));
 }
 
-function localStorageSaveTodos(todoDB){
+function localStorageSaveTodos(todoDB) {
     localStorage.setItem("todoDB", stringifyDatabase(todoDB));
 }
 
-export {storageAvailable, localStorageGetItem, localStorageSetItem, localStorageRemoveItem, localStorageGetAllProjects, localStorageGetAllTodos, localStorageSaveProjects, localStorageSaveTodos};
+export {
+    storageAvailable,
+    localStorageGetItem,
+    localStorageSetItem,
+    localStorageRemoveItem,
+    localStorageGetAllProjects,
+    localStorageGetAllTodos,
+    localStorageSaveProjects,
+    localStorageSaveTodos,
+};

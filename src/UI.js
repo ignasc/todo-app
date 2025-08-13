@@ -1,4 +1,13 @@
-import { projectDelete, projectRetrieve, projectUpdate, todoRetrieve, todoDelete, todoUpdate, projectCreateNew, todoCreateNew } from "./dbActions";
+import {
+    projectDelete,
+    projectRetrieve,
+    projectUpdate,
+    todoRetrieve,
+    todoDelete,
+    todoUpdate,
+    projectCreateNew,
+    todoCreateNew,
+} from "./dbActions";
 
 import imgCheckmarkComplete from "./img/checkbox-marked-outline.svg";
 import imgCheckmarkIncomplete from "./img/checkbox-blank-outline.svg";
@@ -11,7 +20,7 @@ import { localStorageSaveTodos } from "./localStorage";
 import { returnDueDateMessage, formatDateToISO } from "./dateDisplay";
 import todoDB from "./dbTodoItems";
 
-function showNavBar(){
+function showNavBar() {
     /*Generate a list of projects for sidebar*/
     const divNavbar = document.querySelector("#main-navbar");
     divNavbar.textContent = "";
@@ -25,7 +34,7 @@ function showNavBar(){
     const btn_NewProject = document.createElement("button");
     btn_NewProject.textContent = "Create new todo list";
     btn_NewProject.setAttribute("class", "btn-generic-style");
-    btn_NewProject.addEventListener("click", ()=>{
+    btn_NewProject.addEventListener("click", () => {
         navbarForms.textContent = "";
         navbarForms.appendChild(returnNewProjectForm());
         document.querySelector("#form-new-project").style.display = "flex";
@@ -35,8 +44,10 @@ function showNavBar(){
     const btn_NewTodo = document.createElement("button");
     btn_NewTodo.textContent = "Create new todo item";
     btn_NewTodo.setAttribute("class", "btn-generic-style");
-    btn_NewTodo.addEventListener("click", ()=>{
-        if(projectRetrieve("getAll").length == 0){return}; //prevent showing form if no projects available
+    btn_NewTodo.addEventListener("click", () => {
+        if (projectRetrieve("getAll").length == 0) {
+            return;
+        } //prevent showing form if no projects available
         navbarForms.textContent = "";
         navbarForms.appendChild(returnNewTodoForm());
         document.querySelector("#form-new-todo").style.display = "flex";
@@ -47,34 +58,40 @@ function showNavBar(){
     navbarButtons.appendChild(btn_NewTodo);
     divNavbar.appendChild(navbarButtons);
     divNavbar.appendChild(navbarForms);
-};
+}
 
-function showSideBar(){
+function showSideBar() {
     /*Generate a list of all available projects*/
     const divSidebar = document.querySelector("#content-sidebar");
     divSidebar.textContent = "";
 
     const projectList = document.createElement("ul");
-    const projectItem = document.createElement("li")
+    const projectItem = document.createElement("li");
     const btnProject = document.createElement("button");
     btnProject.setAttribute("class", "btn-generic-style");
     const projects = projectRetrieve("getAll");
 
-    if(projects.length == 0){
+    if (projects.length == 0) {
         divSidebar.style.display = "none";
-    } else{
+    } else {
         divSidebar.style.display = "flex";
 
         for (let i = 0; i < projects.length; i++) {
             const element = projects[i];
             const newItem = projectItem.cloneNode();
             const newButton = btnProject.cloneNode();
-            newButton.addEventListener("click", (e)=>{
+            newButton.addEventListener("click", (e) => {
                 e.preventDefault();
-                projectRetrieve(e.target.getAttribute("data-id")).toggleDetails();
-                const todoList = document.querySelector("#todo-list-" + element.id);
+                projectRetrieve(
+                    e.target.getAttribute("data-id")
+                ).toggleDetails();
+                const todoList = document.querySelector(
+                    "#todo-list-" + element.id
+                );
 
-                const btnExpand = document.querySelector("#btn-exp-" + element.id);
+                const btnExpand = document.querySelector(
+                    "#btn-exp-" + element.id
+                );
                 const btnImage = new Image();
                 btnImage.setAttribute("class", "btn-icon");
 
@@ -96,16 +113,16 @@ function showSideBar(){
                 }
             });
             newButton.textContent = element.title;
-            newButton.setAttribute("data-id", element.id)
+            newButton.setAttribute("data-id", element.id);
 
             newItem.appendChild(newButton);
             projectList.appendChild(newItem);
-        };
-    };
+        }
+    }
 
     divSidebar.appendChild(projectList);
-};
-function showMainContent(){
+}
+function showMainContent() {
     /*Generate a list of projects/todo items for main page content*/
     const mainContentDiv = document.querySelector("#content-main");
     const divMain = document.querySelector("#content-main");
@@ -113,15 +130,15 @@ function showMainContent(){
 
     const fullListOfProjects = returnProjectsListHtml();
 
-    if(fullListOfProjects.childElementCount > 0){
+    if (fullListOfProjects.childElementCount > 0) {
         mainContentDiv.style.display = "block";
         mainContentDiv.appendChild(fullListOfProjects);
-    } else{
+    } else {
         mainContentDiv.style.display = "none";
-    };
-};
+    }
+}
 
-function returnProjectsListHtml(){
+function returnProjectsListHtml() {
     /*Generate a project item list as "ul" element*/
     const projectList = document.createElement("ul");
 
@@ -131,12 +148,12 @@ function returnProjectsListHtml(){
         const newLiItem = returnProjectItemHtml(element);
 
         projectList.appendChild(newLiItem);
-    };
+    }
 
     return projectList;
-};
+}
 
-function returnProjectItemHtml(object){
+function returnProjectItemHtml(object) {
     /*Generate project item as "li" element*/
     const todoList = returnTodoList(object.id);
     const itemCountText = "Items: " + todoList.childElementCount;
@@ -149,22 +166,22 @@ function returnProjectItemHtml(object){
     projectCardHeader.setAttribute("class", "project-card-heading");
 
     const btnExpand = document.createElement("button");
-    btnExpand.setAttribute("id","btn-exp-" + object.id)
-    btnExpand.setAttribute("class", "btn-generic-style")
-    if(object.cardExpanded){
+    btnExpand.setAttribute("id", "btn-exp-" + object.id);
+    btnExpand.setAttribute("class", "btn-generic-style");
+    if (object.cardExpanded) {
         btnExpand.textContent = "";
         const btnImage = new Image();
         btnImage.setAttribute("class", "btn-icon");
         btnImage.src = getButtonIcon("collapse");
         btnExpand.appendChild(btnImage);
-    }else{
+    } else {
         btnExpand.textContent = "";
         const btnImage = new Image();
         btnImage.setAttribute("class", "btn-icon");
         btnImage.src = getButtonIcon("expand");
         btnExpand.appendChild(btnImage);
-    };
-    btnExpand.addEventListener("click", (e)=>{
+    }
+    btnExpand.addEventListener("click", (e) => {
         e.preventDefault();
         const todoList = document.querySelector("#todo-list-" + object.id);
 
@@ -201,14 +218,14 @@ function returnProjectItemHtml(object){
     projectNav.setAttribute("class", "project-nav");
 
     const btnEdit = document.createElement("button");
-    btnEdit.setAttribute("id", "btn-edit-" + object.id)
+    btnEdit.setAttribute("id", "btn-edit-" + object.id);
     btnEdit.setAttribute("class", "btn-generic-style");
-    if(object.editActive){
+    if (object.editActive) {
         btnEdit.textContent = "Cancel Edit";
-    }else{
+    } else {
         btnEdit.textContent = "Edit";
-    };
-    btnEdit.addEventListener("click", (e)=>{
+    }
+    btnEdit.addEventListener("click", (e) => {
         e.preventDefault();
         const editForm = document.querySelector("#edit-" + object.id);
         switch (editForm.style.display) {
@@ -226,7 +243,7 @@ function returnProjectItemHtml(object){
     const btnRemove = document.createElement("button");
     btnRemove.textContent = "Remove";
     btnRemove.setAttribute("class", "btn-generic-style");
-    btnRemove.addEventListener("click", (e)=>{
+    btnRemove.addEventListener("click", (e) => {
         e.preventDefault();
         projectDelete(object.id);
         showSideBar();
@@ -249,19 +266,19 @@ function returnProjectItemHtml(object){
     newLiItem.appendChild(todoList);
 
     return newLiItem;
-};
+}
 
-function returnTodoList(projectId){
+function returnTodoList(projectId) {
     /*Generate todo item list as "ul" element*/
     const allTodoItems = todoRetrieve(projectId, true);
     const todoList = document.createElement("ul");
     todoList.setAttribute("class", "todo-list-card");
     todoList.setAttribute("id", "todo-list-" + projectId);
-    if(projectRetrieve(projectId).cardExpanded){
+    if (projectRetrieve(projectId).cardExpanded) {
         todoList.style.display = "flex";
-    }else{
+    } else {
         todoList.style.display = "none";
-    };
+    }
 
     for (let index = 0; index < allTodoItems.length; index++) {
         const element = allTodoItems[index];
@@ -269,9 +286,9 @@ function returnTodoList(projectId){
     }
 
     return todoList;
-};
+}
 
-function returnTodoItem(object){
+function returnTodoItem(object) {
     /*Generate a todo item as "li" element*/
     const todoItem = document.createElement("li");
     todoItem.setAttribute("class", "todo-card");
@@ -295,39 +312,39 @@ function returnTodoItem(object){
 
     const btnTodoComplete = document.createElement("button");
 
-    if(object.completed){
+    if (object.completed) {
         btnTodoComplete.textContent = "";
         btnTodoComplete.appendChild(iconCompleted);
         iconCompleted.setAttribute("class", "btn-completed");
-    }else{
+    } else {
         btnTodoComplete.textContent = "";
         btnTodoComplete.appendChild(iconIncomplete);
         iconIncomplete.setAttribute("class", "btn-incomplete");
-    };
+    }
     btnTodoComplete.setAttribute("data-id", object.id);
-    btnTodoComplete.addEventListener("click", (e)=>{
+    btnTodoComplete.addEventListener("click", (e) => {
         e.preventDefault();
         object.setCompleted();
-        if(object.completed){
+        if (object.completed) {
             btnTodoComplete.textContent = "";
             btnTodoComplete.appendChild(iconCompleted);
             iconCompleted.setAttribute("class", "btn-completed");
-        }else{
+        } else {
             btnTodoComplete.textContent = "";
             btnTodoComplete.appendChild(iconIncomplete);
             iconIncomplete.setAttribute("class", "btn-incomplete");
-        };
+        }
         localStorageSaveTodos(todoDB);
     });
 
     const btnTodoEdit = document.createElement("button");
     btnTodoEdit.appendChild(iconEdit);
-    if(object.editActive){
+    if (object.editActive) {
         iconEdit.setAttribute("class", "btn-edit-active");
-    }else{
+    } else {
         iconEdit.setAttribute("class", "btn-edit-inactive");
-    };
-    btnTodoEdit.addEventListener("click", (e)=>{
+    }
+    btnTodoEdit.addEventListener("click", (e) => {
         e.preventDefault();
         const todoEditForm = document.querySelector("#edit-" + object.id);
         object.setEditMode();
@@ -348,7 +365,7 @@ function returnTodoItem(object){
     const btnTodoRemove = document.createElement("button");
     btnTodoRemove.appendChild(iconDelete);
     iconDelete.setAttribute("class", "btn-remove");
-    btnTodoRemove.addEventListener("click", (e)=>{
+    btnTodoRemove.addEventListener("click", (e) => {
         e.preventDefault();
         todoDelete(object.id);
         todoItem.remove();
@@ -358,7 +375,7 @@ function returnTodoItem(object){
     //Assemble the element
 
     const todoHeader = document.createElement("div");
-    todoHeader.setAttribute("id","todo-card-header");
+    todoHeader.setAttribute("id", "todo-card-header");
     todoHeader.appendChild(todoTitle);
     todoHeader.appendChild(returnDueDateMessage(object.dueDate));
     todoHeader.appendChild(todoDescription);
@@ -374,10 +391,10 @@ function returnTodoItem(object){
     todoItem.appendChild(returnTodoEditFormHtml(object));
 
     return todoItem;
-};
+}
 
-function returnProjectEditFormHtml(object){
-    const formCard = document.createElement("form")
+function returnProjectEditFormHtml(object) {
+    const formCard = document.createElement("form");
     formCard.setAttribute("class", "project-form");
     formCard.setAttribute("id", "edit-" + object.id);
     formCard.style.display = "none";
@@ -388,7 +405,7 @@ function returnProjectEditFormHtml(object){
     const divWrapper = document.createElement("div");
 
     //title, description
-    const inputTitle = genericInput.cloneNode()
+    const inputTitle = genericInput.cloneNode();
     inputTitle.setAttribute("id", "pname");
     inputTitle.setAttribute("name", "title");
     inputTitle.setAttribute("value", object.title);
@@ -410,13 +427,13 @@ function returnProjectEditFormHtml(object){
     btn_submit.setAttribute("id", "form-project-submit-btn");
     btn_submit.setAttribute("class", "btn-generic-style");
 
-    btn_submit.addEventListener("click", (e)=>{
-        e.preventDefault()
+    btn_submit.addEventListener("click", (e) => {
+        e.preventDefault();
         const newFormData = new FormData(formCard);
         const newProjectItem = {};
-        for(const [key, value] of newFormData){
+        for (const [key, value] of newFormData) {
             newProjectItem[key] = value;
-        };
+        }
         projectUpdate(object.id, newProjectItem);
         document.querySelector("#edit-" + object.id).style.display = "none";
         updateUI();
@@ -438,10 +455,10 @@ function returnProjectEditFormHtml(object){
     formCard.appendChild(btn_submit);
 
     return formCard;
-};
+}
 
-function returnTodoEditFormHtml(object){
-    const formCard = document.createElement("form")
+function returnTodoEditFormHtml(object) {
+    const formCard = document.createElement("form");
     formCard.setAttribute("class", "todo-form");
     formCard.setAttribute("id", "edit-" + object.id);
     formCard.style.display = "none";
@@ -458,20 +475,20 @@ function returnTodoEditFormHtml(object){
     inputTodoPriority.setAttribute("id", "todo-priority-list");
     const labelTodoPriority = genericLabel.cloneNode();
     labelTodoPriority.setAttribute("for", "todo-priority-list");
-    labelTodoPriority.textContent = "Set priority:"
+    labelTodoPriority.textContent = "Set priority:";
     const allTodoItems = todoRetrieve(object.projectId, true);
     for (let index = 0; index < allTodoItems.length; index++) {
         const element = allTodoItems[index];
         const newListOption = document.createElement("option");
         newListOption.setAttribute("value", element.priority);
         newListOption.textContent = element.priority;
-        if(object.priority == element.priority){
+        if (object.priority == element.priority) {
             newListOption.defaultSelected = true;
-        };
+        }
         inputTodoPriority.appendChild(newListOption);
-    };
+    }
 
-    const inputTitle = genericInput.cloneNode()
+    const inputTitle = genericInput.cloneNode();
     inputTitle.setAttribute("id", "iname");
     inputTitle.setAttribute("name", "title");
     inputTitle.setAttribute("value", object.title);
@@ -501,16 +518,16 @@ function returnTodoEditFormHtml(object){
     inputAssignToProject.setAttribute("id", "project-id-list");
     const labelAssignToProject = genericLabel.cloneNode();
     labelAssignToProject.setAttribute("for", "project-id-list");
-    labelAssignToProject.textContent = "Select project:"
+    labelAssignToProject.textContent = "Select project:";
     const allProjects = projectRetrieve("getAll");
     for (let index = 0; index < allProjects.length; index++) {
         const element = allProjects[index];
         const newListOption = document.createElement("option");
         newListOption.setAttribute("value", element.id);
         newListOption.textContent = element.title;
-        if(object.projectId == element.id){
+        if (object.projectId == element.id) {
             newListOption.defaultSelected = true;
-        };
+        }
         inputAssignToProject.appendChild(newListOption);
     }
 
@@ -520,13 +537,13 @@ function returnTodoEditFormHtml(object){
     btn_submit.setAttribute("id", "form-todo-submit-btn");
     btn_submit.setAttribute("class", "btn-generic-style");
 
-    btn_submit.addEventListener("click", (e)=>{
-        e.preventDefault()
+    btn_submit.addEventListener("click", (e) => {
+        e.preventDefault();
         const newFormData = new FormData(formCard);
         const newTodoItem = {};
-        for(const [key, value] of newFormData){
+        for (const [key, value] of newFormData) {
             newTodoItem[key] = value;
-        };
+        }
         todoUpdate(object.id, newTodoItem);
         updateUI();
     });
@@ -565,11 +582,11 @@ function returnTodoEditFormHtml(object){
     formCard.appendChild(btn_submit);
 
     return formCard;
-};
+}
 
-function returnNewProjectForm(){
+function returnNewProjectForm() {
     const newProjectFormId = "form-new-project";
-    const formCard = document.createElement("form")
+    const formCard = document.createElement("form");
     formCard.setAttribute("class", "project-form");
     formCard.setAttribute("id", newProjectFormId);
     formCard.style.display = "none";
@@ -580,7 +597,7 @@ function returnNewProjectForm(){
     const divWrapper = document.createElement("div");
 
     //title, description
-    const inputTitle = genericInput.cloneNode()
+    const inputTitle = genericInput.cloneNode();
     inputTitle.setAttribute("id", "pname");
     inputTitle.setAttribute("name", "title");
     inputTitle.setAttribute("value", "New Todo List");
@@ -602,13 +619,13 @@ function returnNewProjectForm(){
     btn_submit.setAttribute("id", "form-new-project-submit-btn");
     btn_submit.setAttribute("class", "btn-generic-style");
 
-    btn_submit.addEventListener("click", (e)=>{
-        e.preventDefault()
+    btn_submit.addEventListener("click", (e) => {
+        e.preventDefault();
         const newFormData = new FormData(formCard);
         const newProjectItem = {};
-        for(const [key, value] of newFormData){
+        for (const [key, value] of newFormData) {
             newProjectItem[key] = value;
-        };
+        }
         projectCreateNew(newProjectItem.title, newProjectItem.description);
         document.querySelector("#new-forms").style.display = "none";
         updateUI();
@@ -617,7 +634,7 @@ function returnNewProjectForm(){
     const btn_cancel = document.createElement("button");
     btn_cancel.textContent = "Cancel";
     btn_cancel.setAttribute("class", "btn-generic-style");
-    btn_cancel.addEventListener("click", (e)=>{
+    btn_cancel.addEventListener("click", (e) => {
         e.preventDefault();
         document.querySelector("#new-forms").style.display = "none";
     });
@@ -640,10 +657,10 @@ function returnNewProjectForm(){
     formCard.appendChild(formDivBtn);
 
     return formCard;
-};
-function returnNewTodoForm(){
+}
+function returnNewTodoForm() {
     const newTodoFormId = "form-new-todo";
-    const formCard = document.createElement("form")
+    const formCard = document.createElement("form");
     formCard.setAttribute("class", "todo-form");
     formCard.setAttribute("id", newTodoFormId);
     formCard.style.display = "none";
@@ -654,7 +671,7 @@ function returnNewTodoForm(){
     const divWrapper = document.createElement("div");
 
     //title, description, date inputs
-    const inputTitle = genericInput.cloneNode()
+    const inputTitle = genericInput.cloneNode();
     inputTitle.setAttribute("id", "iname");
     inputTitle.setAttribute("name", "title");
     inputTitle.setAttribute("value", "New Todo");
@@ -684,16 +701,16 @@ function returnNewTodoForm(){
     inputAssignToProject.setAttribute("id", "project-id-list");
     const labelAssignToProject = genericLabel.cloneNode();
     labelAssignToProject.setAttribute("for", "project-id-list");
-    labelAssignToProject.textContent = "Select project:"
+    labelAssignToProject.textContent = "Select project:";
     const allProjects = projectRetrieve("getAll");
     for (let index = 0; index < allProjects.length; index++) {
         const element = allProjects[index];
         const newListOption = document.createElement("option");
         newListOption.setAttribute("value", element.id);
         newListOption.textContent = element.title;
-        if(index == 0){
+        if (index == 0) {
             newListOption.defaultSelected = true;
-        };
+        }
         inputAssignToProject.appendChild(newListOption);
     }
 
@@ -703,21 +720,27 @@ function returnNewTodoForm(){
     btn_submit.setAttribute("id", "form-new-todo-submit-btn");
     btn_submit.setAttribute("class", "btn-generic-style");
 
-    btn_submit.addEventListener("click", (e)=>{
-        e.preventDefault()
+    btn_submit.addEventListener("click", (e) => {
+        e.preventDefault();
         const newFormData = new FormData(formCard);
         const newTodoItem = {};
-        for(const [key, value] of newFormData){
+        for (const [key, value] of newFormData) {
             newTodoItem[key] = value;
-        };
-        todoCreateNew(newTodoItem.projectId, newTodoItem.title, newTodoItem.description, newTodoItem.dueDate, newTodoItem.priority = 1);
+        }
+        todoCreateNew(
+            newTodoItem.projectId,
+            newTodoItem.title,
+            newTodoItem.description,
+            newTodoItem.dueDate,
+            (newTodoItem.priority = 1)
+        );
         updateUI();
     });
 
     const btn_cancel = document.createElement("button");
     btn_cancel.textContent = "Cancel";
     btn_cancel.setAttribute("class", "btn-generic-style");
-    btn_cancel.addEventListener("click", (e)=>{
+    btn_cancel.addEventListener("click", (e) => {
         e.preventDefault();
         document.querySelector("#new-forms").style.display = "none";
     });
@@ -750,9 +773,9 @@ function returnNewTodoForm(){
     formCard.appendChild(formDivBtn);
 
     return formCard;
-};
+}
 
-function getButtonIcon(iconType){
+function getButtonIcon(iconType) {
     let iconSelected;
     switch (iconType) {
         case "expand":
@@ -778,12 +801,12 @@ function getButtonIcon(iconType){
             break;
     }
     return iconSelected;
-};
+}
 
-function updateUI(){
+function updateUI() {
     showNavBar();
     showSideBar();
     showMainContent();
     document.querySelector("#new-forms").style.display = "none";
-};
-export {updateUI};
+}
+export { updateUI };

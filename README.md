@@ -6,19 +6,20 @@ A basic todo list app.
 
 ## Features
 
-* Create/modify/delete todo items.
-* Create/modify/delete todo lists/groups.
-* Group items into projects/lists.
+- Create/modify/delete todo items.
+- Create/modify/delete todo lists/groups.
+- Group items into projects/lists.
 
 ## Learning experience
 
 Things I learned more about:
-* How to use localStorage to preserve data during browsing session.
-* Using JS modules to organise and separate code into smaller pieces.
-* Practice "SOLID" principles of coding.
-* Managing project using npm packages and webpack.
-* Managing code using git and github. New features used: unstage files, revert older commits, branching and merging.
-* Using Eslint to keep good coding practices.
+
+- How to use localStorage to preserve data during browsing session.
+- Using JS modules to organise and separate code into smaller pieces.
+- Practice "SOLID" principles of coding.
+- Managing project using npm packages and webpack.
+- Managing code using git and github. New features used: unstage files, revert older commits, branching and merging.
+- Using Eslint to keep good coding practices.
 
 ## Webpack notes
 

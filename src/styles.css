@@ -1,4 +1,4 @@
-:root{
+:root {
     --border-radius-small: 5px;
     --border-radius-big: 10px;
 
@@ -16,9 +16,12 @@
 
     --image-icon-height: 1.2rem;
 
-    --filter-expand-hover: brightness(0) saturate(100%) invert(84%) sepia(77%) saturate(7324%) hue-rotate(172deg) brightness(117%) contrast(111%);
-    --filter-checkmark-complete: invert(28%) sepia(96%) saturate(2790%) hue-rotate(92deg) brightness(88%) contrast(105%);
-    --filter-edit-delete: invert(14%) sepia(87%) saturate(7480%) hue-rotate(4deg) brightness(97%) contrast(121%);
+    --filter-expand-hover: brightness(0) saturate(100%) invert(84%) sepia(77%)
+        saturate(7324%) hue-rotate(172deg) brightness(117%) contrast(111%);
+    --filter-checkmark-complete: invert(28%) sepia(96%) saturate(2790%)
+        hue-rotate(92deg) brightness(88%) contrast(105%);
+    --filter-edit-delete: invert(14%) sepia(87%) saturate(7480%)
+        hue-rotate(4deg) brightness(97%) contrast(121%);
 }
 
 .main-style {
@@ -27,7 +30,7 @@
     overflow: hidden;
 }
 
-body{
+body {
     font-family: "Roboto", sans-serif;
     display: grid;
     grid-template-columns: 1fr 5fr;
@@ -70,7 +73,8 @@ body{
     border-radius: var(--border-radius-big);
 }
 
-#form-new-project, #form-new-todo {
+#form-new-project,
+#form-new-todo {
     padding: 5px;
 
     display: flex;
@@ -78,25 +82,32 @@ body{
     gap: 5px;
 }
 
-#form-new-project-title, #form-new-project-desc{
+#form-new-project-title,
+#form-new-project-desc {
     display: flex;
     flex-direction: column;
 }
 
-#form-new-project-btn, #form-new-todo-btn {
+#form-new-project-btn,
+#form-new-todo-btn {
     display: flex;
     justify-content: center;
     gap: 5px;
 }
 
-#form-new-project-btn > button, input {
+#form-new-project-btn > button,
+input {
     flex-grow: 1;
 }
-#form-new-todo-btn > button, input {
+#form-new-todo-btn > button,
+input {
     flex-grow: 1;
 }
 
-#form-new-todo-title, #form-new-todo-desc, #form-new-todo-duedate, #form-new-todo-projectselect {
+#form-new-todo-title,
+#form-new-todo-desc,
+#form-new-todo-duedate,
+#form-new-todo-projectselect {
     display: flex;
     flex-direction: column;
 }
@@ -163,20 +174,20 @@ select {
     gap: 5px;
 }
 
-.project-card-heading > button{
+.project-card-heading > button {
     flex: 0 1 2ch; /*grow,shrink,basis*/
     padding: 0;
     border: none;
 }
 
-.project-card-heading > h1{
+.project-card-heading > h1 {
     flex-grow: 0;
     flex-basis: content;
 
     align-self: center;
 }
 
-.project-description-p{
+.project-description-p {
     flex-grow: 4;
     flex-basis: 100%;
 
@@ -186,7 +197,7 @@ select {
     font-size: 0.75rem;
 }
 
-.project-nav{
+.project-nav {
     flex-grow: 1;
     flex-basis: max-content;
 
@@ -207,7 +218,8 @@ select {
     gap: 5px;
 }
 
-#form-div-project-title, #form-div-project-description {
+#form-div-project-title,
+#form-div-project-description {
     display: flex;
     flex-direction: column;
 }
@@ -242,7 +254,8 @@ select {
     gap: 5px;
 }
 
-#todo-duedate, #todo-description {
+#todo-duedate,
+#todo-description {
     font-size: 0.75rem;
 }
 
@@ -265,11 +278,14 @@ select {
     height: var(--image-icon-height);
 }
 
-.btn-incomplete:hover, .btn-completed, .btn-edit-active {
+.btn-incomplete:hover,
+.btn-completed,
+.btn-edit-active {
     filter: var(--filter-checkmark-complete);
 }
 
-.btn-edit-inactive:hover, .btn-remove:hover {
+.btn-edit-inactive:hover,
+.btn-remove:hover {
     filter: var(--filter-edit-delete);
 }
 
@@ -291,7 +307,11 @@ select {
     gap: 5px;
 }
 
-#form-div-todo-priority, #form-div-todo-title, #form-div-todo-description, #form-div-todo-duedate, #form-div-todo-assignproject {
+#form-div-todo-priority,
+#form-div-todo-title,
+#form-div-todo-description,
+#form-div-todo-duedate,
+#form-div-todo-assignproject {
     border-radius: var(--border-radius-small);
 
     display: flex;
@@ -335,11 +355,13 @@ select {
 }
 
 .highlight-duetoday {
-    filter: brightness(0) saturate(100%) invert(42%) sepia(91%) saturate(1276%) hue-rotate(2deg) brightness(106%) contrast(103%);
+    filter: brightness(0) saturate(100%) invert(42%) sepia(91%) saturate(1276%)
+        hue-rotate(2deg) brightness(106%) contrast(103%);
 }
 
 .highlight-overdue {
-    filter: brightness(0) saturate(100%) invert(22%) sepia(75%) saturate(3851%) hue-rotate(345deg) brightness(86%) contrast(105%);
+    filter: brightness(0) saturate(100%) invert(22%) sepia(75%) saturate(3851%)
+        hue-rotate(345deg) brightness(86%) contrast(105%);
 }
 
 .btn-generic-style {

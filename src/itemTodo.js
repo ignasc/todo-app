@@ -1,5 +1,13 @@
-class itemTodo{
-    constructor(projectId, title, description, dueDate, priority, completed, id = "I" + crypto.randomUUID()){
+class itemTodo {
+    constructor(
+        projectId,
+        title,
+        description,
+        dueDate,
+        priority,
+        completed,
+        id = "I" + crypto.randomUUID()
+    ) {
         this.id = id;
         this.projectId = projectId;
         this.title = title;
@@ -10,56 +18,56 @@ class itemTodo{
         this.editActive = false;
     }
 
-    getObject(){
+    getObject() {
         return {
-            "id":this.id,
-            "projectId":this.projectId,
-            "title":this.title,
-            "description":this.description,
-            "dueDate":this.dueDate,
-            "priority":this.priority,
-            "completed":this.completed,
-            "editActive":this.editActive,
+            id: this.id,
+            projectId: this.projectId,
+            title: this.title,
+            description: this.description,
+            dueDate: this.dueDate,
+            priority: this.priority,
+            completed: this.completed,
+            editActive: this.editActive,
         };
     }
 
-    updateObject(newDataObject){
-        if(newDataObject.projectId != ""){
+    updateObject(newDataObject) {
+        if (newDataObject.projectId != "") {
             this.setProjectId(newDataObject.projectId);
-        };
+        }
 
         this.setTitle(newDataObject.title);
 
         this.setDescription(newDataObject.description);
 
-        if(newDataObject.dueDate != ""){
+        if (newDataObject.dueDate != "") {
             this.setDueDate(newDataObject.dueDate);
-        };
+        }
 
         this.setPriority(newDataObject.priority);
     }
 
-    setProjectId(projectId){
+    setProjectId(projectId) {
         this.projectId = projectId;
     }
-    setTitle(title){
+    setTitle(title) {
         this.title = title;
     }
-    setDescription(desc){
+    setDescription(desc) {
         this.description = desc;
     }
-    setDueDate(dueDate){
+    setDueDate(dueDate) {
         this.dueDate = dueDate;
     }
-    setPriority(priority){
+    setPriority(priority) {
         this.priority = priority;
     }
-    setCompleted(){
+    setCompleted() {
         this.completed = !this.completed;
     }
-    setEditMode(){
+    setEditMode() {
         this.editActive = !this.editActive;
     }
-};
+}
 
 export default itemTodo;
