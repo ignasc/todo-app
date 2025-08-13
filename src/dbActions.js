@@ -5,14 +5,19 @@ import itemTodo from "./itemTodo";
 import { localStorageSaveProjects, localStorageSaveTodos } from "./localStorage";
 
 //main CRUD operations for todo item db
-function todoCreateNew(projectId, title, description, dueDate, completed){
+function todoCreateNew(projectId, title, description, dueDate, priority, completed){
     if(projectRetrieve("getAll").length == 0){return};//prevent creation of todo item if no project list available.
-    const newTodoItem = new itemTodo(projectId,title, description, dueDate, completed = false);
+
+    const allTodosForProject = todoRetrieve(projectId, true);
+    const lastPriorityNumber = allTodosForProject.length == 0 ? 0 : allTodosForProject[allTodosForProject.length-1].priority;
+
+    const newTodoItem = new itemTodo(projectId,title, description, dueDate, lastPriorityNumber + 1, completed = false);
     todoDB.push(newTodoItem);
     localStorageSaveTodos(todoDB);
 };
 
 function todoRetrieve(id, getAll = false){
+    //if getAll is true, id is treated as projects id, not todo items id.
     if(getAll){
         const allTodosForProject = todoDB.filter((element)=>{return element.projectId == id;});
         return allTodosForProject;
@@ -27,7 +32,12 @@ function todoUpdate(id, updateObject = {}){
 
         if(element.id == id){
 
+            if(element.priority != updateObject.priority){
+                updateTodoPriority(element.projectId, element.priority, updateObject.priority);
+            };
+
             todoDB[index].updateObject(updateObject);
+            sortTodoDBByPriority();
             localStorageSaveTodos(todoDB);
 
             break;
@@ -94,6 +104,30 @@ function projectDelete(id){
             break;
         };
     };
+};
+
+// Custom functions for CRUD operations
+
+function updateTodoPriority(projectId, currentPriority, newPriority){
+    /*Finds item that already has newPriority value and assigns it currentPriority, which belonds to another item, whos priority is being updated to newPriority*/
+
+    const allTodosForProject = todoRetrieve(projectId, true);
+
+    for (let index = 0; index < allTodosForProject.length; index++) {
+        const element = allTodosForProject[index];
+        if(element.priority == newPriority){
+            element.setPriority(currentPriority);
+            break;
+        };
+    }
+};
+
+function sortTodoDBByPriority(){
+    todoDB.sort((elementA, elementB)=>{
+        const eleACompare = elementA.projectId + elementA.priority;
+        const eleBCompare = elementB.projectId + elementB.priority;
+        return eleACompare.localeCompare(eleBCompare);
+    });
 };
 
 export {

@@ -1,10 +1,11 @@
 class itemTodo{
-    constructor(projectId, title, description, dueDate, completed, id = "I" + crypto.randomUUID()){
+    constructor(projectId, title, description, dueDate, priority, completed, id = "I" + crypto.randomUUID()){
         this.id = id;
         this.projectId = projectId;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+        this.priority = priority;
         this.completed = completed;
         this.editActive = false;
     }
@@ -16,6 +17,7 @@ class itemTodo{
             "title":this.title,
             "description":this.description,
             "dueDate":this.dueDate,
+            "priority":this.priority,
             "completed":this.completed,
             "editActive":this.editActive,
         };
@@ -33,6 +35,8 @@ class itemTodo{
         if(newDataObject.dueDate != ""){
             this.setDueDate(newDataObject.dueDate);
         };
+
+        this.setPriority(newDataObject.priority);
     }
 
     setProjectId(projectId){
@@ -46,6 +50,9 @@ class itemTodo{
     }
     setDueDate(dueDate){
         this.dueDate = dueDate;
+    }
+    setPriority(priority){
+        this.priority = priority;
     }
     setCompleted(){
         this.completed = !this.completed;

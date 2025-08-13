@@ -25,15 +25,15 @@ if(storageAvailable("localStorage")){
         todoDB.length = 0;
         for (let index = 0; index < localDB.length; index++) {
             const todoItem = JSON.parse(localDB[index]);
-            todoDB.push(new itemTodo(todoItem.projectId, todoItem.title, todoItem.description, todoItem.dueDate, todoItem.completed, todoItem.id));
+            todoDB.push(new itemTodo(todoItem.projectId, todoItem.title, todoItem.description, todoItem.dueDate, todoItem.priority, todoItem.completed, todoItem.id));
         };
     } else{
         //create todo DB with random items for testing purposes
-        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with DUE date.", formatDateToISO(generateCustomDateFromNow(1, randomIntFromInterval(1,999))), false));
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.1","This is a sample todo no.1 item for demonstration purposes with DUE date.", formatDateToISO(generateCustomDateFromNow(1, randomIntFromInterval(1,999))), 1, false));
 
-        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.2","This is a sample todo no.2 item for demonstration purposes with DUE TODAY date.", formatDateToISO(new Date()), true));
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.2","This is a sample todo no.2 item for demonstration purposes with DUE TODAY date.", formatDateToISO(new Date()), 2, true));
 
-        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.3","This is a sample todo no.3 item for demonstration purposes with OVERDUE date.", formatDateToISO(generateCustomDateFromNow(-1, randomIntFromInterval(1,999))), true));
+        todoDB.push(new itemTodo(projectIds[0],"Sample Todo Item No.3","This is a sample todo no.3 item for demonstration purposes with OVERDUE date.", formatDateToISO(generateCustomDateFromNow(-1, randomIntFromInterval(1,999))), 3, true));
 
         //store projects to localStorage if available
         const arrayForLocalStorage = [];

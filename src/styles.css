@@ -290,7 +290,7 @@ select {
     gap: 5px;
 }
 
-#form-div-todo-title, #form-div-todo-description, #form-div-todo-duedate, #form-div-todo-assignproject {
+#form-div-todo-priority, #form-div-todo-title, #form-div-todo-description, #form-div-todo-duedate, #form-div-todo-assignproject {
     border-radius: var(--border-radius-small);
 
     display: flex;

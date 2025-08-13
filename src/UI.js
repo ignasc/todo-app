@@ -278,7 +278,7 @@ function returnTodoItem(object){
 
     const todoTitle = document.createElement("p");
     todoTitle.setAttribute("id", "todo-title");
-    todoTitle.textContent = object.title;
+    todoTitle.textContent = object.priority + ". " + object.title;
 
     const iconCompleted = new Image();
     iconCompleted.src = getButtonIcon("checked");
@@ -452,6 +452,25 @@ function returnTodoEditFormHtml(object){
     const divWrapper = document.createElement("div");
 
     //title, description, date inputs
+
+    const inputTodoPriority = document.createElement("select");
+    inputTodoPriority.setAttribute("name", "priority");
+    inputTodoPriority.setAttribute("id", "todo-priority-list");
+    const labelTodoPriority = genericLabel.cloneNode();
+    labelTodoPriority.setAttribute("for", "todo-priority-list");
+    labelTodoPriority.textContent = "Set priority:"
+    const allTodoItems = todoRetrieve(object.projectId, true);
+    for (let index = 0; index < allTodoItems.length; index++) {
+        const element = allTodoItems[index];
+        const newListOption = document.createElement("option");
+        newListOption.setAttribute("value", element.priority);
+        newListOption.textContent = element.priority;
+        if(object.priority == element.priority){
+            newListOption.defaultSelected = true;
+        };
+        inputTodoPriority.appendChild(newListOption);
+    };
+
     const inputTitle = genericInput.cloneNode()
     inputTitle.setAttribute("id", "iname");
     inputTitle.setAttribute("name", "title");
@@ -513,6 +532,12 @@ function returnTodoEditFormHtml(object){
     });
 
     //add all elements to form
+    const formDivPriority = divWrapper.cloneNode();
+    formDivPriority.setAttribute("id", "form-div-todo-priority");
+    formDivPriority.appendChild(labelTodoPriority);
+    formDivPriority.appendChild(inputTodoPriority);
+    formCard.appendChild(formDivPriority);
+
     const formDivTitle = divWrapper.cloneNode();
     formDivTitle.setAttribute("id", "form-div-todo-title");
     formDivTitle.appendChild(labelTitle);
@@ -685,7 +710,7 @@ function returnNewTodoForm(){
         for(const [key, value] of newFormData){
             newTodoItem[key] = value;
         };
-        todoCreateNew(newTodoItem.projectId, newTodoItem.title, newTodoItem.description, newTodoItem.dueDate, newTodoItem.priority = 0);
+        todoCreateNew(newTodoItem.projectId, newTodoItem.title, newTodoItem.description, newTodoItem.dueDate, newTodoItem.priority = 1);
         updateUI();
     });
 
