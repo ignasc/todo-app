@@ -28,9 +28,13 @@ Make sure to modify the command line of `"deploy"` script to refer to correct gi
 
 Below are the scripts that have been added to `package.json` file
 
-`"test"`: runs `eslint` check on all files in `src` folder
+`"test"`: runs `prettier` and all files and `eslint` check on all files in `src` folder (only a check, no modifications).
 
 `"fix"`: runs `eslint` with `--fix` option.
+
+`"formatCheck"`: runs `prettier` with `--check` option to check if code is formated to set options.
+
+`"formatWrite"`:runs `prettier` with `--write` option to format code to set options.
 
 `"prebuild"`: runs `eslint` check automatically before building production version app
 
@@ -39,10 +43,11 @@ Below are the scripts that have been added to `package.json` file
 `"start"`: starts a dev server with the developer version app
 
 `"deploy"`: this script does the following steps in order:
-* checks out `gh-pages` branch,
-* merges `main` branch into `gh-pages` branch,
-* runs `build` script (see above of what it does),
-* adds `dist` folder contents to be committed,
-* commits `dist` folder contents,
-* pushes the commit to remote repository,
-* switches back to `main` branch.
+
+- checks out `gh-pages` branch,
+- merges `main` branch into `gh-pages` branch,
+- runs `build` script (see above of what it does),
+- adds `dist` folder contents to be committed,
+- commits `dist` folder contents,
+- pushes the commit to remote repository,
+- switches back to `main` branch.
