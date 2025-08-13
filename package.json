@@ -4,8 +4,10 @@
   "description": "basic todo app",
   "main": "index.js",
   "scripts": {
-    "test": "eslint ./src/",
+    "test": "npm run formatCheck && eslint ./src/",
     "fix": "eslint --fix ./src/",
+    "formatCheck": "prettier . --check",
+    "formatWrite": "prettier . --write",
     "prebuild": "eslint ./src/",
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
