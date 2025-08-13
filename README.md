@@ -28,7 +28,7 @@ Make sure to modify the command line of `"deploy"` script to refer to correct gi
 
 Below are the scripts that have been added to `package.json` file
 
-`"test"`: runs `prettier` and all files and `eslint` check on all files in `src` folder (only a check, no modifications).
+`"test"`: runs `prettier` check on all files and `eslint` check on all files in `src` folder (no modifications).
 
 `"fix"`: runs `eslint` with `--fix` option.
 
